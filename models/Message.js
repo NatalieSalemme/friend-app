@@ -17,27 +17,15 @@ const MessageSchema = new Schema({
   avatar: {
     type: String,
   },
-  likes: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users',
-      },
-    },
-  ],
   messages: [
     {
-      user: {
+      message: String,
+      from: {
         type: Schema.Types.ObjectId,
         ref: 'users',
       },
-      text: {
-        type: String,
-        required: true,
-      },
-      name: {
-        type: String,
-      },
+      delivered: Boolean,
+      read: Boolean,
       avatar: {
         type: String,
       },
