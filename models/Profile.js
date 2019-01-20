@@ -6,67 +6,75 @@ const ProfileSchema = new Schema({
   user: {
     //associates user by its id
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'users',
   },
   handle: {
     type: String,
     required: true,
-    max: 40
+    max: 40,
   },
   website: {
     type: String,
   },
   location: {
     type: String,
-  }
+  },
   status: {
     type: String,
-    required: true
+    required: true,
   },
   hobbies: {
     type: [String],
-    required: true
+    required: true,
   },
-  animals: {
-    type: [String]
-  },
-  countries: {
-    type: [String]
+  bucketlist: {
+    type: [String],
+    required: true,
   },
   bio: {
-    type: String
+    type: String,
   },
   education: [
     {
       school: {
-        type: String
+        type: String,
       },
       major: {
-        type: String
+        type: String,
       },
       year: {
-        type: String
-      }
-    }
+        type: String,
+      },
+    },
+  ],
+  experience: [
+    {
+      title: {
+        type: String,
+      },
+      company: {
+        type: String,
+      },
+    },
   ],
   social: {
     twitter: {
-      type: String
+      type: String,
     },
     facebook: {
-      type: String
+      type: String,
     },
     linkedin: {
-      type: String
+      type: String,
     },
     instagram: {
-      type: String
-    }
+      type: String,
+    },
   },
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
