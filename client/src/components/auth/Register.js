@@ -34,52 +34,64 @@ class Register extends Component {
     }))
   }
   render() {
-    const { errors } = this.state.errors;
+    const { errors } = this.state;
     return (
       <div>
         <Landing>
           <h3 style={{ marginTop: '-1em' }}>Sign Up</h3>
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit} noValidate>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="text"
-                className="form-control"
+                className={classnames('form-control', {
+                  'is-invalid': errors.name
+                })}
                 name="name"
                 placeholder="Name"
                 value={this.state.name}
                 onChange={this.onChange}
               />
+              {errors.name && (<div className="invalid-feedback text-left font-weight-bold">{errors.name}</div>)}
             </div>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="email"
-                className="form-control "
+                className={classnames('form-control', {
+                  'is-invalid': errors.email
+                })}
                 name="email"
                 placeholder="Enter email"
                 value={this.state.email}
                   onChange={this.onChange}
               />
+                {errors.email && (<div className="invalid-feedback text-left font-weight-bold">{errors.email}</div>)}
             </div>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="password"
-                className="form-control"
+                className={classnames('form-control', {
+                  'is-invalid': errors.password
+                })}
                 name="password"
                 placeholder="Password"
                 value={this.state.password}
                   onChange={this.onChange}
               />
+                {errors.password && (<div className="invalid-feedback text-left font-weight-bold">{errors.password}</div>)}
             </div>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="password"
-                className="form-control"
+                className={classnames('form-control', {
+                  'is-invalid': errors.password2
+                })}
 
                 name="password2"
                 placeholder="Confirm password"
                 value={this.state.password2}
                   onChange={this.onChange}
               />
+                {errors.password2 && (<div className="invalid-feedback text-left font-weight-bold">{errors.password2}</div>)}
             </div>
 
             <div className="form-check">

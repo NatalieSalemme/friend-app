@@ -26,7 +26,7 @@ class Login extends Component {
       <div>
         <Landing>
           <h3 style={{ marginTop: '-1em' }}>Login</h3>
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit} noValidate>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="email"
