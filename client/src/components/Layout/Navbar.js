@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   render() {
@@ -7,9 +8,9 @@ class Navbar extends Component {
         className="navbar navbar-expand-sm "
         style={{ backgroundColor: '#e3f2fd' }}
       >
-        <a className="navbar-brand" href="#">
+        <Link to="/" className="navbar-brand">
           Friend Search
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -25,19 +26,19 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="delete.html">
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link to="/profiles" className="nav-link" >
                 Link
-              </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
+                href="delete.html"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -47,14 +48,14 @@ class Navbar extends Component {
                 Dropdown
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="delete.html">
                   Action
                 </a>
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="delete.html">
                   Another action
                 </a>
                 <div className="dropdown-divider" />
-                <a className="dropdown-item" href="#">
+                <a className="dropdown-item" href="delete.html">
                   Something else here
                 </a>
               </div>
@@ -62,8 +63,8 @@ class Navbar extends Component {
             <li className="nav-item">
               <a
                 className="nav-link disabled"
-                href="#"
-                tabindex="-1"
+              href="delete.html"
+                tabIndex="-1"
                 aria-disabled="true"
               >
                 Disabled

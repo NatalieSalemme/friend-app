@@ -13,23 +13,23 @@ const Footer = () => {
             </div>
 
             <div className="col-md-6 col-lg-7 text-center text-md-right">
-              <a className="fb-ic">
+              <a href="delete.html" className="fb-ic">
                 <i className="fab fa-facebook-f text-white mr-4"> </i>
               </a>
 
-              <a className="tw-ic">
+              <a href="delete.html" className="tw-ic">
                 <i className="fab fa-twitter text-white mr-4"> </i>
               </a>
 
-              <a className="gplus-ic">
+              <a href="delete.html" className="gplus-ic">
                 <i className="fab fa-google-plus-g text-white mr-4"> </i>
               </a>
 
-              <a className="li-ic">
+              <a href="delete.html" className="li-ic">
                 <i className="fab fa-linkedin-in text-white mr-4"> </i>
               </a>
 
-              <a className="ins-ic">
+              <a href="delete.html" className="ins-ic">
                 <i className="fab fa-instagram text-white"> </i>
               </a>
             </div>
@@ -60,16 +60,16 @@ const Footer = () => {
               style={{ width: '60px', backgroundColor: '#6351ce' }}
             />
             <p>
-              <a href="#!">MDBootstrap</a>
+              <a href="delete.html">MDBootstrap</a>
             </p>
             <p>
-              <a href="#!">MDWordPress</a>
+              <a href="delete.html">MDWordPress</a>
             </p>
             <p>
-              <a href="#!">BrandFlow</a>
+              <a href="delete.html">BrandFlow</a>
             </p>
             <p>
-              <a href="#!">Bootstrap Angular</a>
+              <a href="delete.html">Bootstrap Angular</a>
             </p>
           </div>
 
@@ -117,7 +117,9 @@ const Footer = () => {
 
         <div className="footer-copyright text-center py-3 text-white">
           © 2019 Copyright:
-          <a href="http://www.yesmillennial.com" target="_blank">
+          <a href="http://www.yesmillennial.com" target="_blank"
+          rel="noopener noreferrer"
+          >
             <span className="text-white pl-2">Natalie Salemme</span>
           </a>
         </div>
