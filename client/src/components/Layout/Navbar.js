@@ -5,10 +5,10 @@ class Navbar extends Component {
   render() {
     return (
       <nav
-        className="navbar navbar-expand-sm "
-        style={{ backgroundColor: '#e3f2fd' }}
+        className="navbar navbar-expand-sm"
+        style={{ backgroundColor: '#6351ce' }}
       >
-        <Link to="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand text-white">
           Friend Search
         </Link>
         <button
@@ -26,18 +26,18 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="delete.html">
+              <a className="nav-link text-white" href="delete.html">
                 Home <span className="sr-only">(current)</span>
               </a>
             </li>
             <li className="nav-item">
-              <Link to="/profiles" className="nav-link" >
+              <Link to="/profiles" className="nav-link text-white" >
                 Link
               </Link>
             </li>
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link dropdown-toggle text-white"
                 href="delete.html"
                 id="navbarDropdown"
                 role="button"
@@ -48,7 +48,7 @@ class Navbar extends Component {
                 Dropdown
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="delete.html">
+                <a className="dropdown-item text-white" href="delete.html">
                   Action
                 </a>
                 <a className="dropdown-item" href="delete.html">
@@ -62,7 +62,7 @@ class Navbar extends Component {
             </li>
             <li className="nav-item">
               <a
-                className="nav-link disabled"
+                className="nav-link disabled text-white"
               href="delete.html"
                 tabIndex="-1"
                 aria-disabled="true"
@@ -74,13 +74,15 @@ class Navbar extends Component {
           <form className="form-inline my-2 my-lg-0">
             <input
               className="form-control mr-sm-2"
+
               type="search"
               placeholder="Search"
               aria-label="Search"
             />
             <button
-              className="btn btn-outline-success my-2 my-sm-0"
+              className="btn btn-outline-dark my-2 my-sm-0 text-white"
               type="submit"
+                style={{backgroundColor: '#1f0891'}}
             >
               Search
             </button>
