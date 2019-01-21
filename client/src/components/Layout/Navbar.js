@@ -7,6 +7,7 @@ import { logoutUser } from '../../actions/authActions';
 class Navbar extends Component {
   onLogoutClick = e => {
     e.preventDefault();
+    console.log('logging out');
     this.props.logoutUser();
   };
   render() {
@@ -71,7 +72,7 @@ class Navbar extends Component {
           )}
         </li>
           <li className="nav-item">
-            <a href="" onClick={this.onLogoutClick} className="nav-link text-white">
+            <a href="#" onClick={this.onLogoutClick} className="nav-link text-white">
               Logout
             </a>
           </li>
@@ -85,6 +86,17 @@ class Navbar extends Component {
         <Link to="/" className="navbar-brand text-white">
           Friend Search
         </Link>
+        <li className="nav-item">
+          <Link
+            to="/"
+            className="nav-link disabled text-white"
+            href="delete.html"
+            tabIndex="-1"
+            aria-disabled="true"
+          >
+            Sign Up
+          </Link>
+        </li>
         <li className="nav-item">
           <Link
             to="/login"
