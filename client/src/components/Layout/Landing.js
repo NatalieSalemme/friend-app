@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Register from '../auth/Register';
-import { Link } from 'react-router-dom';
 
 class Landing extends Component {
   render() {
@@ -16,14 +14,7 @@ class Landing extends Component {
                 Stay connected with friends, meet someone new, reunite with an old friend!
                 </p>
                 <hr />
-                {/* <img src={require('../images/friends.jpg')} style={{height: '300px', width: '400px', opacity: 1.0}}/> */}
                 {this.props.children}
-                {/* <Link to="/register" className="btn btn-lg btn-info mr-2">
-                  Sign Up
-                </Link>
-                <Link to="/login" className="btn btn-lg btn-light">
-                  Login
-                </Link> */}
               </div>
             </div>
           </div>
