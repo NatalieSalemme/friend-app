@@ -2,3 +2,16 @@
   margin: 0;
   padding: 0;
 }
+.landing {
+  position: relative;
+  background: url('./components/images/network.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 92vh;
+  /* opacity: .8; */
+  margin-bottom: -50px;
+}
+.landing-info-container {
+  background-color: navy;
+  opacity: .92;
+}
