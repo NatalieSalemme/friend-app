@@ -1,74 +1,53 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
+  onLogoutClick = e => {
+    e.preventDefault();
+    console.log('logging out');
+    this.props.logoutUser();
+  };
   render() {
-    return (
+    const { isAuthenticated, user } = this.props.auth;
+    const authLinks = (
       <nav
-        className="navbar navbar-expand-sm "
-        style={{ backgroundColor: '#e3f2fd' }}
+        className="navbar navbar-expand-lg navbar-dark"
+        style={{ backgroundColor: '#6351ce' }}
       >
-        <Link to="/" className="navbar-brand">
-          Friend Search
-        </Link>
         <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
+          data-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon" />
         </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
+        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <Link to="/" className="navbar-brand">
+            Friend Search
+          </Link>
+          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <a className="nav-link" href="delete.html">
+              <Link to="/" className="nav-link" href="#">
                 Home <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <Link to="/profiles" className="nav-link" >
-                Link
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="delete.html"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="delete.html">
-                  Action
-                </a>
-                <a className="dropdown-item" href="delete.html">
-                  Another action
-                </a>
-                <div className="dropdown-divider" />
-                <a className="dropdown-item" href="delete.html">
-                  Something else here
-                </a>
-              </div>
+            <li className="nav-item active">
+              <Link to="/feed" className="nav-link">
+                Post Feed
+              </Link>
             </li>
-            <li className="nav-item">
-              <a
-                className="nav-link disabled"
-              href="delete.html"
-                tabIndex="-1"
-                aria-disabled="true"
-              >
-                Disabled
-              </a>
+            <li className="nav-item active">
+              <Link to="/dashboard" className="nav-link">
+                {' '}
+                Dashboard
+              </Link>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">
@@ -79,16 +58,85 @@ class Navbar extends Component {
               aria-label="Search"
             />
             <button
-              className="btn btn-outline-success my-2 my-sm-0"
+              className="btn btn-outline-dark my-2 my-sm-0 text-white"
               type="submit"
+              style={{ backgroundColor: '#1f0891' }}
             >
               Search
             </button>
           </form>
+          <div className="nav-item">
+            {user.avatar && (
+              <img
+                className="rounded-circle"
+                src={user.avatar}
+                alt={user.name}
+                style={{ width: '25px', marginRight: '5px' }}
+                title="You must have a Gravatar connected to your email to display an image"
+              />
+            )}
+          </div>
+          <div
+            className="nav-item nav-link text-white mx-5"
+            onClick={this.onLogoutClick}
+          >
+            Logout
+          </div>
         </div>
       </nav>
     );
+
+    const guestLinks = (
+      <nav
+        className="navbar navbar-expand-lg navbar-dark"
+        style={{ backgroundColor: '#6351ce' }}
+      >
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <Link to="/" className="navbar-brand">
+            Friend Search
+          </Link>
+          <div className="navbar-nav mr-auto mt-2 mt-lg-0" />
+
+          <div className="nav-item active ">
+            <Link to="/" className="nav-link text-white">
+              {' '}
+              Sign Up
+            </Link>
+          </div>
+
+          <div className="nav-item active mr-5">
+            <Link to="/login" className="nav-link text-white">
+              {' '}
+              Log In
+            </Link>
+          </div>
+        </div>
+      </nav>
+    );
+    return <div>{isAuthenticated ? authLinks : guestLinks}</div>;
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);
