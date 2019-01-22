@@ -46,9 +46,8 @@ class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link to="/dashboard" className="nav-link">
-                {' '}
-                Dashboard
+              <Link to="/profiles" className="nav-link">
+                Browse Friends
               </Link>
             </li>
           </ul>
