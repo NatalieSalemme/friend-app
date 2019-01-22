@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import InputGroup from '../common/InputGroup';
+import { createProfile } from '../../actions/profileActions';
 
 class CreateProfile extends Component {
   state = {
@@ -20,9 +22,30 @@ class CreateProfile extends Component {
     instagram: '',
     errors: {},
   };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
+  }
+
   onSubmit = e => {
     e.preventDefault();
-    console.log('submit');
+    const profileData = {
+      handle: this.state.handle,
+      website: this.state.website,
+      location: this.state.location,
+      status: this.state.status,
+      hobbies: this.state.hobbies,
+      bucketlist: this.state.bucketlist,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      instagram: this.state.instagram,
+    };
+    this.props.createProfile(profileData, this.props.history);
   };
   onChange = e => {
     this.setState({
@@ -70,7 +93,7 @@ class CreateProfile extends Component {
                   info="City or city & state suggested (eg. Boston, MA)"
                 />
                 <TextFieldGroup
-                  placeholder="Status"
+                  placeholder="* Status"
                   name="status"
                   value={this.state.status}
                   onChange={this.onChange}
@@ -135,15 +158,6 @@ class CreateProfile extends Component {
                   />
 
                   <InputGroup
-                    placeholder="YouTube Channel URL"
-                    name="youtube"
-                    icon="fab fa-youtube"
-                    value={this.state.youtube}
-                    onChange={this.onChange}
-                    error={errors.youtube}
-                  />
-
-                  <InputGroup
                     placeholder="Instagram Page URL"
                     name="instagram"
                     icon="fab fa-instagram"
@@ -177,4 +191,7 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));
