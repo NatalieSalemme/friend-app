@@ -79,8 +79,9 @@ class Navbar extends Component {
             )}
           </div>
           <div
-            className="nav-item nav-link active text-white mr-5"
-            onClick={this.onLogoutClick}>
+            className="nav-item active text-white mr-5 logout-btn"
+            onClick={this.onLogoutClick}
+          >
             Logout
           </div>
         </div>

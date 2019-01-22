@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profileActions';
-import Spinner from '../spinner/Spinner';
+import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
 
 class Dashboard extends Component {

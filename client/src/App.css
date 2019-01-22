@@ -16,3 +16,6 @@
   background-color: #1f0891;
   opacity: .96;
 }
+.logout-btn {
+  cursor: pointer;
+}
