@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
+import { clearCurrentProfile } from '../../actions/profileActions';
 
 class Navbar extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     console.log('logging out');
+    this.props.clearCurrentProfile();
     this.props.logoutUser();
   };
   render() {
@@ -50,7 +52,7 @@ class Navbar extends Component {
               </Link>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
+          <form className="form-inline mr-5 my-lg-0">
             <input
               className="form-control mr-sm-2"
               type="search"
@@ -77,7 +79,7 @@ class Navbar extends Component {
             )}
           </div>
           <div
-            className="nav-item nav-link text-white mx-5"
+            className="nav-item active text-white mr-5 logout-btn"
             onClick={this.onLogoutClick}
           >
             Logout
@@ -138,5 +140,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser, clearCurrentProfile }
 )(Navbar);

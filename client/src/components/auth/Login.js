@@ -10,39 +10,38 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-    errors: {}
+    errors: {},
+  };
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
   }
-componentDidMount() {
-  if(this.props.auth.isAuthenticated) {
-    this.props.history.push('/dashboard');
-  }
-}
 
-componentWillReceiveProps(nextProps) {
-  if(nextProps.auth.isAuthenticated) {
-    this.props.history.push('/dashboard');
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors,
+      });
+    }
   }
-  if(nextProps.errors) {
-    this.setState({
-      errors: nextProps.errors
-    })
-  }
-}
-
 
   onChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
-  }
+  };
   onSubmit = e => {
     e.preventDefault();
     const userData = {
       email: this.state.email,
-      password: this.state.password
-    }
+      password: this.state.password,
+    };
     this.props.loginUser(userData);
-  }
+  };
   render() {
     const { errors } = this.state;
     return (
@@ -54,27 +53,35 @@ componentWillReceiveProps(nextProps) {
               <input
                 type="email"
                 className={classnames('form-control', {
-                  'is-invalid': errors.email
+                  'is-invalid': errors.email,
                 })}
                 name="email"
                 placeholder="Enter email"
                 value={this.state.email}
                 onChange={this.onChange}
               />
-              {errors.email && (<div className="invalid-feedback text-left font-weight-bold">{errors.email}</div>)}
+              {errors.email && (
+                <div className="invalid-feedback text-left font-weight-bold">
+                  {errors.email}
+                </div>
+              )}
             </div>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="password"
                 className={classnames('form-control', {
-                  'is-invalid': errors.password
+                  'is-invalid': errors.password,
                 })}
                 name="password"
                 placeholder="Password"
                 value={this.state.password}
                 onChange={this.onChange}
               />
-              {errors.password && (<div className="invalid-feedback text-left font-weight-bold">{errors.password}</div>)}
+              {errors.password && (
+                <div className="invalid-feedback text-left font-weight-bold">
+                  {errors.password}
+                </div>
+              )}
             </div>
 
             <button
@@ -100,12 +107,15 @@ componentWillReceiveProps(nextProps) {
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
-}
+  errors: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(mapStateToProps, {loginUser})(Login);
+export default connect(
+  mapStateToProps,
+  { loginUser }
+)(Login);
