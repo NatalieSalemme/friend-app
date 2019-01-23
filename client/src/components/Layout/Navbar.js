@@ -50,11 +50,7 @@ class Navbar extends Component {
         );
       } else {
         // User is logged in but has no profile
-        content = (
-          <div>
-            <p className="lead text-muted">Welcome {user.name}</p>
-          </div>
-        );
+        content = null;
       }
     }
 
