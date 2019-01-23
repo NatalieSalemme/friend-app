@@ -10,7 +10,14 @@ class ProfileItem extends Component {
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-2">
-            <img src={profile.user.avatar} alt="" className="rounded-circle" />
+            <img
+              className="img-thumbnail mr-3"
+              // style={{ width: '35px', height: '35px' }}
+              src={require('../images/rose.jpg')}
+              alt="avatar"
+            />
+            {/* <img src={profile.user.avatar } alt=""
+               className="rounded-circle" /> */}
           </div>
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.user.name}</h3>
@@ -20,7 +27,11 @@ class ProfileItem extends Component {
                 <span>at {profile.company}</span>
               )}
             </p>
-            <Link to={`/profile/${profile.handle}`} className="btn btn-info">
+            <Link
+              to={`/profile/${profile.handle}`}
+              className="btn text-white"
+              style={{ backgroundColor: '#1f0891' }}
+            >
               View Profile
             </Link>
           </div>

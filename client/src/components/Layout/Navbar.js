@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Spinner from '../common/Spinner';
 import { logoutUser } from '../../actions/authActions';
-import { clearCurrentProfile } from '../../actions/profileActions';
+
+import {
+  getCurrentProfile,
+  clearCurrentProfile,
+} from '../../actions/profileActions';
 
 class Navbar extends Component {
+  componentDidMount() {
+    // console.log('about to get current profile');
+    this.props.getCurrentProfile();
+  }
   onLogoutClick = e => {
     e.preventDefault();
     console.log('logging out');
@@ -14,7 +23,43 @@ class Navbar extends Component {
   };
   render() {
     const { isAuthenticated, user } = this.props.auth;
-    console.log(user.name);
+    const { profile, loading } = this.props.profile;
+
+    let content;
+    if (profile === null || loading) {
+      // content = <Spinner />;
+      content = null;
+    } else {
+      // Check if logged in user has profile data
+      if (Object.keys(profile).length > 0) {
+        content = (
+          <div>
+            <Link className="mr-4 text-white" to={`/profile/${profile.handle}`}>
+              {user.name}
+            </Link>
+
+            <Link to={`/profile/${profile.handle}`}>
+              <img
+                className="rounded-circle mr-4"
+                style={{ width: '35px', height: '35px' }}
+                src={require('../images/rose.jpg')}
+                alt="avatar"
+              />
+            </Link>
+          </div>
+        );
+      } else {
+        // User is logged in but has no profile
+        content = (
+          <div>
+            <p className="lead text-muted">Welcome {user.name}</p>
+          </div>
+        );
+      }
+    }
+
+    // console.log('profile', this.props.profile);
+    // console.log('user', user);
     const authLinks = (
       <nav
         className="navbar navbar-expand-lg navbar-dark"
@@ -47,7 +92,7 @@ class Navbar extends Component {
               </Link>
             </li>
             <li className="nav-item active">
-              <Link to="/profiles" className="nav-link">
+              <Link to={`/profiles`} className="nav-link">
                 Browse Friends
               </Link>
             </li>
@@ -67,13 +112,18 @@ class Navbar extends Component {
               Search
             </button>
           </form>
+
           <div className="nav-item">
-            <img
-              className="rounded-circle mr-3"
-              style={{ width: '35px', height: '35px' }}
-              src={require('../images/rose.jpg')}
-              alt="avatar"
-            />
+            {content}
+            {/* <Link to={`/profile`}>
+              <img
+                className="rounded-circle mr-3"
+                style={{ width: '35px', height: '35px' }}
+                src={require('../images/rose.jpg')}
+                alt="avatar"
+              />
+            </Link> */}
+
             {/* {user.avatar ===
               '//www.gravatar.com/avatar/0e393a1a33ad90f4c3d52f6884ccb7ea?s=200&r=pg&d=mm' ||
             user.avatar === user.name ? (
@@ -151,9 +201,10 @@ Navbar.propTypes = {
 };
 const mapStateToProps = state => ({
   auth: state.auth,
+  profile: state.profile,
 });
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile }
+  { logoutUser, clearCurrentProfile, getCurrentProfile }
 )(Navbar);
