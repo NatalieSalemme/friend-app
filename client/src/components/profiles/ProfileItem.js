@@ -10,14 +10,13 @@ class ProfileItem extends Component {
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <div className="col-2">
-            <img
-              className="img-thumbnail mr-3"
-              // style={{ width: '35px', height: '35px' }}
-              src={require('../images/rose.jpg')}
-              alt="avatar"
-            />
-            {/* <img src={profile.user.avatar } alt=""
-               className="rounded-circle" /> */}
+            <Link to={`/profile/${profile.handle}`}>
+              <img
+                className="img-thumbnail mr-3"
+                src={require('../images/rose.jpg')}
+                alt="avatar"
+              />
+            </Link>
           </div>
           <div className="col-lg-6 col-md-4 col-8">
             <h3>{profile.user.name}</h3>
