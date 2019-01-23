@@ -84,12 +84,12 @@ class Navbar extends Component {
             </li>
             <li className="nav-item active">
               <Link to="/feed" className="nav-link">
-                Post Feed
+                Feed
               </Link>
             </li>
             <li className="nav-item active">
               <Link to={`/profiles`} className="nav-link">
-                Browse Friends
+                Browse
               </Link>
             </li>
           </ul>

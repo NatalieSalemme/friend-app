@@ -27,7 +27,7 @@ class PostForm extends Component {
     const newPost = {
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar,
+      avatar: this.state.avatar,
     };
 
     this.props.addPost(newPost);
@@ -43,6 +43,7 @@ class PostForm extends Component {
 
     return (
       <div className="post-form mb-3">
+        <h1 className="text-center mb-5">My Feed</h1>
         <div className="card card-info">
           <div className="card-header bg-info text-white">Say Something...</div>
           <div className="card-body">
@@ -54,6 +55,7 @@ class PostForm extends Component {
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}
+                  avatar={this.state.avatar}
                 />
               </div>
               <button type="submit" className="btn btn-dark">

@@ -32,7 +32,7 @@ class Profiles extends Component {
             <p className="lead text-center">Browse and connect with friends</p>
           </div>
           <div className="row">
-            <div className="card-group col-md-8 mx-auto">{profileItems}</div>
+            <div className="card-deck col-md-8 mx-auto">{profileItems}</div>
           </div>
         </div>
       </div>
