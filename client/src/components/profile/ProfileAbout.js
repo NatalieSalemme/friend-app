@@ -12,13 +12,13 @@ class ProfileAbout extends Component {
     // Hobbies List
     const hobbies = profile.hobbies.map((hobby, index) => (
       <div key={index} className="p-3">
-        <i className="fa fa-check" /> {hobby}
+        <i className="far fa-circle" /> {hobby}
       </div>
     ));
     // BucketList List
     const bucketlist = profile.bucketlist.map((item, index) => (
       <div key={index} className="p-3">
-        <i className="fa fa-check" /> {item}
+        <i className="far fa-circle" /> {item}
       </div>
     ));
 
@@ -41,6 +41,7 @@ class ProfileAbout extends Component {
                 {hobbies}
               </div>
             </div>
+            <hr />
             <h3 className="text-center text-info">Bucket List</h3>
             <div className="row">
               <div className="d-flex flex-wrap justify-content-center align-items-center">

@@ -23,7 +23,7 @@ class Posts extends Component {
     }
 
     return (
-      <div className="feed">
+      <div className="feed mt-5">
         <div className="container">
           <div className="row">
             <div className="col-md-12">

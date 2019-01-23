@@ -14,6 +14,7 @@ class Navbar extends Component {
   };
   render() {
     const { isAuthenticated, user } = this.props.auth;
+    console.log(user.name);
     const authLinks = (
       <nav
         className="navbar navbar-expand-lg navbar-dark"
@@ -67,7 +68,22 @@ class Navbar extends Component {
             </button>
           </form>
           <div className="nav-item">
-            {user.avatar && (
+            <img
+              className="rounded-circle mr-3"
+              style={{ width: '35px', height: '35px' }}
+              src={require('../images/rose.jpg')}
+              alt="avatar"
+            />
+            {/* {user.avatar ===
+              '//www.gravatar.com/avatar/0e393a1a33ad90f4c3d52f6884ccb7ea?s=200&r=pg&d=mm' ||
+            user.avatar === user.name ? (
+              <img
+                className="rounded-circle mr-3"
+                style={{ width: '35px', height: '35px' }}
+                src={require('../images/rose.jpg')}
+                alt="avatar"
+              />
+            ) : (
               <img
                 className="rounded-circle"
                 src={user.avatar}
@@ -75,7 +91,7 @@ class Navbar extends Component {
                 style={{ width: '25px', marginRight: '5px' }}
                 title="You must have a Gravatar connected to your email to display an image"
               />
-            )}
+            )} */}
           </div>
           <div
             className="nav-item active text-white mr-5 logout-btn"

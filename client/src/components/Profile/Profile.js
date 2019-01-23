@@ -25,7 +25,11 @@ class Profile extends Component {
         <div>
           <div className="row">
             <div className="col-md-6">
-              <Link to="/profiles" className="btn btn-light mb-3 float-left">
+              <Link
+                to="/profiles"
+                className="btn btn-light mb-5 mt-4 float-left text-white"
+                style={{ backgroundColor: '#1f0891' }}
+              >
                 Back To Profiles
               </Link>
             </div>

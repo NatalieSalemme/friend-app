@@ -36,6 +36,7 @@ router.post('/register', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        avatar: req.body.avatar,
       });
       //salt the password
       const saltRounds = 10;
@@ -79,7 +80,7 @@ router.post('/login', (req, res) => {
       if (isMatch) {
         //User matched
         //Create JWT payload
-        const payload = { id: user.id, name: user.name };
+        const payload = { id: user.id, name: user.name, avatar: user.avatar };
         //Sign token
         //(payload, secret, expiration, callback)
         jwt.sign(
