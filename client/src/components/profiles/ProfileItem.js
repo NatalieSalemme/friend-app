@@ -6,7 +6,6 @@ import isEmpty from '../../validation/is-empty';
 class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
-    console.log(profile);
     return (
       // <div classNameName="card card-body bg-light mb-3">
       //   <div classNameName="row">
@@ -54,12 +53,8 @@ class ProfileItem extends Component {
       //     </div>
       //   </div>
       // </div>
-      <div className="card">
-        <Link
-          to={`/profile/${profile.handle}`}
-          classNameName="btn text-white"
-          style={{ backgroundColor: '#1f0891' }}
-        >
+      <div className="card mx-2">
+        <Link to={`/profile/${profile.handle}`} classNameName="btn text-white">
           <img
             className="card-img-top img-thumbnail"
             // style={{ height: '100px', width: '100px' }}
@@ -69,10 +64,7 @@ class ProfileItem extends Component {
         </Link>
 
         <div className="card-body">
-          <h5
-            className="card-title list-group-item text-center text-white"
-            style={{ backgroundColor: '#1f0891' }}
-          >
+          <h5 className="card-title list-group-item text-center ">
             {profile.user.name}
           </h5>
         </div>

@@ -34,7 +34,7 @@ class Navbar extends Component {
       if (Object.keys(profile).length > 0) {
         content = (
           <div>
-            <Link className="mr-4 text-white" to={`/profile/${profile.handle}`}>
+            <Link className="mr-4 text-white" to="/edit-profile">
               {user.name}
             </Link>
 
