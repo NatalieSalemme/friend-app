@@ -11,9 +11,6 @@ class CommentForm extends Component {
       text: '',
       errors: {},
     };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
   //Does the error checking
   componentWillReceiveProps(newProps) {
@@ -22,7 +19,7 @@ class CommentForm extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     const { user } = this.props.auth;
@@ -36,11 +33,11 @@ class CommentForm extends Component {
 
     this.props.addComment(postId, newComment);
     this.setState({ text: '' });
-  }
+  };
 
-  onChange(e) {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
   render() {
     const { errors } = this.state;

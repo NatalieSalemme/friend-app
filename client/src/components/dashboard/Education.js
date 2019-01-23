@@ -13,7 +13,8 @@ class Education extends Component {
     const education = this.props.education.map(edu => (
       <tr key={edu._id}>
         <td>{edu.school}</td>
-        <td>{edu.degree}</td>
+        <td>{edu.major}</td>
+        <td>{edu.year}</td>
 
         <td>
           <button
@@ -33,7 +34,7 @@ class Education extends Component {
             <tr>
               <th>School</th>
               <th>Degree</th>
-              <th>Years</th>
+              <th>Year</th>
               <th />
             </tr>
             {education}

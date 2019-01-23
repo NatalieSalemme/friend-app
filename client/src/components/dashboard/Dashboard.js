@@ -14,9 +14,9 @@ class Dashboard extends Component {
     this.props.getCurrentProfile();
   }
 
-  onDeleteClick(e) {
+  onDeleteClick = e => {
     this.props.deleteAccount();
-  }
+  };
 
   render() {
     const { user } = this.props.auth;
@@ -38,10 +38,7 @@ class Dashboard extends Component {
             <Experience experience={profile.experience} />
             <Education education={profile.education} />
             <div style={{ marginBottom: '60px' }} />
-            <button
-              onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
-            >
+            <button onClick={this.onDeleteClick} className="btn btn-danger">
               Delete My Account
             </button>
           </div>
