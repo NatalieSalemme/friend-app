@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-// import { deletePost,
-//   addLike,
-//   removeLike
-// } from '../../actions/postActions';
+import { deletePost, addLike, removeLike } from '../../actions/postActions';
 
 class PostItem extends Component {
   onDeleteClick(id) {
@@ -108,6 +105,10 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-  mapStateToProps
-  // { deletePost, addLike, removeLike }
+  mapStateToProps,
+  {
+    deletePost,
+    addLike,
+    removeLike,
+  }
 )(PostItem);
