@@ -28,7 +28,11 @@ class CommentForm extends Component {
     const newComment = {
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar,
+      avatar: user.avatar ? (
+        user.avatar
+      ) : (
+        <img src={require('../images/rose.jpg')} />
+      ),
     };
 
     this.props.addComment(postId, newComment);
@@ -54,6 +58,7 @@ class CommentForm extends Component {
                 <TextAreaFieldGroup
                   placeholder="Reply to post"
                   name="text"
+                  avatar={this.state.avatar}
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}

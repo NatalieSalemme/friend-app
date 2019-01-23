@@ -135,7 +135,7 @@ class Footer extends Component {
                 San Diego, CA
               </p>
               <p>
-                <i className="fas fa-envelope mr-3" /> natalie@yesmillennial.com
+                <i className="fas fa-envelope mr-3" /> nataliesalemme@gmail.com
               </p>
               <p>
                 <i className="fas fa-phone mr-3" /> + 01 234 567 88

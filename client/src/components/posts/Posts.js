@@ -14,7 +14,7 @@ class Posts extends Component {
   render() {
     const { posts, loading } = this.props.post;
     const { profile } = this.props.profile;
-    // console.log('from Posts.js', profile.handle);
+
     let postContent;
 
     if (posts === null || loading) {
