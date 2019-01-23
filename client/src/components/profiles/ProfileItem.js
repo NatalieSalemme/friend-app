@@ -73,7 +73,9 @@ class ProfileItem extends Component {
           <li className="card-text list-group-item ">
             Status: "{profile.status}"
           </li>
-          <li className="list-group-item">{profile.location}</li>
+          <li className="list-group-item">
+            {profile.location ? profile.location : `It's a mystery`}
+          </li>
         </ul>
       </div>
     );

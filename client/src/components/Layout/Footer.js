@@ -36,23 +36,31 @@ class Footer extends Component {
               </div>
 
               <div className="col-md-6 col-lg-7 text-center text-md-right">
-                <a href="delete.html" className="fb-ic">
+                <a href="http://facebook.com" target="_blank" className="fb-ic">
                   <i className="fab fa-facebook-f text-white mr-4"> </i>
                 </a>
 
-                <a href="delete.html" className="tw-ic">
+                <a href="http://twitter.com" target="_blank" className="tw-ic">
                   <i className="fab fa-twitter text-white mr-4"> </i>
                 </a>
 
-                <a href="delete.html" className="gplus-ic">
+                <a
+                  href="http://googleplus.com"
+                  target="_blank"
+                  className="gplus-ic"
+                >
                   <i className="fab fa-google-plus-g text-white mr-4"> </i>
                 </a>
 
-                <a href="delete.html" className="li-ic">
+                <a href="http://linkedin.com" target="_blank" className="li-ic">
                   <i className="fab fa-linkedin-in text-white mr-4"> </i>
                 </a>
 
-                <a href="delete.html" className="ins-ic">
+                <a
+                  href="http://instagram.com"
+                  target="_blank"
+                  className="ins-ic"
+                >
                   <i className="fab fa-instagram text-white"> </i>
                 </a>
               </div>
