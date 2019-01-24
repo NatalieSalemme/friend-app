@@ -115,7 +115,18 @@ router.get(
   }
 );
 
-//@route POST api/users/edit-profile
+// //@route Post api/users/current
+// //@desc  Return curent user
+// //access Private
+// router.post(
+//   '/current',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     res.json(req.user);
+//   }
+// );
+
+//@route POST api/users/edit-account
 //@desc  Update current username
 //access Private
 router.post(

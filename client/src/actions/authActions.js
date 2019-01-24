@@ -2,7 +2,7 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { GET_ERRORS, SET_CURRENT_USER, GET_USER, UPDATE_USER } from './types';
 
 //Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -61,4 +61,40 @@ export const logoutUser = () => dispatch => {
   //Set current user to {} which will set isAuthenticated to false and user to an empty object
 
   dispatch(setCurrentUser({}));
+};
+
+// getCurrentUser
+export const getCurrentUser = () => dispatch => {
+  axios
+    .get('/api/users/current')
+    .then(res =>
+      dispatch({
+        type: GET_USER,
+        payload: res.data,
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_USER,
+        payload: {},
+      })
+    );
+};
+
+export const updateUser = (userData, history) => dispatch => {
+  axios
+    .post('/api/users/edit-account', userData)
+    .then(
+      res => console.log(res)
+      // dispatch({
+      //   type: UPDATE_USER,
+      //   payload: res.data,
+      // })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
 };
