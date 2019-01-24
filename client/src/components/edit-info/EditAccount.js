@@ -13,6 +13,7 @@ class EditAccount extends Component {
     password: '',
     password2: '',
     errors: {},
+    submitted: false,
   };
   componentDidMount() {
     this.props.getCurrentUser();
@@ -25,8 +26,6 @@ class EditAccount extends Component {
     }
     if (nextProps.auth) {
       let user = nextProps.auth.user;
-
-      // console.log('user is ', nextProps.auth);
 
       //Set components field state
       this.setState({
@@ -43,9 +42,11 @@ class EditAccount extends Component {
       password: this.state.password,
       password2: this.state.password2,
     };
-    console.log('state.errors', this.state.errors);
-    this.props.updateUser(userData, this.props.history);
-    // console.log('state is component will receive props', this.state);
+    this.props.updateUser(userData);
+    this.setState({
+      submitted: true,
+    });
+    console.log(this.state.errors);
   };
   onChange = e => {
     this.setState({
@@ -54,7 +55,8 @@ class EditAccount extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    console.log(this.state);
+    const { errors, success, fail, submitted } = this.state;
     return (
       <div>
         <div className="create-profile">
@@ -65,6 +67,24 @@ class EditAccount extends Component {
                   Edit Account
                 </h1>
 
+                {submitted && Object.entries(errors).length > 0 && (
+                  // (errors.name ||
+                  // errors.email ||
+                  // errors.password ||
+                  // errors.password2)
+                  <div className="alert alert-danger" role="alert">
+                    Uh-oh! There was an error submitting your form
+                  </div>
+                )}
+                {submitted && Object.entries(errors).length === 0 ? (
+                  // !errors.name &&
+                  // !errors.email &&
+                  // !errors.password &&
+                  // !errors.password2 &&
+                  <div className="alert alert-success" role="alert">
+                    Success! Your account details have been updated
+                  </div>
+                ) : null}
                 <small className="d-block pb-3">* = required fields</small>
                 <form onSubmit={this.onSubmit}>
                   <InputGroup

@@ -2,7 +2,13 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
-import { GET_ERRORS, SET_CURRENT_USER, GET_USER, UPDATE_USER } from './types';
+import {
+  GET_ERRORS,
+  SET_CURRENT_USER,
+  GET_USER,
+  UPDATE_USER,
+  CLEAR_ERRORS,
+} from './types';
 
 //Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -81,7 +87,7 @@ export const getCurrentUser = () => dispatch => {
     );
 };
 
-export const updateUser = (userData, history) => dispatch => {
+export const updateUser = userData => dispatch => {
   axios
     .post('/api/users/edit-account', userData)
     .then(res =>
@@ -90,10 +96,22 @@ export const updateUser = (userData, history) => dispatch => {
         payload: res.data.event,
       })
     )
+    .then(res =>
+      dispatch({
+        type: CLEAR_ERRORS,
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
       })
     );
+};
+
+//clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
+  };
 };
