@@ -24,23 +24,16 @@ class EditAccount extends Component {
       });
     }
     if (nextProps.auth) {
-      let user = nextProps.auth.profile;
-      let username = nextProps.auth.user;
-      user.name = user.name;
-      user.email = user.email;
-      // user.password = user.password;
-      // user.password2 = user.password2;
-      console.log('user is ', user);
+      let user = nextProps.auth.user;
+      console.log('user is ', nextProps.auth);
 
       //Set components field state
       this.setState({
         name: user.name,
         email: user.email,
-        // password: user.password,
         password2: user.password2,
       });
     }
-    // console.log(nextProps);
   }
   onSubmit = e => {
     e.preventDefault();

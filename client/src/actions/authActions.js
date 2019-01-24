@@ -84,12 +84,11 @@ export const getCurrentUser = () => dispatch => {
 export const updateUser = (userData, history) => dispatch => {
   axios
     .post('/api/users/edit-account', userData)
-    .then(
-      res => console.log(res)
-      // dispatch({
-      //   type: UPDATE_USER,
-      //   payload: res.data,
-      // })
+    .then(res =>
+      dispatch({
+        type: UPDATE_USER,
+        payload: res.data.event,
+      })
     )
     .catch(err =>
       dispatch({

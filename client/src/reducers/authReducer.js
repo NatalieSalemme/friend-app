@@ -11,12 +11,13 @@ export default function(state = initialState, action) {
     case UPDATE_USER:
       return {
         ...state,
-        user: { ...action.payload },
+        user: action.payload,
       };
     case GET_USER:
+      console.log(state.user);
       return {
         ...state,
-        profile: action.payload,
+        user: action.payload,
       };
     case SET_CURRENT_USER:
       return {
