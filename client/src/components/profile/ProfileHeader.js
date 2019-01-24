@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import isEmpty from '../../validation/is-empty';
+import ProfileCreds from './ProfileCreds';
+import ProfileAbout from './ProfileAbout';
 
 class ProfileHeader extends Component {
   render() {
@@ -10,9 +12,9 @@ class ProfileHeader extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="card card-body bg-secondary text-white mb-3">
+          <div className="card card-body bg-secondary mb-3">
             <div className="row">
-              <div className="col-4 col-md-3 ">
+              <div className="col-4 col-md-3">
                 {profile.user.avatar ? (
                   <img
                     className="rounded-circle"
@@ -45,65 +47,83 @@ class ProfileHeader extends Component {
                     <span>at {profile.company}</span>
                   )}
                 </p>
+                <div className="container">
+                  <div className="row justify-content-md-center">
+                    <div className="col-md-auto">
+                      <i className="far fa-envelope fa-2x" />
+                    </div>
+                    <div className="col-md-auto">
+                      <i className="fas fa-plus fa-2x" />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="text-center">
-              <p>
-                {isEmpty(profile.website) ? null : (
-                  <a
-                    className="text-white p-2"
-                    href={profile.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fas fa-globe fa-2x" />
-                  </a>
-                )}
 
-                {isEmpty(profile.social && profile.social.twitter) ? null : (
-                  <a
-                    className="text-white p-2"
-                    href={profile.social.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fab fa-twitter fa-2x" />
-                  </a>
-                )}
+              <div className="text-center col-8">
+                <ProfileAbout profile={this.props.profile} />
+                <ProfileCreds
+                  education={this.props.education}
+                  experience={this.props.experience}
+                />
+                <p>
+                  {isEmpty(profile.website) ? null : (
+                    <a
+                      className="text-white p-2"
+                      href={profile.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fas fa-globe fa-2x" />
+                    </a>
+                  )}
 
-                {isEmpty(profile.social && profile.social.facebook) ? null : (
-                  <a
-                    className="text-white p-2"
-                    href={profile.social.facebook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fab fa-facebook fa-2x" />
-                  </a>
-                )}
+                  {isEmpty(profile.social && profile.social.twitter) ? null : (
+                    <a
+                      className="text-white p-2"
+                      href={profile.social.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-twitter fa-2x" />
+                    </a>
+                  )}
 
-                {isEmpty(profile.social && profile.social.linkedin) ? null : (
-                  <a
-                    className="text-white p-2"
-                    href={profile.social.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fab fa-linkedin fa-2x" />
-                  </a>
-                )}
+                  {isEmpty(profile.social && profile.social.facebook) ? null : (
+                    <a
+                      className="text-white p-2"
+                      href={profile.social.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-facebook fa-2x" />
+                    </a>
+                  )}
 
-                {isEmpty(profile.social && profile.social.instagram) ? null : (
-                  <a
-                    className="text-white p-2"
-                    href={profile.social.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fab fa-instagram fa-2x" />
-                  </a>
-                )}
-              </p>
+                  {isEmpty(profile.social && profile.social.linkedin) ? null : (
+                    <a
+                      className="text-white p-2"
+                      href={profile.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-linkedin fa-2x" />
+                    </a>
+                  )}
+
+                  {isEmpty(
+                    profile.social && profile.social.instagram
+                  ) ? null : (
+                    <a
+                      className="text-white p-2"
+                      href={profile.social.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="fab fa-instagram fa-2x" />
+                    </a>
+                  )}
+                </p>
+              </div>
             </div>
           </div>
         </div>
