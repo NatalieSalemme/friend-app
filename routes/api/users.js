@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const _ = require('lodash');
 
 //Load input validation
 const validateRegisterInput = require('../../validation/register');
@@ -121,16 +122,29 @@ router.post(
   '/edit-account',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const userFields = {};
-    userFields.user = req.user;
+    const { errors, isValid } = validateRegisterInput(req.body);
 
-    User.findByIdAndUpdate(req.user._id, { name: req.body.name })
-      .then(user => {
-        res.json(user);
-      })
-      .catch(err => res.json(err));
-    //Save user
-    new User(userFields).save().then(user => res.json(user));
+    //Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const userFields = {};
+
+    userFields.name = req.body.name;
+    userFields.email = req.body.email;
+    userFields.password = req.body.password;
+    userFields.password2 = req.body.password2;
+
+    User.findByIdAndUpdate(
+      req.user.id,
+      { $set: userFields },
+      { new: true },
+      function(err, Event) {
+        if (err) throw err;
+        res.json(Event);
+      }
+    );
   }
 );
 
