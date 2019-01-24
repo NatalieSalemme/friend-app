@@ -128,23 +128,27 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
+    let password = req.body.password;
 
-    const userFields = {};
+    bcrypt.hash(password, 10, function(err, hash) {
+      let userFields = {};
 
-    userFields.name = req.body.name;
-    userFields.email = req.body.email;
-    userFields.password = req.body.password;
-    userFields.password2 = req.body.password2;
+      userFields.password = hash;
+      userFields.password2 = hash;
 
-    User.findByIdAndUpdate(
-      req.user.id,
-      { $set: userFields },
-      { new: true },
-      function(err, Event) {
-        if (err) throw err;
-        res.json(Event);
-      }
-    );
+      userFields.name = req.body.name;
+      userFields.email = req.body.email;
+
+      User.findByIdAndUpdate(
+        req.user.id,
+        { $set: userFields },
+        { new: true },
+        function(err, Event) {
+          if (err) throw err;
+          res.json({ event: Event });
+        }
+      );
+    });
   }
 );
 
