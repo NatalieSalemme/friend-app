@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Spinner from '../common/Spinner';
 import { logoutUser } from '../../actions/authActions';
 
 import {
@@ -12,7 +11,6 @@ import {
 
 class Navbar extends Component {
   componentDidMount() {
-    // console.log('about to get current profile');
     this.props.getCurrentProfile();
   }
   onLogoutClick = e => {
@@ -27,7 +25,6 @@ class Navbar extends Component {
 
     let content;
     if (profile === null || loading) {
-      // content = <Spinner />;
       content = null;
     } else {
       // Check if logged in user has profile data
@@ -54,8 +51,6 @@ class Navbar extends Component {
       }
     }
 
-    // console.log('profile', this.props.profile);
-    // console.log('user', user);
     const authLinks = (
       <nav
         className="navbar navbar-expand-lg navbar-dark"

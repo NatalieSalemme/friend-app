@@ -25,9 +25,9 @@ class ProfileAbout extends Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="card card-body bg-light mb-3">
-            <h3 className="text-center text-info">{firstName}'s Bio</h3>
-            <p className="lead">
+          <div className="card card-body mb-3">
+            <h3>{firstName}'s Bio</h3>
+            <p className="lead text-left">
               {isEmpty(profile.bio) ? (
                 <span>{firstName} does not have a bio</span>
               ) : (
@@ -35,14 +35,14 @@ class ProfileAbout extends Component {
               )}
             </p>
             <hr />
-            <h3 className="text-center text-info">Hobbies </h3>
-            <div className="row">
-              <div className="d-flex flex-wrap justify-content-center align-items-center">
-                {hobbies}
-              </div>
+            <h3 className="text-center ">Hobbies </h3>
+            {/* <div className="row"> */}
+            <div className="col-10 d-flex flex-wrap justify-content-center align-items-center">
+              {hobbies}
             </div>
+            {/* </div> */}
             <hr />
-            <h3 className="text-center text-info">Bucket List</h3>
+            <h3 className="text-center ">Bucket List</h3>
             <div className="row">
               <div className="d-flex flex-wrap justify-content-center align-items-center">
                 {bucketlist}

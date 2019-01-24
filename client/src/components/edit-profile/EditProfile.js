@@ -36,8 +36,8 @@ class EditProfile extends Component {
       const profile = nextProps.profile.profile;
 
       //Bring array back to CSV
-      const hobbiesCSV = profile.hobbies.join(',');
-      const bucketlistCSV = profile.bucketlist.join(',');
+      const hobbiesCSV = profile.hobbies.join(', ');
+      const bucketlistCSV = profile.bucketlist.join(', ');
       //If profile field doesn't exist, make empty string
       profile.handle = !isEmpty(profile.handle) ? profile.handle : '';
       profile.website = !isEmpty(profile.website) ? profile.website : '';

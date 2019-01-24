@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import isEmpty from '../../validation/is-empty';
 
 class ProfileItem extends Component {
   render() {
@@ -59,7 +58,7 @@ class ProfileItem extends Component {
             className="card-img-top img-thumbnail"
             // style={{ height: '100px', width: '100px' }}
             src={require('../images/rose.jpg')}
-            alt="Card image cap"
+            alt="Avatar"
           />
         </Link>
 

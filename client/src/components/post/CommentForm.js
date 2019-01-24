@@ -31,7 +31,7 @@ class CommentForm extends Component {
       avatar: user.avatar ? (
         user.avatar
       ) : (
-        <img src={require('../images/rose.jpg')} />
+        <img src={require('../images/rose.jpg')} alt="avatar" />
       ),
     };
 
