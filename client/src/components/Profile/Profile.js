@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ProfileHeader from './ProfileHeader';
-import ProfileAbout from './ProfileAbout';
-import ProfileCreds from './ProfileCreds';
 import Spinner from '../common/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -37,11 +35,6 @@ class Profile extends Component {
           </div>
           <ProfileHeader
             profile={profile}
-            education={profile.education}
-            experience={profile.experience}
-          />
-          <ProfileAbout profile={profile} />
-          <ProfileCreds
             education={profile.education}
             experience={profile.experience}
           />

@@ -36,11 +36,21 @@ class Footer extends Component {
               </div>
 
               <div className="col-md-6 col-lg-7 text-center text-md-right">
-                <a href="http://facebook.com" target="_blank" className="fb-ic">
+                <a
+                  href="http://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="fb-ic"
+                >
                   <i className="fab fa-facebook-f text-white mr-4"> </i>
                 </a>
 
-                <a href="http://twitter.com" target="_blank" className="tw-ic">
+                <a
+                  href="http://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="tw-ic"
+                >
                   <i className="fab fa-twitter text-white mr-4"> </i>
                 </a>
 
@@ -48,17 +58,24 @@ class Footer extends Component {
                   href="http://googleplus.com"
                   target="_blank"
                   className="gplus-ic"
+                  rel="noopener noreferrer"
                 >
                   <i className="fab fa-google-plus-g text-white mr-4"> </i>
                 </a>
 
-                <a href="http://linkedin.com" target="_blank" className="li-ic">
+                <a
+                  href="http://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="li-ic"
+                >
                   <i className="fab fa-linkedin-in text-white mr-4"> </i>
                 </a>
 
                 <a
                   href="http://instagram.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="ins-ic"
                 >
                   <i className="fab fa-instagram text-white"> </i>
