@@ -114,4 +114,24 @@ router.get(
   }
 );
 
+//@route POST api/users/edit-profile
+//@desc  Update current username
+//access Private
+router.post(
+  '/edit-account',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const userFields = {};
+    userFields.user = req.user;
+
+    User.findByIdAndUpdate(req.user._id, { name: req.body.name })
+      .then(user => {
+        res.json(user);
+      })
+      .catch(err => res.json(err));
+    //Save user
+    new User(userFields).save().then(user => res.json(user));
+  }
+);
+
 module.exports = router;
