@@ -25,13 +25,13 @@ class EditAccount extends Component {
     }
     if (nextProps.auth) {
       let user = nextProps.auth.user;
-      console.log('user is ', nextProps.auth);
+
+      // console.log('user is ', nextProps.auth);
 
       //Set components field state
       this.setState({
         name: user.name,
         email: user.email,
-        password2: user.password2,
       });
     }
   }
@@ -43,7 +43,9 @@ class EditAccount extends Component {
       password: this.state.password,
       password2: this.state.password2,
     };
+    console.log('state.errors', this.state.errors);
     this.props.updateUser(userData, this.props.history);
+    // console.log('state is component will receive props', this.state);
   };
   onChange = e => {
     this.setState({
@@ -65,7 +67,7 @@ class EditAccount extends Component {
 
                 <small className="d-block pb-3">* = required fields</small>
                 <form onSubmit={this.onSubmit}>
-                  <TextFieldGroup
+                  <InputGroup
                     placeholder="* Name"
                     name="name"
                     value={this.state.name}
@@ -73,14 +75,14 @@ class EditAccount extends Component {
                     error={errors.name}
                   />
 
-                  <TextFieldGroup
+                  <InputGroup
                     placeholder="* Email"
                     name="email"
                     value={this.state.email}
                     onChange={this.onChange}
                     error={errors.email}
                   />
-                  <TextFieldGroup
+                  <InputGroup
                     placeholder="* Password"
                     type="password"
                     name="password"
@@ -88,7 +90,7 @@ class EditAccount extends Component {
                     onChange={this.onChange}
                     error={errors.password}
                   />
-                  <TextFieldGroup
+                  <InputGroup
                     placeholder="* Confirm Password"
                     type="password"
                     name="password2"
@@ -115,6 +117,7 @@ class EditAccount extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  errors: state.errors,
 });
 export default connect(
   mapStateToProps,
