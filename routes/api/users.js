@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const _ = require('lodash');
 
 //Load input validation
 const validateRegisterInput = require('../../validation/register');
@@ -111,6 +112,54 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     res.json(req.user);
+  }
+);
+
+// //@route Post api/users/current
+// //@desc  Return curent user
+// //access Private
+// router.post(
+//   '/current',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     res.json(req.user);
+//   }
+// );
+
+//@route POST api/users/edit-account
+//@desc  Update current username
+//access Private
+router.post(
+  '/edit-account',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    //Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    let password = req.body.password;
+
+    bcrypt.hash(password, 10, function(err, hash) {
+      let userFields = {};
+
+      userFields.password = hash;
+      userFields.password2 = hash;
+
+      userFields.name = req.body.name;
+      userFields.email = req.body.email;
+
+      User.findByIdAndUpdate(
+        req.user.id,
+        { $set: userFields },
+        { new: true },
+        function(err, Event) {
+          if (err) throw err;
+          res.json({ event: Event });
+        }
+      );
+    });
   }
 );
 

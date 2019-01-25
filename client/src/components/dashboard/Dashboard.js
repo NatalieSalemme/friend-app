@@ -10,8 +10,6 @@ import Education from './Education';
 
 class Dashboard extends Component {
   componentDidMount() {
-    // console.log('profile from dashboard', this.props.profile);
-    // console.log('about to get current profile');
     this.props.getCurrentProfile();
   }
 
@@ -21,10 +19,12 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
+
     const { profile, loading } = this.props.profile;
+
     let dashboardContent;
 
-    if (profile === null || loading) {
+    if (profile === null || loading || user === null) {
       dashboardContent = <Spinner />;
     } else {
       // Check if logged in user has profile data

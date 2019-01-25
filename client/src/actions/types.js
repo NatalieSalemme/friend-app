@@ -11,3 +11,5 @@ export const GET_POST = 'GET_POST';
 export const ADD_POST = 'ADD_POST';
 export const DELETE_POST = 'DELETE_POST';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const GET_USER = 'GET_USER';
+export const UPDATE_USER = 'UPDATE_USER';
