@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import TextFieldGroup from '../common/TextFieldGroup';
+
 import InputGroup from '../common/InputGroup';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+
 import { getCurrentUser, updateUser } from '../../actions/authActions';
 
 class EditAccount extends Component {
@@ -17,6 +17,9 @@ class EditAccount extends Component {
   };
   componentDidMount() {
     this.props.getCurrentUser();
+    this.setState({
+      submitted: false,
+    });
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -46,7 +49,6 @@ class EditAccount extends Component {
     this.setState({
       submitted: true,
     });
-    console.log(this.state.errors);
   };
   onChange = e => {
     this.setState({
@@ -55,8 +57,7 @@ class EditAccount extends Component {
   };
 
   render() {
-    console.log(this.state);
-    const { errors, success, fail, submitted } = this.state;
+    const { errors, submitted } = this.state;
     return (
       <div>
         <div className="create-profile">
@@ -67,7 +68,7 @@ class EditAccount extends Component {
                   Edit Account
                 </h1>
 
-                {submitted && Object.entries(errors).length > 0 && (
+                {submitted && Object.values(errors).length > 0 && (
                   // (errors.name ||
                   // errors.email ||
                   // errors.password ||
@@ -76,7 +77,7 @@ class EditAccount extends Component {
                     Uh-oh! There was an error submitting your form
                   </div>
                 )}
-                {submitted && Object.entries(errors).length === 0 ? (
+                {submitted && Object.values(errors).length === 0 ? (
                   // !errors.name &&
                   // !errors.email &&
                   // !errors.password &&
