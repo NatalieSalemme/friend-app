@@ -6,9 +6,10 @@ import ProfileAbout from './ProfileAbout';
 class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
-    if (!this.props) {
+    if (!profile) {
       return <div>Loading...</div>;
     }
+    console.log(profile);
     return (
       <div className="row">
         <div className="col-md-12">
