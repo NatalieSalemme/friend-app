@@ -23,19 +23,23 @@ class Experience extends Component {
         </td>
       </tr>
     ));
+    const experienceInfo =
+      experience.length === 0 ? (
+        <p className="text-muted">None</p>
+      ) : (
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Company</th>
+            <th />
+          </tr>
+          {experience}
+        </thead>
+      );
     return (
-      <div className="mt-5">
-        <h4 className="mb-4">Experience Credentials</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Company</th>
-              <th />
-            </tr>
-            {experience}
-          </thead>
-        </table>
+      <div className=" col-md-10">
+        <h4 className="mb-4">My Experience </h4>
+        <table className="table">{experienceInfo}</table>
       </div>
     );
   }
