@@ -52,7 +52,10 @@ class ProfileItem extends Component {
       //     </div>
       //   </div>
       // </div>
-      <div className="card mx-2">
+      <div
+        className="card mx-2 my-3 mx-auto"
+        style={{ minWidth: '15em', maxWidth: '15em' }}
+      >
         <Link to={`/profile/${profile.handle}`} classNameName="btn text-white">
           <img
             className="card-img-top img-thumbnail"

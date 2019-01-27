@@ -12,6 +12,10 @@ const ProfileActions = () => {
         <i className="fas fa-user-edit text-info mr-1" />
         Edit Account
       </Link>
+      <Link to="/edit-photo" className="btn btn-light">
+        <i className="fas fa-camera text-info mr-1" />
+        Edit Photo
+      </Link>
       <Link to="/add-experience" className="btn btn-light">
         <i className="fab fa-black-tie text-info mr-1" />
         Add Experience
