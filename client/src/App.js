@@ -87,7 +87,7 @@ class App extends Component {
                 />
               </Switch>
               <Switch>
-                <PrivateRoute exact path="/photos" component={EditPhoto} />
+                <PrivateRoute exact path="/edit-photo" component={EditPhoto} />
               </Switch>
               <Switch>
                 <PrivateRoute
