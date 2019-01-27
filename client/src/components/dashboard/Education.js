@@ -26,20 +26,25 @@ class Education extends Component {
         </td>
       </tr>
     ));
+    const educationInfo =
+      education.length === 0 ? (
+        <p className="text-muted">None</p>
+      ) : (
+        <thead>
+          <tr>
+            <th>School</th>
+            <th>Degree</th>
+            <th>Year</th>
+            <th />
+          </tr>
+          {education}
+        </thead>
+      );
+
     return (
-      <div>
-        <h4 className="mb-4">Education Credentials</h4>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>School</th>
-              <th>Degree</th>
-              <th>Year</th>
-              <th />
-            </tr>
-            {education}
-          </thead>
-        </table>
+      <div className="col-md-10">
+        <h4 className="mb-4">My Education </h4>
+        <table className="table">{educationInfo}</table>
       </div>
     );
   }
