@@ -28,12 +28,17 @@ class Dashboard extends Component {
       dashboardContent = <Spinner />;
     } else {
       // Check if logged in user has profile data
+      let firstName = user.name.split(' ')[0];
+      console.log(firstName);
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
-            <p className="lead text-muted">
-              Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
-            </p>
+            <h1 className="my-5 text-center">
+              Hi{' '}
+              <Link className="text-dark" to={`/profile/${profile.handle}`}>
+                {firstName}!
+              </Link>
+            </h1>
             <ProfileActions />
             <Experience experience={profile.experience} />
             <Education education={profile.education} />
@@ -61,10 +66,7 @@ class Dashboard extends Component {
       <div className="dashboard">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
-              {dashboardContent}
-            </div>
+            <div className="col-md-12">{dashboardContent}</div>
           </div>
         </div>
       </div>
