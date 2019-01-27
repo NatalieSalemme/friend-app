@@ -33,7 +33,7 @@ class ProfileHeader extends Component {
                   />
                 )}
                 <div className="bg-white">
-                  <h1 className="display-4 text-center">{profile.user.name}</h1>
+                  <h1 className="display-6 text-center">{profile.user.name}</h1>
 
                   <div className="text-center col">
                     <div>
