@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import isEmpty from '../../validation/is-empty';
 import ProfileCreds from './ProfileCreds';
 import ProfileAbout from './ProfileAbout';
+import { Link } from 'react-router-dom';
 
 class ProfileHeader extends Component {
   render() {
@@ -67,7 +68,7 @@ class ProfileHeader extends Component {
                       {isEmpty(profile.website) ? null : (
                         <a
                           className=" p-2"
-                          href={profile.website}
+                          href={`https://${profile.website}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -80,7 +81,7 @@ class ProfileHeader extends Component {
                       ) ? null : (
                         <a
                           className=" p-2"
-                          href={profile.social.twitter}
+                          href={`https://${profile.social.twitter}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -93,7 +94,7 @@ class ProfileHeader extends Component {
                       ) ? null : (
                         <a
                           className=" p-2"
-                          href={profile.social.facebook}
+                          href={`https://${profile.social.facebook}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -106,7 +107,7 @@ class ProfileHeader extends Component {
                       ) ? null : (
                         <a
                           className=" p-2"
-                          href={profile.social.linkedin}
+                          href={`https://${profile.social.linkedin}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -119,7 +120,7 @@ class ProfileHeader extends Component {
                       ) ? null : (
                         <a
                           className=" p-2"
-                          href={profile.social.instagram}
+                          href={`https://${profile.social.instagram}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
