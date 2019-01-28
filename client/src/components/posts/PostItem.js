@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deletePost, addLike, removeLike } from '../../actions/postActions';
+import { getProfileById } from '../../actions/profileActions';
 
 class PostItem extends Component {
   onDeleteClick = id => {
@@ -27,20 +28,25 @@ class PostItem extends Component {
     }
   };
 
+  onPhotoClick = id => {
+    this.props.getProfileById(id);
+  };
   render() {
     const { post, auth, showActions } = this.props;
-
+    // console.log(this.props.profile);
     return (
       <div className="card card-body mb-3 col-md-8 mx-auto">
         <div className="row">
           <div className="col-md-2">
-            <a href="profile.html">
+            <Link to={`profile/user/${post.user}`}>
               <img
+                onClick={id => this.onPhotoClick(post.user)}
                 className="rounded-circle d-none d-md-block"
-                src={post.avatar}
+                src={require('../images/rose.jpg')}
+                style={{ width: '75px', height: '75px' }}
                 alt=""
               />
-            </a>
+            </Link>
             <br />
             <p className="text-center">{post.name}</p>
           </div>
@@ -102,6 +108,7 @@ PostItem.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  profile: state.profile,
 });
 
 export default connect(
@@ -110,5 +117,6 @@ export default connect(
     deletePost,
     addLike,
     removeLike,
+    getProfileById,
   }
 )(PostItem);

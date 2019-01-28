@@ -49,7 +49,7 @@ class PostForm extends Component {
             className="card-header text-white"
             style={{ backgroundColor: '#1f0891' }}
           >
-            What's happening?{' '}
+            What's On Your Mind?{' '}
           </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
