@@ -47,10 +47,14 @@ class Dashboard extends Component {
                 <Education education={profile.education} />
               </div>
             </div>
-            <div style={{ marginBottom: '60px' }} />
-            <button onClick={this.onDeleteClick} className="btn btn-danger">
-              Delete My Account
-            </button>
+            <div className="mt-5">
+              <button
+                onClick={this.onDeleteClick}
+                className="btn btn-danger mx-auto"
+              >
+                Delete My Account
+              </button>
+            </div>
           </div>
         );
       } else {

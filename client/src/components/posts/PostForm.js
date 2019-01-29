@@ -42,10 +42,15 @@ class PostForm extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="post-form mb-3">
+      <div className="post-form mb-3 col-md-8 mx-auto ">
         <h1 className="text-center mb-5">My Feed</h1>
         <div className="card card-info">
-          <div className="card-header bg-info text-white">Say Something...</div>
+          <div
+            className="card-header text-white"
+            style={{ backgroundColor: '#1f0891' }}
+          >
+            What's On Your Mind?{' '}
+          </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
@@ -58,7 +63,11 @@ class PostForm extends Component {
                   avatar={this.state.avatar}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
+              <button
+                type="submit"
+                className="btn text-white"
+                style={{ backgroundColor: '#1f0891' }}
+              >
                 Submit
               </button>
             </form>

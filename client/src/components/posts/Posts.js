@@ -13,7 +13,7 @@ class Posts extends Component {
 
   render() {
     const { posts, loading } = this.props.post;
-
+    console.log('posts js', this.props.profile);
     let postContent;
 
     if (posts === null || loading) {

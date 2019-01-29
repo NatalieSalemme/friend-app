@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import ProfileHeader from './ProfileHeader';
-import Spinner from '../common/Spinner';
 import { connect } from 'react-redux';
+import Spinner from '../common/Spinner';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getProfileByHandle } from '../../actions/profileActions';
+import ProfileHeader from './ProfileHeader';
+import { getProfileById } from '../../actions/profileActions';
 
-class Profile extends Component {
+class IdProfile extends Component {
   componentDidMount() {
-    if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params.handle);
+    if (this.props.match.params.id) {
+      this.props.getProfileById(this.props.match.params.Id);
     }
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.profile.profile === null && this.props.profile.loading) {
-      this.props.history.push('/not-found');
-    }
-  }
+
   render() {
     const { profile, loading } = this.props.profile;
     let profileContent;
@@ -56,15 +52,10 @@ class Profile extends Component {
     );
   }
 }
-Profile.propTypes = {
-  profile: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = state => ({
   profile: state.profile,
 });
-
 export default connect(
   mapStateToProps,
-  { getProfileByHandle }
-)(Profile);
+  { getProfileById }
+)(IdProfile);
