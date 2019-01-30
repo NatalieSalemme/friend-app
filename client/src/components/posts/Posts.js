@@ -23,7 +23,14 @@ class Posts extends Component {
     }
 
     return (
-      <div className="feed mt-5">
+      <div
+        className="feed pt-5"
+        style={{
+          backgroundColor: '#E9EBEE',
+          paddingBottom: '5em',
+          marginBottom: '-4em',
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-12">
