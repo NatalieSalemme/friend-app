@@ -20,6 +20,7 @@ const MessageSchema = new Schema({
   to: {
     type: String,
   },
+
   messages: [
     {
       message: String,

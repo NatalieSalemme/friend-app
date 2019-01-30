@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MessageItem from './MessageItem';
 
 class MessageFeed extends Component {
   render() {
@@ -7,12 +8,11 @@ class MessageFeed extends Component {
       messageContent = <h1>You have 0 messages</h1>;
     } else {
       messageContent = this.props.messages.map(message => (
-        <li key={message.id}>{message.text}</li>
+        <MessageItem key={message._id} message={message} />
       ));
     }
     return (
       <div>
-        <h1>Message Feed</h1>
         <div>{messageContent}</div>
       </div>
     );
