@@ -20,7 +20,7 @@ router.post(
     }
 
     const newMessage = new Message({
-      text: req.body.text,
+      message: req.body.text,
       name: req.body.name,
       avatar: req.body.avatar,
       user: req.user.id,
@@ -37,7 +37,7 @@ router.get(
     User.findOne({ _id: req.user.id }).then(user => {
       if (user) {
         // res.json({ user: user });
-        Message.find({ to: req.user.id }).then(message => res.json(message));
+        Message.find({ to: req.user.id }).then(messages => res.json(messages));
       } else {
         res.status(404).json({ error: 'No user found' });
       }
