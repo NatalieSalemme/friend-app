@@ -103,7 +103,12 @@ class Navbar extends Component {
               Search
             </button>
           </form>
-
+          <div className="nav-item active ">
+            <Link to="/messages/all" className="nav-link text-white">
+              {' '}
+              <i className="far fa-envelope" />
+            </Link>
+          </div>
           <div className="nav-item">
             {content}
             {/* <Link to={`/profile`}>

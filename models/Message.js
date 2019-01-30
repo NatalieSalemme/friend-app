@@ -17,6 +17,10 @@ const MessageSchema = new Schema({
   avatar: {
     type: String,
   },
+  to: {
+    type: String,
+  },
+
   messages: [
     {
       message: String,
