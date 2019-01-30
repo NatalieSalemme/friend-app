@@ -31,15 +31,13 @@ router.post(
 );
 
 router.get(
-  '/:user',
+  '/all',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    User.findOne({ _id: req.params.user }).then(user => {
+    User.findOne({ _id: req.user.id }).then(user => {
       if (user) {
         // res.json({ user: user });
-        Message.find({ to: req.params.user }).then(message =>
-          res.json(message)
-        );
+        Message.find({ to: req.user.id }).then(message => res.json(message));
       } else {
         res.status(404).json({ error: 'No user found' });
       }
