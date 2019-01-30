@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Message = require('../../models/Message');
-
+const User = require('../../models/User');
 //Validation
 const validateMessageInput = require('../../validation/message');
 
@@ -24,9 +24,26 @@ router.post(
       name: req.body.name,
       avatar: req.body.avatar,
       user: req.user.id,
+      to: req.body.to,
     });
     newMessage.save().then(message => res.json(message));
   }
 );
 
+router.get(
+  '/:user',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.params.user }).then(user => {
+      if (user) {
+        // res.json({ user: user });
+        Message.find({ to: req.params.user }).then(message =>
+          res.json(message)
+        );
+      } else {
+        res.status(404).json({ error: 'No user found' });
+      }
+    });
+  }
+);
 module.exports = router;
