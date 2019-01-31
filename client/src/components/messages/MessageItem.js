@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import moment from 'moment';
 
-class MessageItem extends Component {
+class MessageItem extends React.Component {
   render() {
     const { message } = this.props;
+    console.log(this.props);
+    let messageDate = message.date.toString();
+    // let formattedDate = moment({ messageDate }, 'MM/DD/YYYY');
     return (
       <div style={{ border: '2px solid black' }} className="my-2">
-        <div>Text: {message.text}</div>
-        <div>Date: {message.date}</div>
-        <div>From: {message.user}</div>
+        <div>Text: {message.message}</div>
+        <div>{moment(messageDate).format('MM/DD/YYYY LT')}</div>
+        <div>From: {message.from}</div>
       </div>
     );
   }
