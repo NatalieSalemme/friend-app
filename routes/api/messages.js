@@ -28,6 +28,7 @@ router.post(
       from: req.user.name,
     });
     newMessage.save().then(message => res.json(message));
+    res.json(req.user);
   }
 );
 

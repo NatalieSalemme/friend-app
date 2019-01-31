@@ -8,7 +8,10 @@ class MessageItem extends React.Component {
     let messageDate = message.date.toString();
     // let formattedDate = moment({ messageDate }, 'MM/DD/YYYY');
     return (
-      <div style={{ border: '2px solid black' }} className="my-2">
+      <div
+        style={{ border: '2px solid black' }}
+        className="my-2 container card"
+      >
         <div>Text: {message.message}</div>
         <div>{moment(messageDate).format('MM/DD/YYYY LT')}</div>
         <div>From: {message.from}</div>
