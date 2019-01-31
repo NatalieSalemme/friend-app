@@ -7,7 +7,7 @@ const MessageSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users',
   },
-  text: {
+  message: {
     type: String,
     required: true,
   },
@@ -20,7 +20,9 @@ const MessageSchema = new Schema({
   to: {
     type: String,
   },
-
+  from: {
+    type: String,
+  },
   messages: [
     {
       message: String,

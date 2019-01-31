@@ -4,13 +4,13 @@ const isEmpty = require('./is-empty');
 module.exports = function validateMessageInput(data) {
   let errors = {};
 
-  data.text = !isEmpty(data.text) ? data.text : '';
+  data.message = !isEmpty(data.message) ? data.message : '';
 
-  if (!Validator.isLength(data.text, { min: 1, max: 1000 })) {
-    errors.text = 'Post must be between 10 and 300 characters';
+  if (!Validator.isLength(data.message, { min: 1, max: 3000 })) {
+    errors.message = 'Post must be between 1 and 3000 characters';
   }
-  if (Validator.isEmpty(data.text)) {
-    errors.text = 'Text field is required';
+  if (Validator.isEmpty(data.message)) {
+    errors.message = 'message field is required';
   }
 
   return { errors, isValid: isEmpty(errors) };

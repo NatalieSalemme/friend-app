@@ -20,11 +20,12 @@ router.post(
     }
 
     const newMessage = new Message({
-      message: req.body.text,
+      message: req.body.message,
       name: req.body.name,
       avatar: req.body.avatar,
       user: req.user.id,
       to: req.body.to,
+      from: req.user.name,
     });
     newMessage.save().then(message => res.json(message));
   }
