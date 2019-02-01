@@ -115,7 +115,6 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/messages/all" component={Messages} />
               </Switch>
-              {/* <Route exact path="/not-found" component={NotFound} /> */}
             </div>
             <Footer />
           </div>
