@@ -1,11 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { deleteMessage } from '../../actions/messageActions';
 
 class MessageItem extends React.Component {
+  onDeleteClick = id => {
+    this.props.deleteMessage(id);
+  };
   render() {
     const { message } = this.props;
-    console.log(this.props);
+
     let messageDate = message.date.toString();
     // let formattedDate = moment({ messageDate }, 'MM/DD/YYYY');
     return (
@@ -46,6 +51,7 @@ class MessageItem extends React.Component {
               </Link>
               <Link
                 to={`/messages/delete/${message._id}`}
+                onClick={() => this.onDeleteClick(message._id)}
                 className="btn btn-danger"
               >
                 Delete
@@ -58,4 +64,7 @@ class MessageItem extends React.Component {
   }
 }
 
-export default MessageItem;
+export default connect(
+  null,
+  { deleteMessage }
+)(MessageItem);
