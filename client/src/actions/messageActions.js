@@ -46,12 +46,11 @@ export const deleteMessage = id => dispatch => {
 export const getMessageThread = id => dispatch => {
   axios
     .get(`/api/messages/reply/${id}`)
-    .then(
-      res => console.log(res)
-      // dispatch({
-      //   type: GET_MESSAGE_THREAD,
-      //   payload: res.data,
-      // })
+    .then(res =>
+      dispatch({
+        type: GET_MESSAGE_THREAD,
+        payload: res.data,
+      })
     )
     .catch(err =>
       dispatch({
