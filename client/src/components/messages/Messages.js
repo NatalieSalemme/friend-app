@@ -14,7 +14,7 @@ class Messages extends Component {
       <div>
         <h1 className="text-center mt-4">Messages</h1>
         <div className="text-center">
-          <MessageFeed messages={messages} />
+          <MessageFeed messages={messages.reverse()} />
         </div>
       </div>
     );

@@ -9,8 +9,9 @@ import { getProfileById } from '../../actions/profileActions';
 class IdProfile extends Component {
   componentDidMount() {
     if (this.props.match.params.id) {
-      this.props.getProfileById(this.props.match.params.Id);
+      this.props.getProfileById(this.props.match.params.id);
     }
+    console.log('id profile component');
   }
 
   render() {

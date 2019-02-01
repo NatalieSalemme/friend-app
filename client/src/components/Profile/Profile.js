@@ -11,6 +11,7 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
+    console.log('profile component');
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {

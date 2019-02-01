@@ -28,6 +28,7 @@ import IdProfile from './components/profile/IdProfile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
 import Messages from './components/messages/Messages';
+import MessageThread from './components/messages/MessageThread';
 // import NotFound from './components/not-found/NotFound';
 
 // Check for token
@@ -115,7 +116,13 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/messages/all" component={Messages} />
               </Switch>
-              {/* <Route exact path="/not-found" component={NotFound} /> */}
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/messages/reply/:id"
+                  component={MessageThread}
+                />
+              </Switch>
             </div>
             <Footer />
           </div>
