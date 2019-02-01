@@ -1,7 +1,13 @@
 import axios from 'axios';
 
-import { GET_MESSAGES, DELETE_MESSAGE, GET_ERRORS } from './types';
+import {
+  GET_MESSAGES,
+  DELETE_MESSAGE,
+  GET_ERRORS,
+  GET_MESSAGE_THREAD,
+} from './types';
 
+//Get all messages
 export const getMessages = () => dispatch => {
   axios
     .get('/api/messages/all')
@@ -18,7 +24,7 @@ export const getMessages = () => dispatch => {
       });
     });
 };
-
+//Delete message by Id
 export const deleteMessage = id => dispatch => {
   axios
     .delete(`/api/messages/delete/${id}`)
@@ -32,6 +38,25 @@ export const deleteMessage = id => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
+      })
+    );
+};
+
+//Get message thread
+export const getMessageThread = id => dispatch => {
+  axios
+    .get(`/api/messages/reply/${id}`)
+    .then(
+      res => console.log(res)
+      // dispatch({
+      //   type: GET_MESSAGE_THREAD,
+      //   payload: res.data,
+      // })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_MESSAGE_THREAD,
+        payload: null,
       })
     );
 };

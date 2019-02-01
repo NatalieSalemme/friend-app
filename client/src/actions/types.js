@@ -15,3 +15,4 @@ export const GET_USER = 'GET_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const DELETE_MESSAGE = 'DELETE_MESSAGE';
+export const GET_MESSAGE_THREAD = 'GET_MESSAGE_THREAD';
