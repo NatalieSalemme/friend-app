@@ -12,7 +12,7 @@ class MessageItem extends React.Component {
     const { message } = this.props;
 
     let messageDate = message.date.toString();
-    // let formattedDate = moment({ messageDate }, 'MM/DD/YYYY');
+
     return (
       <div className="card card-body mb-3 col-md-8 mx-auto">
         <div className="row">
@@ -42,20 +42,19 @@ class MessageItem extends React.Component {
             </div>
             <p className="lead text-left">{message.message}</p>
 
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between mt-5 pt-2">
               <Link
                 to={`/messages/reply/${message._id}`}
                 className="btn btn-secondary"
               >
                 Reply
               </Link>
-              <Link
-                to={`/messages/delete/${message._id}`}
+              <button
                 onClick={() => this.onDeleteClick(message._id)}
                 className="btn btn-danger"
               >
                 Delete
-              </Link>
+              </button>
             </div>
           </div>
         </div>
