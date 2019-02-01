@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteMessage } from '../../actions/messageActions';
 import { connect } from 'react-redux';
+import Spinner from '../common/Spinner';
+import moment from 'moment';
 
 class MessageThreadItem extends Component {
   onDeleteClick = id => {
     this.props.deleteMessage(id);
-    this.props.history.push('/messages/all');
   };
   render() {
     const { message } = this.props.message;
-    console.log('messageThreadItem', message);
-    return (
-      <div>
+    let messageThreadContent;
+    if (!message) {
+      messageThreadContent = <Spinner />;
+    } else {
+      const messageDate = message.date;
+      messageThreadContent = (
         <div className="card card-body mb-3 col-md-8 mx-auto">
           <div className="row">
             <div className="col-md-2">
@@ -30,9 +34,9 @@ class MessageThreadItem extends Component {
               </div>
             </div>
             <div className="col-md-10">
-              {/* <div className="text-right">
+              <div className="text-right">
                 {moment(messageDate).format('MM/DD/YYYY LT')}
-              </div> */}
+              </div>
               <p className="lead text-left">{message.message}</p>
 
               <div className="text-right mt-5 pt-2">
@@ -46,8 +50,9 @@ class MessageThreadItem extends Component {
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <div>{messageThreadContent}</div>;
   }
 }
 
