@@ -38,12 +38,18 @@ class MessageItem extends React.Component {
             <p className="lead text-left">{message.message}</p>
 
             <div class="d-flex justify-content-between">
-              <Link to="/messages/reply/id" className="btn btn-secondary">
+              <Link
+                to={`/messages/reply/${message._id}`}
+                className="btn btn-secondary"
+              >
                 Reply
               </Link>
-              <button type="button" className="btn btn-danger">
+              <Link
+                to={`/messages/delete/${message._id}`}
+                className="btn btn-danger"
+              >
                 Delete
-              </button>
+              </Link>
             </div>
           </div>
         </div>

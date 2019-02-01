@@ -46,4 +46,20 @@ router.get(
     });
   }
 );
+
+router.delete(
+  '/delete/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    // res.json(req.params.id);
+    Message.findById(req.params.id)
+      .then(message => {
+        //Delete
+        message.remove().then(() => res.json({ success: true }));
+      })
+      .catch(err =>
+        res.status(404).json({ messagenotfound: 'No message found' })
+      );
+  }
+);
 module.exports = router;
