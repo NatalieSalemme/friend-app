@@ -122,7 +122,7 @@ export const deletePost = id => dispatch => {
     );
 };
 
-//Add Like
+//Add Post Like
 export const addLike = id => dispatch => {
   axios
     .post(`/api/posts/like/${id}`)
@@ -134,6 +134,20 @@ export const addLike = id => dispatch => {
       })
     );
 };
+//Add Comment Like
+//Add Like
+export const addCommentLike = (postId, commentId) => dispatch => {
+  axios
+    .post(`/api/posts/like/${postId}/${commentId}`)
+    .then(res => dispatch(getPosts()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 //Remove Like
 export const removeLike = id => dispatch => {
   axios

@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { deleteComment } from '../../actions/postActions';
+import {
+  deleteComment,
+  deletePost,
+  addCommentLike,
+  removeLike,
+} from '../../actions/postActions';
 
 class CommentItem extends Component {
+  onLikeClick = commentId => {
+    this.props.addCommentLike(this.props.postId, commentId);
+    console.log(this.props.postId, commentId);
+  };
+
+  onUnlikeClick = id => {
+    this.props.removeLike(id);
+  };
+
   onDeleteClick = (postId, commentId) => {
     this.props.deleteComment(postId, commentId);
+  };
+
+  findUserLike = likes => {
+    const { auth } = this.props;
+    if (likes.filter(like => like.user === auth.user.id).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   render() {
     const { comment, postId, auth } = this.props;
     const { profile, loading } = this.props.profile;
-
+    // console.log('commentItem', comment._id);
     let content;
     if (profile === null || loading) {
       // content = <Spinner />;
@@ -56,6 +80,28 @@ class CommentItem extends Component {
               <h4>{comment.name}</h4>
             </div>
           </div>
+          <div className="row">
+            <button
+              onClick={() => this.onLikeClick(comment._id)}
+              type="button"
+              className="btn btn-light mr-1"
+            >
+              <i
+                className={classnames('fas fa-thumbs-up', {
+                  'text-info': this.findUserLike(comment.likes),
+                })}
+              />
+
+              <span className="badge badge-light">{comment.likes.length}</span>
+            </button>
+            <button
+              onClick={() => this.onUnlikeClick(comment._id)}
+              type="button"
+              className="btn btn-light mr-1"
+            >
+              <i className="text-secondary fas fa-thumbs-down" />
+            </button>
+          </div>
           <div className="col-md-10">
             <p className="lead">{comment.text}</p>
             {comment.user === auth.user.id ? (
@@ -88,5 +134,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteComment }
+  { deleteComment, addCommentLike }
 )(CommentItem);
