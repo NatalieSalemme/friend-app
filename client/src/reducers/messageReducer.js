@@ -1,5 +1,3 @@
-import isEmpty from '../validation/is-empty';
-
 import {
   GET_MESSAGES,
   DELETE_MESSAGE,

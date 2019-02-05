@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import isEmpty from '../../validation/is-empty';
 import ProfileCreds from './ProfileCreds';
 import ProfileAbout from './ProfileAbout';
-import { Link } from 'react-router-dom';
 
 class ProfileHeader extends Component {
   render() {

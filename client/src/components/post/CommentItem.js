@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   deleteComment,
-  deletePost,
   addCommentLike,
   removeLike,
 } from '../../actions/postActions';
@@ -13,7 +12,6 @@ import {
 class CommentItem extends Component {
   onLikeClick = commentId => {
     this.props.addCommentLike(this.props.postId, commentId);
-    console.log(this.props.postId, commentId);
   };
 
   onUnlikeClick = id => {
@@ -66,14 +64,6 @@ class CommentItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            {/* <a href="profile.html">
-              <img
-                className="rounded-circle d-none d-md-block"
-                src={comment.avatar}
-                alt=""
-              />
-            </a> */}
-
             <br />
             <div className="text-center">
               {content}

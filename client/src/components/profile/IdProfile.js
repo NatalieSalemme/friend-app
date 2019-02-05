@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../common/Spinner';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
 import { getProfileById } from '../../actions/profileActions';

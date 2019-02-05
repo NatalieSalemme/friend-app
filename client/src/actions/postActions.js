@@ -139,7 +139,7 @@ export const addLike = id => dispatch => {
 export const addCommentLike = (postId, commentId) => dispatch => {
   axios
     .post(`/api/posts/like/${postId}/${commentId}`)
-    .then(res => dispatch(getPosts()))
+    .then(res => dispatch(getPost(postId)))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

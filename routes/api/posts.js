@@ -214,7 +214,6 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findOne({ _id: req.params.postId }).then(post => {
         let index = post.comments.findIndex(x => x.id === req.params.commentId);
-        // let commentItem = post.comments[index];
 
         post.comments[index].likes.unshift({ user: req.user.id });
 
