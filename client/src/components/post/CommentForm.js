@@ -28,11 +28,11 @@ class CommentForm extends Component {
     const newComment = {
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar ? (
-        user.avatar
-      ) : (
-        <img src={require('../images/rose.jpg')} alt="avatar" />
-      ),
+      // avatar: user.avatar ? (
+      //   user.avatar
+      // ) : (
+      //   <img src={require('../images/rose.jpg')} alt="avatar" />
+      // ),
     };
 
     this.props.addComment(postId, newComment);
@@ -45,7 +45,6 @@ class CommentForm extends Component {
 
   render() {
     const { errors } = this.state;
-
     return (
       <div className="post-form mb-3">
         <div className="card card-info">

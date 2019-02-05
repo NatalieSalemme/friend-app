@@ -23,6 +23,7 @@ class MessageThread extends Component {
       <div>
         <h1>Message Thread</h1>
         <div>{messageContent}</div>
+        <button>Reply</button>
       </div>
     );
   }
