@@ -28,7 +28,6 @@ router.post(
       from: req.user.name,
     });
     newMessage.save().then(message => res.json(message));
-    res.json(req.user);
   }
 );
 //@route GET api/messages/all
@@ -82,4 +81,27 @@ router.get(
       );
   }
 );
+
+//@route GET api/messages/from/:userId
+//@desc  Get all messages from a specific user
+//access Private
+router.get(
+  '/from/:userId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Message.find({ user: req.params.userId }).then(messages =>
+      res.json(messages)
+    );
+    // User.findOne({ _id: req.params.userId }).then(user => {
+    //   // res.json(user._id);
+    //   if (user) {
+    //     // res.json({ user: user });
+    //     Message.find({ from: user.id }).then(messages => res.json(messages));
+    //   } else {
+    //     res.status(404).json({ error: 'No user found' });
+    //   }
+    // });
+  }
+);
+
 module.exports = router;

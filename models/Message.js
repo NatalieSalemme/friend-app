@@ -19,6 +19,7 @@ const MessageSchema = new Schema({
   },
   to: {
     type: String,
+    required: true,
   },
   from: {
     type: String,

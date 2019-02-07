@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getMessageThread } from '../../actions/messageActions';
 import Spinner from '../common/Spinner';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
@@ -22,7 +23,16 @@ class MessageThread extends Component {
     }
     return (
       <div>
-        <h1>Message Thread</h1>
+        <div className="col-md-6 row">
+          <Link
+            to="/messages/all"
+            className="btn btn-light mb-3 ml-5 mt-5 float-left text-white"
+            style={{ backgroundColor: '#1f0891' }}
+          >
+            Back To Messages
+          </Link>
+        </div>
+        <h1 className="text-center">Message Thread</h1>
         <div>{messageContent}</div>
 
         <div className="post-form mb-3 col-md-6 mx-auto">
