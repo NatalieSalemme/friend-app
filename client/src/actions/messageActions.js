@@ -59,3 +59,16 @@ export const getMessageThread = id => dispatch => {
       })
     );
 };
+
+//Get all messages from a single user
+export const getMessagesFrom = senderId => dispatch => {
+  axios
+    .get(`/api/messages/from/${senderId}`)
+    .then(res => console.log(res.data))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};

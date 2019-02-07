@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import {
   deleteComment,
   addCommentLike,
-  removeLike,
+  // removeLike,
 } from '../../actions/postActions';
 
 class CommentItem extends Component {

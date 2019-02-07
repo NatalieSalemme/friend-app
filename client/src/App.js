@@ -29,6 +29,7 @@ import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
 import Messages from './components/messages/Messages';
 import MessageThread from './components/messages/MessageThread';
+import MessagesFrom from './components/messages/MessagesFrom';
 // import NotFound from './components/not-found/NotFound';
 
 // Check for token
@@ -121,6 +122,13 @@ class App extends Component {
                   exact
                   path="/messages/reply/:id"
                   component={MessageThread}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/messages/from/:senderId"
+                  component={MessagesFrom}
                 />
               </Switch>
             </div>

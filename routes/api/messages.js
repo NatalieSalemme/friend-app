@@ -86,10 +86,10 @@ router.get(
 //@desc  Get all messages from a specific user
 //access Private
 router.get(
-  '/from/:userId',
+  '/from/:senderId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Message.find({ user: req.params.userId }).then(messages =>
+    Message.find({ user: req.params.senderId }).then(messages =>
       res.json(messages)
     );
     // User.findOne({ _id: req.params.userId }).then(user => {
