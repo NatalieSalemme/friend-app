@@ -11,7 +11,6 @@ class MessageThreadItem extends Component {
   };
   render() {
     const { message } = this.props;
-    console.log('from messagethreaditem', message);
     let messageThreadContent;
     if (!message) {
       messageThreadContent = <Spinner />;
