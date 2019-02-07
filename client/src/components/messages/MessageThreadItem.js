@@ -10,7 +10,8 @@ class MessageThreadItem extends Component {
     this.props.deleteMessage(id);
   };
   render() {
-    const { message } = this.props.message;
+    const { message } = this.props;
+    console.log('from messagethreaditem', message);
     let messageThreadContent;
     if (!message) {
       messageThreadContent = <Spinner />;

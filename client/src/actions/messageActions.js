@@ -64,7 +64,12 @@ export const getMessageThread = id => dispatch => {
 export const getMessagesFrom = senderId => dispatch => {
   axios
     .get(`/api/messages/from/${senderId}`)
-    .then(res => console.log(res.data))
+    .then(res =>
+      dispatch({
+        type: GET_MESSAGE_THREAD,
+        payload: res.data,
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
