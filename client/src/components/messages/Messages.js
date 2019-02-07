@@ -14,7 +14,7 @@ class Messages extends Component {
     if (!messages) {
       let content = <Spinner />;
     } else {
-      messages.filter(function(msg) {
+      messages.filter(msg => {
         let i = uniqueUsers.findIndex(x => x.user === msg.user);
         if (i <= -1) {
           uniqueUsers.push(msg);
