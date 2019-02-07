@@ -10,7 +10,7 @@ class MessageItem extends React.Component {
   };
   render() {
     const { message } = this.props;
-    console.log(message);
+    // console.log(message);
     let messageDate = message.date.toString();
 
     return (
