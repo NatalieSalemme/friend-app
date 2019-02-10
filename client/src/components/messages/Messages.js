@@ -23,7 +23,13 @@ class Messages extends Component {
       });
     }
     return (
-      <div>
+      <div
+        style={{
+          backgroundColor: '#E9EBEE',
+          padding: '2em 0 4em',
+          marginBottom: '-3em',
+        }}
+      >
         <h1 className="text-center mt-4">Messages</h1>
         <div className="text-center">
           <MessageFeed messages={uniqueUsers} />

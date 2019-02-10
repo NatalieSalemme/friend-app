@@ -47,7 +47,10 @@ class MessagesFrom extends Component {
         <h1 className="text-center my-5">Messages From {sender}</h1>
         {messageContent}
 
-        <div className="post-form mb-3 col-md-6 mx-auto">
+        <div
+          className="post-form mb-3 col-md-6 mx-auto"
+          style={{ paddingTop: '2em' }}
+        >
           <div className="card card-info">
             <div
               className="card-header  text-white"

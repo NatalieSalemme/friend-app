@@ -13,7 +13,7 @@ class MessageFeed extends Component {
     }
     return (
       <div>
-        <div>{messageContent}</div>
+        <div>{messageContent.reverse()}</div>
       </div>
     );
   }
