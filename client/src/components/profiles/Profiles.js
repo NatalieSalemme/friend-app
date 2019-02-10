@@ -25,7 +25,14 @@ class Profiles extends Component {
       }
     }
     return (
-      <div className="profiles">
+      <div
+        className="profiles pt-5"
+        style={{
+          backgroundColor: '#E9EBEE',
+          paddingBottom: '5em',
+          marginBottom: '-4em',
+        }}
+      >
         <div className="container">
           <div className="col-md-12">
             <h1 className="display-4 text-center">Find Friends</h1>

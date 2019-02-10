@@ -10,6 +10,7 @@ class IdProfile extends Component {
     if (this.props.match.params.id) {
       this.props.getProfileById(this.props.match.params.id);
     }
+    window.scrollTo(0, 0);
     console.log('id profile component');
   }
 
@@ -42,7 +43,14 @@ class IdProfile extends Component {
       );
     }
     return (
-      <div className="profile">
+      <div
+        className="profile"
+        style={{
+          backgroundColor: '#E9EBEE',
+          paddingBottom: '5em',
+          marginBottom: '-3em',
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-12">{profileContent}</div>

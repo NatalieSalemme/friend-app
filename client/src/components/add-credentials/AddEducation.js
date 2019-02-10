@@ -40,8 +40,8 @@ class AddEducation extends Component {
       <div className="add-education">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 md-auto">
-              <Link to="/dashboard" className="btn btn-light">
+            <div className="col-md-8 mx-auto">
+              <Link to="/dashboard" className="btn btn-light mt-3">
                 Go Back
               </Link>
               <h1 className="display-4 text-center">Add Education</h1>

@@ -9,7 +9,6 @@ class ProfileHeader extends Component {
     if (!profile) {
       return <div>Loading...</div>;
     }
-    console.log(profile);
     return (
       <div className="row">
         <div className="col-md-12">
@@ -19,21 +18,18 @@ class ProfileHeader extends Component {
           >
             <div className="row">
               <div className="col-4 col-md-3">
-                {profile.user.avatar ? (
-                  <img
-                    className="rounded-circle"
-                    src={profile.user.avatar}
-                    alt=""
-                  />
-                ) : (
+                {profile.user && (
                   <img
                     className="img-thumbnail"
                     src={require('../images/rose.jpg')}
                     alt="avatar"
                   />
                 )}
+
                 <div className="bg-white">
-                  <h1 className="display-6 text-center">{profile.user.name}</h1>
+                  <h1 className="display-6 text-center">
+                    {profile.user && profile.user.name}
+                  </h1>
 
                   <div className="text-center col">
                     <div>
