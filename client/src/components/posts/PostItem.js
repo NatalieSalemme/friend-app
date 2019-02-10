@@ -80,7 +80,7 @@ class PostItem extends Component {
                 </div>
                 <div className="row mt-3">
                   <Link
-                    to={`/post/${post._id}`}
+                    to={`/posts/${post._id}`}
                     className="btn text-white"
                     style={{ backgroundColor: '#1f0891' }}
                   >

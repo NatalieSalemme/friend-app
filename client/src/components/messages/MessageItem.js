@@ -10,7 +10,7 @@ class MessageItem extends React.Component {
   };
   render() {
     const { message } = this.props;
-    console.log(message);
+    // console.log(message);
     let messageDate = message.date.toString();
 
     return (
@@ -38,16 +38,16 @@ class MessageItem extends React.Component {
 
             <div className="d-flex justify-content-between mt-5 pt-2">
               <Link
-                to={`/messages/reply/${message._id}`}
+                to={`/messages/from/${message.user}`}
                 className="btn btn-secondary"
               >
-                Reply
+                View Thread
               </Link>
               <button
                 onClick={() => this.onDeleteClick(message._id)}
                 className="btn btn-danger"
               >
-                Delete
+                Delete Thread
               </button>
             </div>
           </div>

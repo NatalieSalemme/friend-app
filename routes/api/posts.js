@@ -105,6 +105,7 @@ router.post(
   }
 );
 
+//
 //@route POST api/posts/like/:id
 //@desc  Unlike post
 //access Private
@@ -199,6 +200,26 @@ router.delete(
         post.save().then(post => res.json(post));
       })
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+  }
+);
+
+//@route POST api/posts/like/:postId/:commentId
+//@desc  Like comment on post
+//access Private
+
+router.post(
+  '/like/:postId/:commentId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Post.findOne({ _id: req.params.postId }).then(post => {
+        let index = post.comments.findIndex(x => x.id === req.params.commentId);
+
+        post.comments[index].likes.unshift({ user: req.user.id });
+
+        post.save().then(post => res.json(post));
+      });
+    });
   }
 );
 

@@ -10,7 +10,7 @@ class MessageThreadItem extends Component {
     this.props.deleteMessage(id);
   };
   render() {
-    const { message } = this.props.message;
+    const { message } = this.props;
     let messageThreadContent;
     if (!message) {
       messageThreadContent = <Spinner />;
@@ -34,7 +34,10 @@ class MessageThreadItem extends Component {
               </div>
             </div>
             <div className="col-md-10">
-              <div className="text-right">
+              <div
+                className="text-right"
+                style={{ paddingBottom: '1em', fontWeight: 500 }}
+              >
                 {moment(messageDate).format('MM/DD/YYYY LT')}
               </div>
               <p className="lead text-left">{message.message}</p>

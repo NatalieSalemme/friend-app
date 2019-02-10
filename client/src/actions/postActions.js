@@ -3,11 +3,11 @@ import axios from 'axios';
 import {
   ADD_POST,
   GET_ERRORS,
+  CLEAR_ERRORS,
   GET_POSTS,
+  GET_POST,
   POST_LOADING,
   DELETE_POST,
-  GET_POST,
-  CLEAR_ERRORS,
 } from './types';
 
 //Add Post
@@ -29,9 +29,9 @@ export const addPost = postData => dispatch => {
     );
 };
 
-//Add Comment
+// Add Comment
 export const addComment = (postId, commentData) => dispatch => {
-  dispatch(clearErrors());
+  // dispatch(clearErrors());
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
@@ -122,7 +122,7 @@ export const deletePost = id => dispatch => {
     );
 };
 
-//Add Like
+//Add Post Like
 export const addLike = id => dispatch => {
   axios
     .post(`/api/posts/like/${id}`)
@@ -134,6 +134,20 @@ export const addLike = id => dispatch => {
       })
     );
 };
+//Add Comment Like
+//Add Like
+export const addCommentLike = (postId, commentId) => dispatch => {
+  axios
+    .post(`/api/posts/like/${postId}/${commentId}`)
+    .then(res => dispatch(getPost(postId)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 //Remove Like
 export const removeLike = id => dispatch => {
   axios
