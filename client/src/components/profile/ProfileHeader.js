@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import isEmpty from '../../validation/is-empty';
 import ProfileCreds from './ProfileCreds';
 import ProfileAbout from './ProfileAbout';
+import { Link } from 'react-router-dom';
 
 class ProfileHeader extends Component {
   render() {
@@ -9,6 +10,7 @@ class ProfileHeader extends Component {
     if (!profile) {
       return <div>Loading...</div>;
     }
+    console.log('this profile is', profile);
     return (
       <div className="row">
         <div className="col-md-12">
@@ -50,11 +52,19 @@ class ProfileHeader extends Component {
                   </p>
                   <div className="container">
                     <div className="row justify-content-md-center">
+                      <Link to={`/messages/to/${profile.user._id}`}>
+                        <div className="col-md-auto">
+                          <i
+                            className="far fa-envelope fa-2x"
+                            style={{ color: 'red' }}
+                          />
+                        </div>
+                      </Link>
                       <div className="col-md-auto">
-                        <i className="far fa-envelope fa-2x" />
-                      </div>
-                      <div className="col-md-auto">
-                        <i className="fas fa-plus fa-2x" />
+                        <i
+                          className="fas fa-plus fa-2x"
+                          style={{ color: 'green' }}
+                        />
                       </div>
                     </div>
                   </div>

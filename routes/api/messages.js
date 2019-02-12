@@ -103,5 +103,13 @@ router.get(
     // });
   }
 );
+//@route POST api/messages/from/:sortedUserId
+//@desc  Get all messages from a specific user
+//access Private
+router.post(
+  '/from/:firstId/:secondId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {}
+);
 
 module.exports = router;
