@@ -103,13 +103,49 @@ router.get(
     // });
   }
 );
+router.post(
+  '/from/:senderId',
+  passport.authenticate('jwt', {
+    session: false
+  }), (req, res) => ({
+    const { errors, isValid } = validateMessageInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const newMessage = new Message({
+      message: req.body.message,
+      name: req.body.name,
+      avatar: req.body.avatar,
+      user: req.user.id,
+      to: req.body.to,
+      from: req.user.name,
+    });
+    newMessage.save().then(message => res.json(message));
+  })
+)
 //@route POST api/messages/from/:sortedUserId
 //@desc  Get all messages from a specific user
 //access Private
-router.post(
-  '/from/:firstId/:secondId',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {}
-);
+// router.post(
+//   '/with/:firstId/:secondId',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     const { errors, isValid } = validateMessageInput(req.body);
+//     if (!isValid) {
+//       return res.status(400).json(errors);
+//     }
+//
+//     const newMessage = new Message({
+//       message: req.body.message,
+//       name: req.body.name,
+//       avatar: req.body.avatar,
+//       user: req.user.id,
+//       to: req.body.to,
+//       from: req.user.name,
+//     });
+//     newMessage.save().then(message => res.json(message));
+//   }
+// );
 
 module.exports = router;
