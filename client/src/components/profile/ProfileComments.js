@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ProfileCommentItem from './ProfileCommentItem';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
+
 import { addPost } from '../../actions/postActions';
 
 class ProfileComments extends Component {
@@ -40,7 +42,11 @@ class ProfileComments extends Component {
 
   render() {
     const { errors } = this.state;
+    const { profile } = this.props.profile;
 
+    const commentList = profile.comments.map(comment => (
+      <ProfileCommentItem key={comment._id} comment={comment} />
+    ));
     return (
       <div className="post-form mb-3 col-md-8 mx-auto ">
         <h1 className="text-center mb-5">Comments</h1>
@@ -73,6 +79,7 @@ class ProfileComments extends Component {
             </form>
           </div>
         </div>
+        {commentList}
       </div>
     );
   }
@@ -87,6 +94,7 @@ ProfileComments.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
+  profile: state.profile,
 });
 
 export default connect(

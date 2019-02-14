@@ -267,9 +267,9 @@ router.get(
   '/:handle/comments',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOne({ handle: req.params.handle }).then(profile =>
-      res.json(profile)
-    );
+    Profile.findOne({ handle: req.params.handle })
+      .then(profile => res.json(profile))
+      .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
 //@route POST api/profile/:handle/comments
@@ -279,23 +279,27 @@ router.post(
   '/:handle/comments',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Profile.findOne({ handle: req.params.handle }).then(profile => {
-      const { errors, isValid } = validatePostInput(req.body);
+    Profile.findOne({ handle: req.params.handle })
+      .then(profile => {
+        const { errors, isValid } = validatePostInput(req.body);
 
-      //check validation
-      if (!isValid) {
-        //if any errors, send 400 with errors object
-        return res.status(400).json(errors);
-      }
-      const newComment = new Post({
-        text: req.body.text,
-        name: req.body.name,
-        avatar: req.body.avatar,
-        user: req.user.id,
-      });
-      profile.comments.unshift(newComment);
-      profile.save().then(profile => res.json(profile));
-    });
+        //check validation
+        if (!isValid) {
+          //if any errors, send 400 with errors object
+          return res.status(400).json(errors);
+        }
+        const newComment = new Post({
+          text: req.body.text,
+          name: req.user.name,
+          avatar: req.body.avatar,
+          user: req.user.id,
+        });
+        profile.comments.unshift(newComment);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err =>
+        res.status(404).json({ commentnotfound: 'No comment found' })
+      );
   }
 );
 
