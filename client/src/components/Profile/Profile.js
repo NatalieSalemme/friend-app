@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import ProfileHeader from './ProfileHeader';
+import ProfileComments from './ProfileComments';
 import Spinner from '../common/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import { getProfileByHandle } from '../../actions/profileActions';
 
 class Profile extends Component {
@@ -46,6 +48,7 @@ class Profile extends Component {
             education={profile.education}
             experience={profile.experience}
           />
+          <ProfileComments />
         </div>
       );
     }
