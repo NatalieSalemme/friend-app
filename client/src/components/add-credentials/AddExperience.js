@@ -52,7 +52,7 @@ class AddExperience extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
+              <Link to="/dashboard" className="btn btn-light mt-4">
                 Go Back
               </Link>
               <h1 className="display-4 text-center">Add Experience</h1>
@@ -79,7 +79,8 @@ class AddExperience extends Component {
                 <input
                   type="submit"
                   value="Submit"
-                  className="btn btn-info btn-block mt-4"
+                  className="btn  btn-block mt-4 text-white"
+                  style={{ backgroundColor: '#1f0891' }}
                 />
               </form>
             </div>

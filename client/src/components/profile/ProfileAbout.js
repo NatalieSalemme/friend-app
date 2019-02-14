@@ -7,6 +7,7 @@ class ProfileAbout extends Component {
     const { profile } = this.props;
 
     // Get first name
+
     const firstName = profile.user.name.trim().split(' ')[0];
 
     // Hobbies List

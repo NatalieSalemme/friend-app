@@ -11,6 +11,9 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
+
+    window.scrollTo(0, 0);
+
     console.log('profile component');
   }
   componentWillReceiveProps(nextProps) {
@@ -47,7 +50,14 @@ class Profile extends Component {
       );
     }
     return (
-      <div className="profile">
+      <div
+        className="profile"
+        style={{
+          backgroundColor: '#E9EBEE',
+          paddingBottom: '5em',
+          marginBottom: '-3em',
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-12">{profileContent}</div>
