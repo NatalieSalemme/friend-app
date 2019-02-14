@@ -7,6 +7,7 @@ import {
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
   SET_CURRENT_USER,
+  ADD_PROFILE_COMMENT,
 } from './types';
 
 // Get profile by handle
@@ -195,4 +196,25 @@ export const clearCurrentProfile = () => {
   return {
     type: CLEAR_CURRENT_PROFILE,
   };
+};
+
+//Post a comment to a profile
+//Add Post
+export const addProfileComment = (commentData, handle) => dispatch => {
+  // dispatch(clearErrors());
+  // console.log(commentData, handle);
+  axios
+    .post(`/api/profile/${handle}/comments`, commentData)
+    .then(res =>
+      dispatch({
+        type: ADD_PROFILE_COMMENT,
+        payload: res.data,
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
 };

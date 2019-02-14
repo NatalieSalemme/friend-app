@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ProfileCommentItem from './ProfileCommentItem';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 
-import { addPost } from '../../actions/postActions';
+import { addProfileComment } from '../../actions/profileActions';
 
 class ProfileComments extends Component {
   constructor(props) {
@@ -23,16 +23,16 @@ class ProfileComments extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
+    let handle = this.props.profile.profile.handle;
     const { user } = this.props.auth;
 
-    const newPost = {
+    const newComment = {
       text: this.state.text,
       name: user.name,
       avatar: this.state.avatar,
     };
 
-    this.props.addPost(newPost);
+    this.props.addProfileComment(newComment, handle);
     this.setState({ text: '' });
   };
 
@@ -41,6 +41,7 @@ class ProfileComments extends Component {
   };
 
   render() {
+    // console.log('profileprops are', this.props.profile.profile.handle);
     const { errors } = this.state;
     const { profile } = this.props.profile;
 
@@ -85,12 +86,6 @@ class ProfileComments extends Component {
   }
 }
 
-ProfileComments.propTypes = {
-  addPost: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
@@ -99,5 +94,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addPost }
+  { addProfileComment }
 )(ProfileComments);
