@@ -27,6 +27,7 @@ router.post(
       to: req.body.to,
       from: req.user.name,
     });
+
     newMessage.save().then(message => res.json(message));
   }
 );
@@ -89,52 +90,24 @@ router.get(
   '/from/:senderId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    Message.find({ user: req.params.senderId }).then(messages =>
-      res.json(messages)
-    );
-    // User.findOne({ _id: req.params.userId }).then(user => {
-    //   // res.json(user._id);
-    //   if (user) {
-    //     // res.json({ user: user });
-    //     Message.find({ from: user.id }).then(messages => res.json(messages));
-    //   } else {
-    //     res.status(404).json({ error: 'No user found' });
-    //   }
-    // });
+    Message.find({
+      user: req.params.senderId,
+      // user: req.user.id,
+    }).then(messages => res.json(messages));
   }
 );
-router.post(
-  '/from/:senderId',
-  passport.authenticate('jwt', {
-    session: false
-  }), (req, res) => ({
-    const { errors, isValid } = validateMessageInput(req.body);
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
 
-    const newMessage = new Message({
-      message: req.body.message,
-      name: req.body.name,
-      avatar: req.body.avatar,
-      user: req.user.id,
-      to: req.body.to,
-      from: req.user.name,
-    });
-    newMessage.save().then(message => res.json(message));
-  })
-)
 //@route POST api/messages/from/:sortedUserId
 //@desc  Get all messages from a specific user
 //access Private
 // router.post(
-//   '/with/:firstId/:secondId',
+//   '/to/:senderId',
 //   passport.authenticate('jwt', { session: false }),
 //   (req, res) => {
-//     const { errors, isValid } = validateMessageInput(req.body);
-//     if (!isValid) {
-//       return res.status(400).json(errors);
-//     }
+//     // const { errors, isValid } = validateMessageInput(req.body);
+//     // if (!isValid) {
+//     //   return res.status(400).json(errors);
+//     // }
 //
 //     const newMessage = new Message({
 //       message: req.body.message,
@@ -144,8 +117,42 @@ router.post(
 //       to: req.body.to,
 //       from: req.user.name,
 //     });
+//
 //     newMessage.save().then(message => res.json(message));
+//     // res.json('from postig');
 //   }
 // );
+router.get(
+  '/with/:messageId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Message.findById(req.params.messageId).then(message => {
+      res.json(message);
+    });
+  }
+);
+router.post(
+  '/with/:messageId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateMessageInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+    Message.findById(req.params.messageId).then(msg => {
+      const newMessage = new Message({
+        message: req.body.message,
+        name: req.body.name,
+        avatar: req.body.avatar,
+        user: req.user.id,
+        to: req.body.to,
+        from: req.user.name,
+      });
 
+      msg.messages.unshift(newMessage);
+      res.json(msg);
+      msg.save().then(msg => res.json(msg));
+    });
+  }
+);
 module.exports = router;
