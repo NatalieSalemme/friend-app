@@ -258,4 +258,17 @@ router.get(
       .catch(err => res.status(404).json(err));
   }
 );
+
+//@route GET api/profile/:handle/comments
+//@desc  Get all comments on a users profile
+//access Private
+router.get(
+  '/:handle/comments',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ handle: req.params.handle }).then(profile =>
+      res.json(profile)
+    );
+  }
+);
 module.exports = router;
