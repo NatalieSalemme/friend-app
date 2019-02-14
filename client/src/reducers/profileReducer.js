@@ -3,6 +3,7 @@ import {
   GET_PROFILES,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
+  ADD_PROFILE_COMMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -35,6 +36,11 @@ export default function(state = initialState, action) {
         ...state,
         profile: null,
       };
+    // case ADD_PROFILE_COMMENT:
+    //   return {
+    //     ...state,
+    //     profile: [action.payload, ...state.profile],
+    //   };
     default:
       return state;
   }
