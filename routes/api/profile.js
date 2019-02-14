@@ -7,6 +7,7 @@ const passport = require('passport');
 const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
+const validatePostInput = require('../../validation/post');
 //Load Profile model
 const Profile = require('../../models/Profile');
 //Load user profile
@@ -271,4 +272,31 @@ router.get(
     );
   }
 );
+//@route POST api/profile/:handle/comments
+//@desc  Post a comment to a users profile
+//access Private
+router.post(
+  '/:handle/comments',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ handle: req.params.handle }).then(profile => {
+      const { errors, isValid } = validatePostInput(req.body);
+
+      //check validation
+      if (!isValid) {
+        //if any errors, send 400 with errors object
+        return res.status(400).json(errors);
+      }
+      const newComment = new Post({
+        text: req.body.text,
+        name: req.body.name,
+        avatar: req.body.avatar,
+        user: req.user.id,
+      });
+      profile.comments.unshift(newComment);
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
 module.exports = router;
