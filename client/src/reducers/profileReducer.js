@@ -10,6 +10,7 @@ const initialState = {
   profile: null,
   profiles: null,
   loading: false,
+  myProfile: null,
 };
 
 export default function(state = initialState, action) {

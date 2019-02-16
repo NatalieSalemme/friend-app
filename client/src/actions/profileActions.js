@@ -220,6 +220,12 @@ export const addProfileComment = (commentData, handle) => dispatch => {
     );
 };
 
+export const getMyProfile = userId => dispatch => {
+  axios
+    .get(`api/profile/user/${userId}`)
+    .then(res => console.log('from getmyprofile reducer', res.data));
+};
+
 //clear errors
 export const clearErrors = () => {
   return {

@@ -6,13 +6,17 @@ import { logoutUser } from '../../actions/authActions';
 
 import {
   // getCurrentProfile,
+  getProfiles,
   clearCurrentProfile,
+  getMyProfile,
 } from '../../actions/profileActions';
 
 class Navbar extends Component {
-  // componentDidMount() {
-  //   this.props.getCurrentProfile();
-  // }
+  componentDidMount() {
+    // this.props.getCurrentProfile();
+    this.props.getProfiles();
+    this.props.getMyProfile(this.props.auth.user.id);
+  }
   onLogoutClick = e => {
     e.preventDefault();
     console.log('logging out');
@@ -27,6 +31,9 @@ class Navbar extends Component {
     if (profile === null || loading) {
       content = null;
     } else {
+      let myUserId = this.props.auth.user.id;
+      let myId = this.props.profile.profiles.filter(x => x._id === myUserId);
+      console.log(myId);
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         content = (
@@ -35,7 +42,7 @@ class Navbar extends Component {
               {user.name}
             </Link>
 
-            <Link to={`/profile/${profile.handle}`}>
+            <Link to={`/profile/user/${user.id}`}>
               <img
                 className="rounded-circle mr-4"
                 style={{ width: '35px', height: '35px' }}
@@ -202,5 +209,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile }
+  { logoutUser, clearCurrentProfile, getProfiles, getMyProfile }
 )(Navbar);
