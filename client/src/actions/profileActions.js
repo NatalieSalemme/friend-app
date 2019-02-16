@@ -6,6 +6,7 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
+  CLEAR_ERRORS,
   SET_CURRENT_USER,
   ADD_PROFILE_COMMENT,
 } from './types';
@@ -167,7 +168,7 @@ export const deleteAccount = () => dispatch => {
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
-  dispatch(setProfileLoading());
+  // dispatch(setProfileLoading());
   console.log('getting current profile');
   axios
     .get('/api/profile')
@@ -217,4 +218,11 @@ export const addProfileComment = (commentData, handle) => dispatch => {
         payload: err.response.data,
       })
     );
+};
+
+//clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
+  };
 };

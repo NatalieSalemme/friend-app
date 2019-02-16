@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
 
 import {
-  getCurrentProfile,
+  // getCurrentProfile,
   clearCurrentProfile,
 } from '../../actions/profileActions';
 
 class Navbar extends Component {
-  componentDidMount() {
-    this.props.getCurrentProfile();
-  }
+  // componentDidMount() {
+  //   this.props.getCurrentProfile();
+  // }
   onLogoutClick = e => {
     e.preventDefault();
     console.log('logging out');
@@ -202,5 +202,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile, getCurrentProfile }
+  { logoutUser, clearCurrentProfile }
 )(Navbar);
