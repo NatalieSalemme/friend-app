@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProfileCommentItem from './ProfileCommentItem';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
@@ -41,7 +40,7 @@ class ProfileComments extends Component {
   };
 
   render() {
-    // console.log('profileprops are', this.props.profile.profile.handle);
+    console.log('profile component rerendered');
     const { errors } = this.state;
     const { profile } = this.props.profile;
 

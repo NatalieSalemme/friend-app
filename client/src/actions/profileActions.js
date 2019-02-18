@@ -202,28 +202,9 @@ export const clearCurrentProfile = () => {
 //Post a comment to a profile
 //Add Post
 export const addProfileComment = (commentData, handle) => dispatch => {
-  // dispatch(clearErrors());
-  // console.log(commentData, handle);
   axios
     .post(`/api/profile/${handle}/comments`, commentData)
-    .then(res =>
-      dispatch({
-        type: ADD_PROFILE_COMMENT,
-        payload: res.data,
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
-      })
-    );
-};
-
-export const getMyProfile = userId => dispatch => {
-  axios
-    .get(`api/profile/user/${userId}`)
-    .then(res => console.log('from getmyprofile reducer', res.data));
+    .then(res => dispatch(getProfileByHandle(handle)));
 };
 
 //clear errors

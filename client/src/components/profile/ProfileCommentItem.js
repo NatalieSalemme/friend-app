@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 
 class ProfileCommentItem extends Component {

@@ -10,7 +10,7 @@ class EditPhoto extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-center my-5">Edit Profile Photo</h1>
+        <h1 className="text-center my-5">Coming Soon: Edit Profile Photo</h1>
         <form onSubmit={this.onSubmit} encType="multipart/form-data">
           <div className="col-md-6 col-form-label mb-3 mx-auto">
             <input

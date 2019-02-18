@@ -37,12 +37,6 @@ export default function(state = initialState, action) {
         ...state,
         profile: null,
       };
-    // case ADD_PROFILE_COMMENT:
-    //   console.log('action.payload is', action.payload);
-    //   return {
-    //     ...state,
-    //     profile: [action.payload],
-    //   };
 
     default:
       return state;

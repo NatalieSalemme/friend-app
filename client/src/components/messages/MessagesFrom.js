@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getMessagesFrom } from '../../actions/messageActions';
 import MessageThreadItem from './MessageThreadItem';
-import MessageFeed from './MessageFeed';
 import Spinner from '../common/Spinner';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 

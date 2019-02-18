@@ -8,14 +8,12 @@ import {
   // getCurrentProfile,
   getProfiles,
   clearCurrentProfile,
-  getMyProfile,
 } from '../../actions/profileActions';
 
 class Navbar extends Component {
   componentDidMount() {
     // this.props.getCurrentProfile();
     this.props.getProfiles();
-    this.props.getMyProfile(this.props.auth.user.id);
   }
   onLogoutClick = e => {
     e.preventDefault();
@@ -31,9 +29,6 @@ class Navbar extends Component {
     if (profile === null || loading) {
       content = null;
     } else {
-      let myUserId = this.props.auth.user.id;
-      let myId = this.props.profile.profiles.filter(x => x._id === myUserId);
-      console.log(myId);
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         content = (
@@ -209,5 +204,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile, getProfiles, getMyProfile }
+  { logoutUser, clearCurrentProfile, getProfiles }
 )(Navbar);
