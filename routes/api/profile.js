@@ -7,6 +7,7 @@ const passport = require('passport');
 const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
+const validatePostInput = require('../../validation/post');
 //Load Profile model
 const Profile = require('../../models/Profile');
 //Load user profile
@@ -256,6 +257,130 @@ router.get(
         res.json(profile);
       })
       .catch(err => res.status(404).json(err));
+  }
+);
+
+//@route GET api/profile/:handle/comments
+//@desc  Get all comments on a users profile
+//access Private
+router.get(
+  '/:handle/comments',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ handle: req.params.handle })
+      .then(profile => res.json(profile))
+      .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+  }
+);
+//@route POST api/profile/:handle/comments
+//@desc  Post a comment to a users profile
+//access Private
+router.post(
+  '/:handle/comments',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ handle: req.params.handle })
+      .then(profile => {
+        const { errors, isValid } = validatePostInput(req.body);
+
+        //check validation
+        if (!isValid) {
+          //if any errors, send 400 with errors object
+          return res.status(400).json(errors);
+        }
+        const newComment = new Post({
+          text: req.body.text,
+          name: req.user.name,
+          avatar: req.body.avatar,
+          user: req.user.id,
+        });
+        profile.comments.unshift(newComment);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err =>
+        res.status(404).json({ commentnotfound: 'No comment found' })
+      );
+  }
+);
+//@route DELETE api/profile/:handle/comments/:id
+//@desc  Delete comment from profile
+//access Private
+
+router.delete(
+  '/:handle/comments/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({
+      handle: req.params.handle,
+    }).then(profile => {
+      const removeIndex = profile.comments
+        .map(comment => comment.id)
+        .indexOf(req.params.id);
+      //Splice out of array
+      profile.comments.splice(removeIndex, 1);
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+//@route POST api/profile/:handle/comments/like/:id
+//@desc  Post like on profile comment
+//access Private
+router.post(
+  '/:handle/comments/like/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({
+      handle: req.params.handle,
+    }).then(profile => {
+      const commentIndex = profile.comments
+        .map(comment => comment.id)
+        .indexOf(req.params.id);
+
+      if (
+        profile.comments[commentIndex].likes.filter(
+          like => like.user.toString() === req.user.id
+        ).length > 0
+      ) {
+        return res
+          .status(400)
+          .json({ alreadyliked: 'User already liked this comment' });
+      }
+      // Add user id to likes array
+      profile.comments[commentIndex].likes.unshift({ user: req.user.id });
+
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+
+//@route POST api/profile/:handle/comments/unlike/:id
+//@desc  Unlike profile comment
+//access Private
+
+router.post(
+  '/:handle/comments/unlike/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({
+      handle: req.params.handle,
+    })
+      .then(profile => {
+        const commentIndex = profile.comments
+          .map(comment => comment.id)
+          .indexOf(req.params.id);
+        if (
+          profile.comments[commentIndex].likes.filter(
+            like => like.user.toString() === req.user.id
+          ).length === 0
+        ) {
+          return res
+            .status(400)
+            .json({ notliked: 'You have not yet liked this profile comment' });
+        }
+        profile.comments[commentIndex].likes.splice(commentIndex, 1);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
 module.exports = router;

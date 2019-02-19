@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
 
 import {
-  getCurrentProfile,
+  // getCurrentProfile,
+  getProfiles,
   clearCurrentProfile,
 } from '../../actions/profileActions';
 
 class Navbar extends Component {
   componentDidMount() {
-    this.props.getCurrentProfile();
+    // this.props.getCurrentProfile();
+    this.props.getProfiles();
   }
   onLogoutClick = e => {
     e.preventDefault();
@@ -35,7 +37,7 @@ class Navbar extends Component {
               {user.name}
             </Link>
 
-            <Link to={`/profile/${profile.handle}`}>
+            <Link to={`/profile/user/${user.id}`}>
               <img
                 className="rounded-circle mr-4"
                 style={{ width: '35px', height: '35px' }}
@@ -202,5 +204,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile, getCurrentProfile }
+  { logoutUser, clearCurrentProfile, getProfiles }
 )(Navbar);

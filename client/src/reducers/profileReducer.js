@@ -9,6 +9,7 @@ const initialState = {
   profile: null,
   profiles: null,
   loading: false,
+  myProfile: null,
 };
 
 export default function(state = initialState, action) {
@@ -35,6 +36,7 @@ export default function(state = initialState, action) {
         ...state,
         profile: null,
       };
+
     default:
       return state;
   }

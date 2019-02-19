@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../common/Spinner';
 import { Link } from 'react-router-dom';
+import ProfileComments from './ProfileComments';
 import ProfileHeader from './ProfileHeader';
 import { getProfileById } from '../../actions/profileActions';
 
@@ -39,6 +40,7 @@ class IdProfile extends Component {
             education={profile.education}
             experience={profile.experience}
           />
+          <ProfileComments />
         </div>
       );
     }

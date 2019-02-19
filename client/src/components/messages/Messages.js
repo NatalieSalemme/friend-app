@@ -10,9 +10,10 @@ class Messages extends Component {
   }
   render() {
     const { messages } = this.props.message;
+    let content;
     const uniqueUsers = [];
     if (!messages) {
-      let content = <Spinner />;
+      content = <Spinner />;
     } else {
       messages.filter(msg => {
         let i = uniqueUsers.findIndex(x => x.user === msg.user);
@@ -33,6 +34,7 @@ class Messages extends Component {
         <h1 className="text-center mt-4">Messages</h1>
         <div className="text-center">
           <MessageFeed messages={uniqueUsers} />
+          {content}
         </div>
       </div>
     );

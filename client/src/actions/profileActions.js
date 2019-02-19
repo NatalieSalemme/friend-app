@@ -6,6 +6,7 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
+  CLEAR_ERRORS,
   SET_CURRENT_USER,
 } from './types';
 
@@ -166,7 +167,7 @@ export const deleteAccount = () => dispatch => {
 
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
-  dispatch(setProfileLoading());
+  // dispatch(setProfileLoading());
   console.log('getting current profile');
   axios
     .get('/api/profile')
@@ -194,5 +195,64 @@ export const setProfileLoading = () => {
 export const clearCurrentProfile = () => {
   return {
     type: CLEAR_CURRENT_PROFILE,
+  };
+};
+
+//Post a comment to a profile
+//Add Post
+export const addProfileComment = (commentData, handle) => dispatch => {
+  axios
+    .post(`/api/profile/${handle}/comments`, commentData)
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//Delete Profile Comment
+export const deleteProfileComment = (handle, commentId) => dispatch => {
+  axios
+    .delete(`/api/profile/${handle}/comments/${commentId}`)
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//Add Profile Comment Like
+export const addProfileCommentLike = (handle, id) => dispatch => {
+  axios
+    .post(`/api/profile/${handle}/comments/like/${id}`)
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//Unlike Profile Comment
+export const unlikeProfileComment = (handle, id) => dispatch => {
+  axios
+    .post(`/api/profile/${handle}/comments/unlike/${id}`)
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+//clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
   };
 };
