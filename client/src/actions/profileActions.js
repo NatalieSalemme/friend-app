@@ -8,7 +8,6 @@ import {
   GET_ERRORS,
   CLEAR_ERRORS,
   SET_CURRENT_USER,
-  ADD_PROFILE_COMMENT,
 } from './types';
 
 // Get profile by handle

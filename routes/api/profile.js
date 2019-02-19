@@ -302,5 +302,25 @@ router.post(
       );
   }
 );
+//@route DELETE api/profile/:handle/comments/:id
+//@desc  Delete comment from profile
+//access Private
+
+router.delete(
+  '/:handle/comments/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({
+      handle: req.params.handle,
+    }).then(profile => {
+      const removeIndex = profile.comments
+        .map(comment => comment.id)
+        .indexOf(req.params.id);
+      //Splice out of array
+      profile.comments.splice(removeIndex, 1);
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
 
 module.exports = router;

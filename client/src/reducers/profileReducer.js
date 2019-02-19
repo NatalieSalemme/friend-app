@@ -3,7 +3,6 @@ import {
   GET_PROFILES,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
-  ADD_PROFILE_COMMENT,
 } from '../actions/types';
 
 const initialState = {
