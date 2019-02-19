@@ -302,7 +302,7 @@ router.post(
       );
   }
 );
-//@route DELETE api/profile/:userId/comments/:id
+//@route DELETE api/profile/:handle/comments/:id
 //@desc  Delete comment from profile
 //access Private
 
@@ -318,6 +318,37 @@ router.delete(
         .indexOf(req.params.id);
       //Splice out of array
       profile.comments.splice(removeIndex, 1);
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
+//@route POST api/profile/:handle/comments/like/:id
+//@desc  Post like on profile comment
+//access Private
+router.post(
+  '/:handle/comments/like/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({
+      handle: req.params.handle,
+    }).then(profile => {
+      const commentIndex = profile.comments
+        .map(comment => comment.id)
+        .indexOf(req.params.id);
+
+      if (
+        // profile.comments[commentIndex].likes.includes(req.user.id)
+        profile.comments[commentIndex].likes.filter(
+          like => like.user.toString() === req.user.id
+        ).length > 0
+      ) {
+        return res
+          .status(400)
+          .json({ alreadyliked: 'User already liked this post' });
+      }
+      // Add user id to likes array
+      profile.comments[commentIndex].likes.unshift({ user: req.user.id });
+
       profile.save().then(profile => res.json(profile));
     });
   }
