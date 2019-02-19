@@ -20,13 +20,13 @@ class ProfileCommentItem extends Component {
     const { comment, showActions, auth, profile } = this.props;
 
     return (
-      <div className="card card-body my-3 col-md-10 mx-auto">
+      <div className="card card-body my-3 col-md-11 mx-auto">
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-3">
             <Link to={`/profile/${comment.user}`}>
               <img
                 // onClick={id => this.onPhotoClick(comment.user)}
-                className="rounded-circle d-none d-md-block"
+                className="rounded-circle d-none d-md-block mx-auto"
                 src={require('../images/rose.jpg')}
                 style={{ width: '75px', height: '75px' }}
                 alt=""
@@ -36,7 +36,7 @@ class ProfileCommentItem extends Component {
             <p className="text-center">{comment.name}</p>
           </div>
 
-          <div className="col-md-10">
+          <div className="col-md-9">
             <p>{comment.text}</p>
             {showActions ? (
               <span>

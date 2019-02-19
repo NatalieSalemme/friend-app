@@ -106,7 +106,7 @@ router.post(
 );
 
 //
-//@route POST api/posts/like/:id
+//@route POST api/posts/unlike/:id
 //@desc  Unlike post
 //access Private
 router.post(

@@ -353,4 +353,34 @@ router.post(
   }
 );
 
+//@route POST api/profile/:handle/comments/unlike/:id
+//@desc  Unlike profile comment
+//access Private
+
+router.post(
+  '/:handle/comments/unlike/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({
+      handle: req.params.handle,
+    })
+      .then(profile => {
+        const commentIndex = profile.comments
+          .map(comment => comment.id)
+          .indexOf(req.params.id);
+        if (
+          profile.comments[commentIndex].likes.filter(
+            like => like.user.toString() === req.user.id
+          ).length === 0
+        ) {
+          return res
+            .status(400)
+            .json({ notliked: 'You have not yet liked this profile comment' });
+        }
+        profile.comments[commentIndex].likes.splice(commentIndex, 1);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+  }
+);
 module.exports = router;
