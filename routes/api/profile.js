@@ -337,14 +337,13 @@ router.post(
         .indexOf(req.params.id);
 
       if (
-        // profile.comments[commentIndex].likes.includes(req.user.id)
         profile.comments[commentIndex].likes.filter(
           like => like.user.toString() === req.user.id
         ).length > 0
       ) {
         return res
           .status(400)
-          .json({ alreadyliked: 'User already liked this post' });
+          .json({ alreadyliked: 'User already liked this comment' });
       }
       // Add user id to likes array
       profile.comments[commentIndex].likes.unshift({ user: req.user.id });

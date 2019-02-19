@@ -225,6 +225,18 @@ export const deleteProfileComment = (handle, commentId) => dispatch => {
     );
 };
 
+//Add Profile Comment Like
+export const addProfileCommentLike = (handle, id) => dispatch => {
+  axios
+    .post(`/api/profile/${handle}/comments/like/${id}`)
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
 //clear errors
 export const clearErrors = () => {
   return {

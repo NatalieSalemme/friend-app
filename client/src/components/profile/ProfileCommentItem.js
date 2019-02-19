@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteProfileComment } from '../../actions/profileActions';
+import {
+  deleteProfileComment,
+  addProfileCommentLike,
+} from '../../actions/profileActions';
 
 class ProfileCommentItem extends Component {
   onDeleteClick = (handle, id) => {
     this.props.deleteProfileComment(handle, id);
   };
-  onLikeClick() {
-    return 'hi';
-  }
+  onProfileLikeClick = commentId => {
+    this.props.addProfileCommentLike(
+      this.props.profile.profile.handle,
+      commentId
+    );
+  };
   render() {
     const { comment, showActions, auth, profile } = this.props;
 
@@ -36,7 +42,7 @@ class ProfileCommentItem extends Component {
               <span>
                 <div className="row">
                   <button
-                    onClick={() => this.onLikeClick(comment._id)}
+                    onClick={() => this.onProfileLikeClick(comment._id)}
                     type="button"
                     className="btn btn-light mr-1"
                   >
@@ -90,5 +96,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { deleteProfileComment }
+  { deleteProfileComment, addProfileCommentLike }
 )(ProfileCommentItem);
