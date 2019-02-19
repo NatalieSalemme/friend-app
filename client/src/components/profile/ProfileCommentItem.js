@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { deleteProfileComment } from '../../actions/profileActions';
 
 class ProfileCommentItem extends Component {
+  onDeleteClick = (handle, id) => {
+    this.props.deleteProfileComment(handle, id);
+  };
   onLikeClick() {
     return 'hi';
   }
   render() {
-    const { comment, showActions, auth } = this.props;
+    const { comment, showActions, auth, profile } = this.props;
 
     return (
       <div className="card card-body my-3 col-md-10 mx-auto">
@@ -58,7 +62,9 @@ class ProfileCommentItem extends Component {
                 <div className="row mt-3">
                   {comment.user === auth.user.id ? (
                     <button
-                      onClick={() => this.onDeleteClick(comment._id)}
+                      onClick={() =>
+                        this.onDeleteClick(profile.profile.handle, comment._id)
+                      }
                       type="button"
                       className="btn btn-danger ml-2"
                     >
@@ -80,5 +86,9 @@ ProfileCommentItem.defaultProps = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  profile: state.profile,
 });
-export default connect(mapStateToProps)(ProfileCommentItem);
+export default connect(
+  mapStateToProps,
+  { deleteProfileComment }
+)(ProfileCommentItem);

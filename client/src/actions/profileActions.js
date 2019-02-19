@@ -203,7 +203,26 @@ export const clearCurrentProfile = () => {
 export const addProfileComment = (commentData, handle) => dispatch => {
   axios
     .post(`/api/profile/${handle}/comments`, commentData)
-    .then(res => dispatch(getProfileByHandle(handle)));
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//Delete Profile Comment
+export const deleteProfileComment = (handle, commentId) => dispatch => {
+  axios
+    .delete(`/api/profile/${handle}/comments/${commentId}`)
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
 };
 
 //clear errors

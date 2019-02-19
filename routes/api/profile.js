@@ -302,7 +302,7 @@ router.post(
       );
   }
 );
-//@route DELETE api/profile/:handle/comments/:id
+//@route DELETE api/profile/:userId/comments/:id
 //@desc  Delete comment from profile
 //access Private
 
