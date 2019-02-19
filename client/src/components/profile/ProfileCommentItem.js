@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
   deleteProfileComment,
   addProfileCommentLike,
+  unlikeProfileComment,
 } from '../../actions/profileActions';
 
 class ProfileCommentItem extends Component {
@@ -12,6 +13,12 @@ class ProfileCommentItem extends Component {
   };
   onProfileLikeClick = commentId => {
     this.props.addProfileCommentLike(
+      this.props.profile.profile.handle,
+      commentId
+    );
+  };
+  onProfileUnlikeClick = commentId => {
+    this.props.unlikeProfileComment(
       this.props.profile.profile.handle,
       commentId
     );
@@ -58,7 +65,7 @@ class ProfileCommentItem extends Component {
                     </span>
                   </button>
                   <button
-                    onClick={() => this.onUnlikeClick(comment._id)}
+                    onClick={() => this.onProfileUnlikeClick(comment._id)}
                     type="button"
                     className="btn btn-light mr-1"
                   >
@@ -96,5 +103,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { deleteProfileComment, addProfileCommentLike }
+  { deleteProfileComment, addProfileCommentLike, unlikeProfileComment }
 )(ProfileCommentItem);

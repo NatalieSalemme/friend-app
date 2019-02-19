@@ -237,6 +237,19 @@ export const addProfileCommentLike = (handle, id) => dispatch => {
       })
     );
 };
+
+//Unlike Profile Comment
+export const unlikeProfileComment = (handle, id) => dispatch => {
+  axios
+    .post(`/api/profile/${handle}/comments/unlike/${id}`)
+    .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
 //clear errors
 export const clearErrors = () => {
   return {
