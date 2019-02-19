@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 import {
   deleteProfileComment,
   addProfileCommentLike,
@@ -23,16 +24,23 @@ class ProfileCommentItem extends Component {
       commentId
     );
   };
+  findUserLike = likes => {
+    const { auth } = this.props;
+    if (likes.filter(like => like.user === auth.user.id).length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   render() {
     const { comment, showActions, auth, profile } = this.props;
 
     return (
-      <div className="card card-body my-3 col-md-11 mx-auto">
+      <div className="card card-body my-3 col-md-12 mx-auto">
         <div className="row">
           <div className="col-md-3">
-            <Link to={`/profile/${comment.user}`}>
+            <Link to={`/profile/user/${comment.user}`}>
               <img
-                // onClick={id => this.onPhotoClick(comment.user)}
                 className="rounded-circle d-none d-md-block mx-auto"
                 src={require('../images/rose.jpg')}
                 style={{ width: '75px', height: '75px' }}
@@ -43,8 +51,8 @@ class ProfileCommentItem extends Component {
             <p className="text-center">{comment.name}</p>
           </div>
 
-          <div className="col-md-9">
-            <p>{comment.text}</p>
+          <div className="col-md-8">
+            <p className="mb-5 mr-5">{comment.text}</p>
             {showActions ? (
               <span>
                 <div className="row">
@@ -54,10 +62,9 @@ class ProfileCommentItem extends Component {
                     className="btn btn-light mr-1"
                   >
                     <i
-                      className="fas fa-thumbs-up"
-                      // className={classnames('fas fa-thumbs-up', {
-                      //   'text-info': this.findUserLike(comment.likes),
-                      // })}
+                      className={classnames('fas fa-thumbs-up', {
+                        'text-info': this.findUserLike(comment.likes),
+                      })}
                     />
 
                     <span className="badge badge-light">
@@ -72,20 +79,20 @@ class ProfileCommentItem extends Component {
                     <i className="text-secondary fas fa-thumbs-down" />
                   </button>
                 </div>
-                <div className="row mt-3">
-                  {comment.user === auth.user.id ? (
-                    <button
-                      onClick={() =>
-                        this.onDeleteClick(profile.profile.handle, comment._id)
-                      }
-                      type="button"
-                      className="btn btn-danger ml-2"
-                    >
-                      <i className="fas fa-times" />
-                    </button>
-                  ) : null}
-                </div>
               </span>
+            ) : null}
+          </div>
+          <div className="col-md-1 pr-4">
+            {comment.user === auth.user.id ? (
+              <button
+                onClick={() =>
+                  this.onDeleteClick(profile.profile.handle, comment._id)
+                }
+                type="button"
+                className="btn btn-danger"
+              >
+                <i className="fas fa-times" />
+              </button>
             ) : null}
           </div>
         </div>
