@@ -37,7 +37,7 @@ class Experience extends Component {
         </thead>
       );
     return (
-      <div className=" col-md-10">
+      <div className=" col-md-10 bg-white py-3 border">
         <h4 className="mb-4">My Experience </h4>
         <table className="table">{experienceInfo}</table>
       </div>

@@ -16,10 +16,11 @@ class Education extends Component {
         <td>{edu.major}</td>
         <td>{edu.year}</td>
 
-        <td>
+        <td className="ml-5">
           <button
             onClick={() => this.onDeleteClick(edu._id)}
-            className="btn btn-danger"
+            className="btn btn-danger ml-5"
+            style={{ marginRight: '-3em' }}
           >
             Delete
           </button>
@@ -42,7 +43,7 @@ class Education extends Component {
       );
 
     return (
-      <div className="col-md-10">
+      <div className="col-md-10 bg-white mt-3 py-3 border">
         <h4 className="mb-4">My Education </h4>
         <table className="table">{educationInfo}</table>
       </div>
