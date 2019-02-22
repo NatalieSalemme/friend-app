@@ -6,6 +6,7 @@ import { logoutUser } from '../../actions/authActions';
 
 import {
   // getCurrentProfile,
+  getProfileById,
   getProfiles,
   clearCurrentProfile,
 } from '../../actions/profileActions';
@@ -13,7 +14,8 @@ import {
 class Navbar extends Component {
   componentDidMount() {
     // this.props.getCurrentProfile();
-    this.props.getProfiles();
+    // this.props.getProfiles();
+    this.props.getProfileById(this.props.auth.user.id);
   }
   onLogoutClick = e => {
     e.preventDefault();
@@ -215,5 +217,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile, getProfiles }
+  { logoutUser, clearCurrentProfile, getProfileById }
 )(Navbar);

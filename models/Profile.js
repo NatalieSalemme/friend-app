@@ -40,6 +40,19 @@ const ProfileSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users',
       },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      handle: {
+        type: String,
+      },
     },
   ],
   friendrequests: [
@@ -47,6 +60,19 @@ const ProfileSchema = new Schema({
       user: {
         type: Schema.Types.ObjectId,
         ref: 'users',
+      },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      handle: {
+        type: String,
       },
     },
   ],

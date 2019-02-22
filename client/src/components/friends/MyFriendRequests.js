@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spinner from '../common/Spinner';
-import { getMyFriendRequests } from '../../actions/profileActions';
+import FriendRequestItem from './FriendRequestItem';
+import {
+  // getMyFriendRequests
+  getProfileById,
+} from '../../actions/profileActions';
 
 class MyFriendRequests extends Component {
-  componentDidMount() {
-    this.props.getMyFriendRequests();
-  }
+  // componentDidMount() {
+  //   // this.props.getMyFriendRequests();
+  //   this.props.getProfileById(this.props.auth.user.id);
+  // }
   render() {
-    const { profile } = this.props;
+    const { profile } = this.props.profile;
     let content;
-    let list;
-
-    if (!profile && !profile.loading) {
-      content = 'No profile found';
-    } else if (profile.loading) {
+    if (!profile) {
       content = <Spinner />;
     } else {
-      console.log('&&&&&&profilefriends', profile.profile);
+      content = profile.friendrequests.map(request => (
+        <FriendRequestItem key={request._id} request={request} />
+      ));
     }
+
+    //   let content;
+    //   let list;
+    //
+    //   if (!profile && !profile.loading) {
+    //     content = 'No profile found';
+    //   } else if (profile === null && profile.loading) {
+    //     content = <Spinner />;
+    //   } else if (profile) {
+    //     console.log('&&&&&&profilefriends', profile.profile);
 
     return (
       <div>
@@ -28,10 +41,12 @@ class MyFriendRequests extends Component {
     );
   }
 }
+
 const mapStateToProps = state => ({
+  auth: state.auth,
   profile: state.profile,
 });
 export default connect(
   mapStateToProps,
-  { getMyFriendRequests }
+  { getProfileById }
 )(MyFriendRequests);
