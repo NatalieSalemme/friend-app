@@ -250,6 +250,14 @@ export const unlikeProfileComment = (handle, id) => dispatch => {
       })
     );
 };
+
+//Add friend request
+export const addFriendRequest = handle => dispatch => {
+  axios
+    .post(`/api/profile/friendrequest/to/${handle}`)
+    .then(res => console.log('from addrequestaction******', res.data));
+};
+
 //clear errors
 export const clearErrors = () => {
   return {
