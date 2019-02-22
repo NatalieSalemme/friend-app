@@ -8,6 +8,7 @@ import {
   GET_ERRORS,
   CLEAR_ERRORS,
   SET_CURRENT_USER,
+  GET_FRIEND_REQUESTS,
 } from './types';
 
 // Get profile by handle
@@ -255,9 +256,26 @@ export const unlikeProfileComment = (handle, id) => dispatch => {
 export const addFriendRequest = handle => dispatch => {
   axios
     .post(`/api/profile/friendrequest/to/${handle}`)
-    .then(res => console.log('from addrequestaction******', res.data));
+    .then(res => console.log('from addrequestaction', res.data));
 };
 
+//Get friend requests
+export const getMyFriendRequests = () => dispatch => {
+  axios
+    .get('/api/profile/friendrequests/to/me')
+    .then(res =>
+      dispatch({
+        type: GET_FRIEND_REQUESTS,
+        payload: res.data,
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_FRIEND_REQUESTS,
+        payload: null,
+      })
+    );
+};
 //clear errors
 export const clearErrors = () => {
   return {

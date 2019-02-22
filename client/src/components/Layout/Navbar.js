@@ -105,6 +105,17 @@ class Navbar extends Component {
               Search
             </button>
           </form>
+
+          <div className="nav-item active ">
+            <Link
+              to="/profile/friendrequests/to/me"
+              className="nav-link text-white"
+            >
+              {' '}
+              <i className="fas fa-user-plus" />
+            </Link>
+          </div>
+
           <div className="nav-item active ">
             <Link to="/messages/all" className="nav-link text-white">
               {' '}

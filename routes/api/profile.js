@@ -115,7 +115,7 @@ router.post(
         ).then(profile => res.json(profile));
       } else {
         //Check if handle exists
-        Profile.findOne({ handle: profileFields.hande }).then(profile => {
+        Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = 'That handle already exists';
             res.status(400).json(errors);
@@ -415,15 +415,15 @@ router.post(
     });
   }
 );
-//@route GET api/profile/friendrequest/to/:userId
+//@route GET api/profile/friendrequests/to/me
 //@desc  Get friend requests for a user
 //access Private
 router.get(
-  '/friendrequest/to/me',
+  '/friendrequests/to/me',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Profile.findOne({ user: req.user.id }).then(profile => {
-      res.json(profile.friendrequests);
+      res.json(profile);
     });
   }
 );
