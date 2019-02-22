@@ -383,4 +383,26 @@ router.post(
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
+
+//@route POST api/profile/friendrequest/to/:handle
+//@desc  Unlike profile comment
+//access Private
+router.post(
+  '/friendrequest/to/:handle',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ handle: req.params.handle }).then(profile => {
+      if (
+        profile.friends.filter(friend => friend.user.toString() === req.user.id)
+          .length > 0
+      ) {
+        return res
+          .status(400)
+          .json({ alreadyFriends: 'You are already friends with this user' });
+      }
+      profile.friendrequests.unshift({ user: req.user.id });
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
 module.exports = router;
