@@ -8,12 +8,12 @@ import { addFriendRequest } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 
 class ProfileHeader extends Component {
-  onFriendRequestClick(header) {
-    this.props.addFriendRequest(header);
+  onFriendRequestClick(handle) {
+    this.props.addFriendRequest(handle);
   }
+
   render() {
     const { profile } = this.props;
-
     let profileContent;
     if (!profile) {
       profileContent = <Spinner />;

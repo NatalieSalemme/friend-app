@@ -34,8 +34,15 @@ class MyFriendRequests extends Component {
     //     console.log('&&&&&&profilefriends', profile.profile);
 
     return (
-      <div>
-        <h1 className="text-center mt-3">My Friend Requests</h1>
+      <div
+        style={{
+          backgroundColor: '#E9EBEE',
+          paddingBottom: '5em',
+          marginBottom: '-3em',
+          marginTop: '-1em',
+        }}
+      >
+        <h1 className="text-center p-5">My Friend Requests</h1>
         {content}
       </div>
     );

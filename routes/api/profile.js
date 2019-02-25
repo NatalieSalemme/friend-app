@@ -80,6 +80,10 @@ router.post(
       //Return any errors with 400 status
       return res.status(400).json(errors);
     }
+    //Get user fields
+    const userFields = {};
+    userFields.user = req.user.id;
+    if (req.body.handle) userFields.handle = req.body.handle;
     //Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
@@ -108,6 +112,7 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         //Update
+
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
@@ -421,12 +426,9 @@ router.post(
         profile.save().then(profile => res.json(profile));
       })
       .catch(err =>
-        res
-          .status(404)
-          .json({
-            friendrequesterror:
-              'Error sending friend request, please try again',
-          })
+        res.status(404).json({
+          friendrequesterror: 'Error sending friend request, please try again',
+        })
       );
   }
 );
