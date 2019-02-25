@@ -466,4 +466,28 @@ router.delete(
       );
   }
 );
+
+//@route POST api/profile/friendrequests/to/me/:requestId
+//@desc  Accept a friend request
+//access Private
+router.post(
+  '/friendrequests/to/me/:requestId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        const findIndex = profile.friendrequests
+          .map(request => request.id)
+          .indexOf(req.params.requestId);
+        const friendInfo = profile.friendrequests[findIndex];
+        profile.friends.unshift(friendInfo);
+        profile.friendrequests.splice(findIndex, 1);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err =>
+        res.status(404).json({ requestnotfound: 'No friend request found' })
+      );
+  }
+);
+
 module.exports = router;
