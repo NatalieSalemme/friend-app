@@ -276,6 +276,19 @@ export const getMyFriendRequests = () => dispatch => {
       })
     );
 };
+
+//Delete friend Request
+export const deleteFriendRequest = (requestId, userId) => dispatch => {
+  axios
+    .delete(`/api/profile/friendrequests/to/me/${requestId}`)
+    .then(res => dispatch(getProfileById(userId)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
 //clear errors
 export const clearErrors = () => {
   return {
