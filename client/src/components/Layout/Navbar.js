@@ -6,6 +6,7 @@ import { logoutUser } from '../../actions/authActions';
 
 import {
   // getCurrentProfile,
+  getProfileById,
   getProfiles,
   clearCurrentProfile,
 } from '../../actions/profileActions';
@@ -13,7 +14,8 @@ import {
 class Navbar extends Component {
   componentDidMount() {
     // this.props.getCurrentProfile();
-    this.props.getProfiles();
+    // this.props.getProfiles();
+    this.props.getProfileById(this.props.auth.user.id);
   }
   onLogoutClick = e => {
     e.preventDefault();
@@ -105,6 +107,17 @@ class Navbar extends Component {
               Search
             </button>
           </form>
+
+          <div className="nav-item active ">
+            <Link
+              to="/profile/friendrequests/to/me"
+              className="nav-link text-white"
+            >
+              {' '}
+              <i className="fas fa-user-plus" />
+            </Link>
+          </div>
+
           <div className="nav-item active ">
             <Link to="/messages/all" className="nav-link text-white">
               {' '}
@@ -204,5 +217,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile, getProfiles }
+  { logoutUser, clearCurrentProfile, getProfileById }
 )(Navbar);

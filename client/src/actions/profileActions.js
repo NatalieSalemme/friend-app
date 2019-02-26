@@ -8,6 +8,7 @@ import {
   GET_ERRORS,
   CLEAR_ERRORS,
   SET_CURRENT_USER,
+  GET_FRIEND_REQUESTS,
 } from './types';
 
 // Get profile by handle
@@ -243,6 +244,70 @@ export const unlikeProfileComment = (handle, id) => dispatch => {
   axios
     .post(`/api/profile/${handle}/comments/unlike/${id}`)
     .then(res => dispatch(getProfileByHandle(handle)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//Add friend request
+export const addFriendRequest = handle => dispatch => {
+  axios
+    .post(`/api/profile/friendrequests/to/${handle}`)
+    .then(res => console.log('from addrequestaction', res.data));
+};
+
+//Get friend requests
+export const getMyFriendRequests = () => dispatch => {
+  axios
+    .get('/api/profile/friendrequests/to/me')
+    .then(res =>
+      dispatch({
+        type: GET_FRIEND_REQUESTS,
+        payload: res.data,
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_FRIEND_REQUESTS,
+        payload: null,
+      })
+    );
+};
+
+//Delete friend Request
+export const deleteFriendRequest = (requestId, userId) => dispatch => {
+  axios
+    .delete(`/api/profile/friendrequests/to/me/${requestId}`)
+    .then(res => dispatch(getProfileById(userId)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//Accept friend request and add friend to current users profile
+export const acceptFriendRequest = (requestId, userId) => dispatch => {
+  axios
+    .post(`/api/profile/friendrequests/to/me/${requestId}/${userId}`)
+    .then(res => dispatch(friendAddsCurrentUser(userId)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//After accepting friend, current user gets added to future friends friend list
+export const friendAddsCurrentUser = futureFriend => dispatch => {
+  axios
+    .post(`/api/profile/friendrequests/accept/${futureFriend}`)
+    .then(res => dispatch(getCurrentProfile()))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

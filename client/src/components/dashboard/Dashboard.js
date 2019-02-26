@@ -47,7 +47,7 @@ class Dashboard extends Component {
                 <Education education={profile.education} />
               </div>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 ml-5 text-center row">
               <button
                 onClick={this.onDeleteClick}
                 className="btn btn-danger mx-auto"
@@ -72,7 +72,14 @@ class Dashboard extends Component {
     }
 
     return (
-      <div className="dashboard">
+      <div
+        className="dashboard"
+        style={{
+          backgroundColor: '#E9EBEE',
+          paddingBottom: '5em',
+          marginBottom: '-4em',
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-12">{dashboardContent}</div>

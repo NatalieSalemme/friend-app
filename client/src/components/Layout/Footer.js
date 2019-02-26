@@ -27,6 +27,7 @@ class Footer extends Component {
     return (
       <footer className="page-footer font-small mt-5">
         <div style={{ backgroundColor: '#6351ce' }}>
+          {/* top footer start */}
           <div className="container">
             <div className="row py-4 d-flex align-items-center">
               <div className="col-md-6 col-lg-5 text-center text-md-left mb-md-0">
@@ -84,7 +85,7 @@ class Footer extends Component {
             </div>
           </div>
         </div>
-
+        {/* top footer end */}
         <div className="page-footer text-center text-md-left bg-dark">
           <div className="row">
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 text-white">

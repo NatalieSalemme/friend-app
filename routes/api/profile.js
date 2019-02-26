@@ -80,6 +80,10 @@ router.post(
       //Return any errors with 400 status
       return res.status(400).json(errors);
     }
+    //Get user fields
+    const userFields = {};
+    userFields.user = req.user.id;
+    if (req.body.handle) userFields.handle = req.body.handle;
     //Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
@@ -108,6 +112,7 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         //Update
+
         Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
@@ -115,7 +120,7 @@ router.post(
         ).then(profile => res.json(profile));
       } else {
         //Check if handle exists
-        Profile.findOne({ handle: profileFields.hande }).then(profile => {
+        Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = 'That handle already exists';
             res.status(400).json(errors);
@@ -383,4 +388,135 @@ router.post(
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }
 );
+
+//@route POST api/profile/friendrequests/to/:handle
+//@desc  Send a friend request to a user
+//access Private
+router.post(
+  '/friendrequests/to/:handle',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ handle: req.params.handle })
+      .then(profile => {
+        if (
+          profile.friends.filter(
+            friend => friend.user.toString() === req.user.id
+          ).length > 0
+        ) {
+          return res.status(400).json({
+            alreadyFriends: 'You are already friends with this user',
+          });
+        }
+        if (
+          profile.friendrequests.filter(
+            friend => friend.user.toString() === req.user.id
+          ).length > 0
+        ) {
+          return res.status(400).json({
+            alreadyFriendRequested:
+              'You already have a pending friend request for this user',
+          });
+        }
+        const requester = {
+          user: req.user.id,
+          name: req.user.name,
+          avatar: req.user.avatar,
+        };
+        profile.friendrequests.unshift(requester);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err =>
+        res.status(404).json({
+          friendrequesterror: 'Error sending friend request, please try again',
+        })
+      );
+  }
+);
+//@route GET api/profile/friendrequests/to/me
+//@desc  Get friend requests for a user
+//access Private
+// router.get(
+//   '/friendrequests/to/me',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     Profile.findOne({ user: req.user.id }).then(profile => {
+//       res.json(profile);
+//     });
+//   }
+// );
+
+//@route Delete api/profile/friendrequests/to/me/:requestId
+//@desc  Delete a friend request
+//access Private
+router.delete(
+  '/friendrequests/to/me/:requestId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        const removeIndex = profile.friendrequests
+          .map(request => request.id)
+          .indexOf(req.params.requestId);
+        //Splice out of array
+        profile.friendrequests.splice(removeIndex, 1);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err =>
+        res.status(404).json({ requestnotfound: 'No friend request found' })
+      );
+  }
+);
+
+//@route POST api/profile/friendrequests/to/me/:requestId
+//@desc  Accept a friend request
+//access Private
+
+router.post(
+  '/friendrequests/to/me/:requestId/:futureFriendId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        const findIndex = profile.friendrequests
+          .map(request => request.id)
+          .indexOf(req.params.requestId);
+        const friendInfo = profile.friendrequests[findIndex];
+        if (friendInfo) {
+          profile.friends.unshift(friendInfo);
+          profile.friendrequests.splice(findIndex, 1);
+          profile.save().then(profile => res.json(profile));
+        }
+      })
+      .catch(err =>
+        res.status(404).json({ requestnotfound: 'No friend request found' })
+      );
+  }
+);
+
+//@route POST api/profile/friendrequests/accept/:futureFriendId
+//@desc  Accept a friend request
+//access Private
+
+router.post(
+  '/friendrequests/accept/:futureFriendId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.params.futureFriendId })
+      .then(profile => {
+        const requester = {
+          user: req.user.id,
+          name: req.user.name,
+          avatar: req.user.avatar,
+        };
+        profile.friends.unshift(requester);
+        profile.save().then(profile => res.json(profile));
+      })
+      .catch(err =>
+        res.status(404).json({
+          friendrequesterror: 'Error adding your name to your friends list',
+        })
+      );
+  }
+);
+
 module.exports = router;

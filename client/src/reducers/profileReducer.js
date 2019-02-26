@@ -3,6 +3,7 @@ import {
   GET_PROFILES,
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
+  GET_FRIEND_REQUESTS,
 } from '../actions/types';
 
 const initialState = {
@@ -35,6 +36,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: null,
+      };
+    case GET_FRIEND_REQUESTS:
+      return {
+        ...state,
+        profile: action.payload,
       };
 
     default:

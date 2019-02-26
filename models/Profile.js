@@ -34,6 +34,48 @@ const ProfileSchema = new Schema({
   bio: {
     type: String,
   },
+  friends: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+      },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      handle: {
+        type: String,
+      },
+    },
+  ],
+  friendrequests: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+      },
+      name: {
+        type: String,
+      },
+      avatar: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      handle: {
+        type: String,
+      },
+    },
+  ],
   education: [
     {
       school: {
