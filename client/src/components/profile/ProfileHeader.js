@@ -14,6 +14,7 @@ class ProfileHeader extends Component {
 
   render() {
     const { profile } = this.props;
+    const firstName = profile.user.name.trim().split(' ')[0];
     let profileContent;
     if (!profile) {
       profileContent = <Spinner />;
@@ -79,7 +80,7 @@ class ProfileHeader extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-5 pb-3">
+                    <div className="mt-3 pb-2">
                       <p>
                         {isEmpty(profile.website) ? null : (
                           <a
@@ -145,6 +146,11 @@ class ProfileHeader extends Component {
                         )}
                       </p>
                     </div>
+                    <div className="pb-5">
+                      <h5 className="text-center">
+                        {firstName} has {profile.friends.length} friends
+                      </h5>
+                    </div>
                   </div>
                 </div>
 
@@ -161,7 +167,7 @@ class ProfileHeader extends Component {
         </div>
       );
     }
-    console.log('this profile is', profile);
+    console.log('this profile is', profile.friends.length);
     return <div>{profileContent}</div>;
   }
 }
