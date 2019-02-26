@@ -289,6 +289,32 @@ export const deleteFriendRequest = (requestId, userId) => dispatch => {
       })
     );
 };
+
+//Accept friend request and add friend to current users profile
+export const acceptFriendRequest = (requestId, userId) => dispatch => {
+  axios
+    .post(`/api/profile/friendrequests/to/me/${requestId}/${userId}`)
+    .then(res => dispatch(friendAddsCurrentUser(userId)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+//After accepting friend, current user gets added to future friends friend list
+export const friendAddsCurrentUser = futureFriend => dispatch => {
+  axios
+    .post(`/api/profile/friendrequests/accept/${futureFriend}`)
+    .then(res => dispatch(getCurrentProfile()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
 //clear errors
 export const clearErrors = () => {
   return {

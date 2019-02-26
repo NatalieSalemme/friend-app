@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getProfileById } from '../../actions/profileActions';
 import { Link } from 'react-router-dom';
-import { deleteFriendRequest } from '../../actions/profileActions';
+import {
+  acceptFriendRequest,
+  deleteFriendRequest,
+} from '../../actions/profileActions';
 
 class FriendRequestItem extends Component {
+  acceptFriendRequest = (id, userId) => {
+    this.props.acceptFriendRequest(id, userId);
+  };
   onDeleteRequest = (id, userId) => {
     this.props.deleteFriendRequest(id, this.props.auth.user.id);
   };
@@ -32,7 +38,13 @@ class FriendRequestItem extends Component {
             {/* <h5>Id: {request._id}</h5> */}
             {/* <h5>User: {request.user}</h5> */}
             <div className="col-md-6 mx-auto my-auto">
-              <button type="button" className="btn btn-success btn-lg mr-2">
+              <button
+                type="button"
+                className="btn btn-success btn-lg mr-2"
+                onClick={() =>
+                  this.acceptFriendRequest(request._id, request.user)
+                }
+              >
                 Accept
               </button>
               {/* </div>
@@ -56,5 +68,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getProfileById, deleteFriendRequest }
+  { getProfileById, deleteFriendRequest, acceptFriendRequest }
 )(FriendRequestItem);
