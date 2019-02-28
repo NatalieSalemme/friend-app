@@ -9,4 +9,3 @@ Things to do:
 -Remove handle from all profiles and instead replace all routes with an id to make it easier and avoid duplicate components/routes
 -React router links to friends works only some of the time
 -Put timestamp on comments
--Green validation when user clicks friend request on profile

@@ -10,9 +10,16 @@ import { addFriendRequest } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 
 class ProfileHeader extends Component {
+  state = {
+    clickedRequest: false,
+  };
   onFriendRequestClick(handle) {
     this.props.addFriendRequest(handle);
-    // console.log(this.state);
+    if (Object.keys(this.props.errors) === 0) {
+      this.setState({
+        clickedRequest: true,
+      });
+    }
   }
 
   render() {
@@ -78,9 +85,18 @@ class ProfileHeader extends Component {
                               this.onFriendRequestClick(profile.handle)
                             }
                             className="fas fa-plus fa-2x"
-                            style={{ color: 'green' }}
+                            style={{ color: 'green', cursor: 'pointer' }}
                           />
                         </div>
+
+                        <div>
+                          {this.props.errors.cannotBeFriendsWithYourself && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.cannotBeFriendsWithYourself}
+                            </div>
+                          )}
+                        </div>
+
                         <div>
                           {this.props.errors.alreadyFriendRequested && (
                             <div className="alert alert-danger" role="alert">
@@ -101,6 +117,14 @@ class ProfileHeader extends Component {
                           {this.props.errors.alreadyFriends && (
                             <div className="alert alert-danger" role="alert">
                               {this.props.errors.alreadyFriends}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          {this.state.clickedRequest && (
+                            <div className="alert alert-success" role="alert">
+                              Friend Request Sent
                             </div>
                           )}
                         </div>

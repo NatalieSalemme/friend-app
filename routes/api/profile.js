@@ -398,6 +398,13 @@ router.post(
   (req, res) => {
     Profile.findOne({ handle: req.params.handle })
       .then(profile => {
+        // res.json(req.user.id, profile.user);
+
+        if (profile.user == req.user.id) {
+          return res.status(400).json({
+            cannotBeFriendsWithYourself: 'You cannot be friends with yourself',
+          });
+        }
         if (
           profile.friends.filter(
             friend => friend.user.toString() === req.user.id
@@ -407,6 +414,7 @@ router.post(
             alreadyFriends: 'You are already friends with this user',
           });
         }
+
         if (
           profile.friendrequests.filter(
             friend => friend.user.toString() === req.user.id
