@@ -21,7 +21,7 @@ class FriendsListProfile extends Component {
         <h5 className="text-center">
           {firstName} has {profile.friends.length} friends including:
         </h5>
-        <ul>{mappedFriends.slice(0, 5)}</ul>
+        <ul>{mappedFriends}</ul>
 
         <h3 className="text-center"> See all Friends</h3>
       </div>

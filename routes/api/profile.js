@@ -18,7 +18,7 @@ const User = require('../../models/User');
 //access Public
 router.get('/all', (req, res) => {
   const errors = {};
-  Profile.find()
+  Profile.find({})
     .populate('user', ['name', 'avatar'])
     .then(profiles => {
       if (!profiles) {

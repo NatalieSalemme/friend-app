@@ -14,6 +14,7 @@ import {
 // Get profile by handle
 export const getProfileByHandle = handle => dispatch => {
   dispatch(setProfileLoading());
+  dispatch(clearErrors());
   console.log('getting profile by handle');
   axios
     .get(`/api/profile/handle/${handle}`)
@@ -34,6 +35,7 @@ export const getProfileByHandle = handle => dispatch => {
 //get profile by id
 export const getProfileById = id => dispatch => {
   dispatch(setProfileLoading());
+  dispatch(clearErrors());
   console.log('getting profile by id');
   axios
     .get(`/api/profile/user/${id}`)
@@ -256,7 +258,13 @@ export const unlikeProfileComment = (handle, id) => dispatch => {
 export const addFriendRequest = handle => dispatch => {
   axios
     .post(`/api/profile/friendrequests/to/${handle}`)
-    .then(res => console.log('from addrequestaction', res.data));
+    .then(res => console.log('from addrequestaction', res.data))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
 };
 
 //Get friend requests

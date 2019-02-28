@@ -12,10 +12,12 @@ import Spinner from '../common/Spinner';
 class ProfileHeader extends Component {
   onFriendRequestClick(handle) {
     this.props.addFriendRequest(handle);
+    // console.log(this.state);
   }
 
   render() {
     const { profile } = this.props;
+    console.log(this.props.errors);
     let profileContent;
     if (!profile) {
       profileContent = <Spinner />;
@@ -78,6 +80,29 @@ class ProfileHeader extends Component {
                             className="fas fa-plus fa-2x"
                             style={{ color: 'green' }}
                           />
+                        </div>
+                        <div>
+                          {this.props.errors.alreadyFriendRequested && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.alreadyFriendRequested}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          {this.props.errors.friendrequesterror && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.friendrequesterror}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          {this.props.errors.alreadyFriends && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.alreadyFriends}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -170,7 +195,10 @@ class ProfileHeader extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  errors: state.errors,
+});
 export default connect(
-  null,
+  mapStateToProps,
   { addFriendRequest }
 )(ProfileHeader);
