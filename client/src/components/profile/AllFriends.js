@@ -23,10 +23,14 @@ class AllFriends extends Component {
     }
 
     return (
-      <div>
-        <h1 className="text-center my-5">All Friends</h1>
-
-        <ul>{mapped}</ul>
+      <div className="container">
+        <div className="col-md-12">
+          <h1 className="text-center my-5">All Friends</h1>
+          {/* <p className="lead text-center">Browse and connect with friends</p> */}
+        </div>
+        <div className="row">
+          <div className="card-deck mx-auto">{mapped}</div>
+        </div>
       </div>
     );
   }
