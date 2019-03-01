@@ -3,46 +3,46 @@ import { connect } from 'react-redux';
 import Spinner from '../common/Spinner';
 import FriendRequestItem from './FriendRequestItem';
 import {
-  // getMyFriendRequests
+  getMyFriendRequests,
   getProfileById,
 } from '../../actions/profileActions';
 
 class MyFriendRequests extends Component {
   // componentDidMount() {
-  //   // this.props.getMyFriendRequests();
-  //   this.props.getProfileById(this.props.auth.user.id);
+  //   this.props.getMyFriendRequests();
+  //   // this.props.getProfileById(this.props.auth.user.id);
   // }
   render() {
     const { profile } = this.props.profile;
+
     let content;
+    let requestsLength;
     if (!profile) {
+      // console.log(profile);
       content = <Spinner />;
     } else {
+      requestsLength = profile.friendrequests.length;
+      console.log(requestsLength);
       content = profile.friendrequests.map(request => (
         <FriendRequestItem key={request._id} request={request} />
       ));
     }
 
-    //   let content;
-    //   let list;
-    //
-    //   if (!profile && !profile.loading) {
-    //     content = 'No profile found';
-    //   } else if (profile === null && profile.loading) {
-    //     content = <Spinner />;
-    //   } else if (profile) {
-    //     console.log('&&&&&&profilefriends', profile.profile);
-
     return (
       <div
         style={{
           backgroundColor: '#E9EBEE',
-          paddingBottom: '5em',
+          paddingBottom: '23em',
           marginBottom: '-3em',
+
           marginTop: '-1em',
         }}
       >
-        <h1 className="text-center p-5">My Friend Requests</h1>
+        <h1 className="text-center pt-5">My Friend Requests</h1>
+        <p className="text-muted text-center">
+          You have {requestsLength ? requestsLength : 0}{' '}
+          {requestsLength === 1 ? 'request' : 'requests'}
+        </p>
         {content}
       </div>
     );
@@ -55,5 +55,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getProfileById }
+  { getProfileById, getMyFriendRequests }
 )(MyFriendRequests);

@@ -22,9 +22,10 @@ class AllFriends extends Component {
       } else {
         name = `${firstName}'s`;
       }
+      // TODO: error when trying to assign friend id to key
       friendCount = profile.friends.length;
-      mapped = profile.friends.map(friend => (
-        <AllFriendsItem friend={friend} />
+      mapped = profile.friends.map((friend, index) => (
+        <AllFriendsItem key={index} friend={friend} />
       ));
     }
 
@@ -34,14 +35,13 @@ class AllFriends extends Component {
           backgroundColor: '#E9EBEE',
           paddingBottom: '5em',
           marginBottom: '-4em',
-          border: '2px dotted pink',
           width: '100%',
         }}
       >
         <div className="container">
           <div className="col-md-12">
             <h1 className="text-center py-5">
-              {name ? name : 'User'} {friendCount} Friends
+              Displaying {name ? name : 'User'} {friendCount} Friends
             </h1>
           </div>
           <div className="row">

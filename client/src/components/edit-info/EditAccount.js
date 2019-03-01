@@ -60,7 +60,14 @@ class EditAccount extends Component {
     const { errors, submitted } = this.state;
     return (
       <div>
-        <div className="create-profile">
+        <div
+          className="create-profile"
+          style={{
+            backgroundColor: '#E9EBEE',
+            paddingBottom: '6em',
+            marginBottom: '-3em',
+          }}
+        >
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
