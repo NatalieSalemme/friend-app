@@ -22,11 +22,15 @@ import EditAccount from './components/edit-info/EditAccount';
 import EditPhoto from './components/edit-info/EditPhoto';
 import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
+
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import IdProfile from './components/profile/IdProfile';
+import AllFriends from './components/profile/AllFriends';
+
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
+
 import Messages from './components/messages/Messages';
 import MessageThread from './components/messages/MessageThread';
 import MessagesFrom from './components/messages/MessagesFrom';
@@ -138,6 +142,13 @@ class App extends Component {
                   exact
                   path="/profile/friendrequests/to/me"
                   component={MyFriendRequests}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/profile/user/friends/:id"
+                  component={AllFriends}
                 />
               </Switch>
             </div>

@@ -7,7 +7,6 @@ class FriendsListProfile extends Component {
     const { profile } = this.props;
     const firstName = profile.user.name.trim().split(' ')[0];
     let mappedFriends;
-    console.log(profile.friends);
     if (!profile) {
       return 'Loading...';
     } else {
@@ -15,15 +14,16 @@ class FriendsListProfile extends Component {
         <FriendItemIcon key={i} friend={friend} />
       ));
     }
-
+    console.log('friendsListProfile&&&&', profile);
     return (
       <div>
         <h5 className="text-center">
           {firstName} has {profile.friends.length} friends including:
         </h5>
         <ul>{mappedFriends}</ul>
-
-        <h3 className="text-center"> See all Friends</h3>
+        <Link to={`/profile/user/friends/${profile.user._id}`}>
+          <h3 className="text-center"> See all Friends</h3>
+        </Link>
       </div>
     );
   }

@@ -8,11 +8,11 @@ class FriendItemIcon extends Component {
     let content;
 
     if (!friend) {
-      content = 'Loading...';
+      content = '';
     } else {
       let friendUser = friend.user;
       content = (
-        <div>
+        <div className="ml-2">
           <Link to={`/profile/user/${friendUser}`} className="text-secondary">
             {friend.name}
           </Link>

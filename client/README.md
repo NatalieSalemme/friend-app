@@ -7,5 +7,6 @@ Things to do:
 -Create a page to add favorite music/bands/tv shows. Create a graph to show recommended media
 -Create error handling on all forms, pages that load data, and create a 404 page
 -Remove handle from all profiles and instead replace all routes with an id to make it easier and avoid duplicate components/routes
--React router links to friends works only some of the time
+
 -Put timestamp on comments
+-Add registration validation on check terms and conditions

@@ -475,7 +475,7 @@ router.delete(
   }
 );
 
-//@route POST api/profile/friendrequests/to/me/:requestId
+//@route POST api/profile/friendrequests/to/me/:requestId/:futureFriendId
 //@desc  Accept a friend request
 //access Private
 
@@ -502,7 +502,7 @@ router.post(
 );
 
 //@route POST api/profile/friendrequests/accept/:futureFriendId
-//@desc  Accept a friend request
+//@desc  After a friend request is accepted, it adds current users name to future friends profile's friends list
 //access Private
 
 router.post(
