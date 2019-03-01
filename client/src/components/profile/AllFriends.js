@@ -11,25 +11,42 @@ class AllFriends extends Component {
   }
   render() {
     const { profile } = this.props.profile;
-    // console.log(profile);
-    //
+    let firstName;
+    let name;
+    let friendCount;
     let mapped;
-    // console.log('hiiya******', profile);
-    // let profileFriends = profile.friends;
     if (profile) {
+      firstName = profile.user.name.trim().split(' ')[0];
+      if (firstName.endsWith('s')) {
+        name = `${firstName}'`;
+      } else {
+        name = `${firstName}'s`;
+      }
+      friendCount = profile.friends.length;
       mapped = profile.friends.map(friend => (
         <AllFriendsItem friend={friend} />
       ));
     }
 
     return (
-      <div className="container">
-        <div className="col-md-12">
-          <h1 className="text-center my-5">All Friends</h1>
-          {/* <p className="lead text-center">Browse and connect with friends</p> */}
-        </div>
-        <div className="row">
-          <div className="card-deck mx-auto">{mapped}</div>
+      <div
+        style={{
+          backgroundColor: '#E9EBEE',
+          paddingBottom: '5em',
+          marginBottom: '-4em',
+          border: '2px dotted pink',
+          width: '100%',
+        }}
+      >
+        <div className="container">
+          <div className="col-md-12">
+            <h1 className="text-center py-5">
+              {name ? name : 'User'} {friendCount} Friends
+            </h1>
+          </div>
+          <div className="row">
+            <div className="card-deck mx-auto">{mapped}</div>
+          </div>
         </div>
       </div>
     );
