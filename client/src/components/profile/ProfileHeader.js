@@ -2,19 +2,29 @@ import React, { Component } from 'react';
 import isEmpty from '../../validation/is-empty';
 import ProfileCreds from './ProfileCreds';
 import ProfileAbout from './ProfileAbout';
+import FriendsListProfile from './FriendsListProfile';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addFriendRequest } from '../../actions/profileActions';
+
 import Spinner from '../common/Spinner';
 
 class ProfileHeader extends Component {
+  state = {
+    clickedRequest: false,
+  };
   onFriendRequestClick(handle) {
     this.props.addFriendRequest(handle);
+    if (Object.keys(this.props.errors) === 0) {
+      this.setState({
+        clickedRequest: true,
+      });
+    }
   }
 
   render() {
     const { profile } = this.props;
-    const firstName = profile.user.name.trim().split(' ')[0];
+    console.log(this.props.errors);
     let profileContent;
     if (!profile) {
       profileContent = <Spinner />;
@@ -75,8 +85,48 @@ class ProfileHeader extends Component {
                               this.onFriendRequestClick(profile.handle)
                             }
                             className="fas fa-plus fa-2x"
-                            style={{ color: 'green' }}
+                            style={{ color: 'green', cursor: 'pointer' }}
                           />
+                        </div>
+
+                        <div>
+                          {this.props.errors.cannotBeFriendsWithYourself && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.cannotBeFriendsWithYourself}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          {this.props.errors.alreadyFriendRequested && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.alreadyFriendRequested}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          {this.props.errors.friendrequesterror && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.friendrequesterror}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          {this.props.errors.alreadyFriends && (
+                            <div className="alert alert-danger" role="alert">
+                              {this.props.errors.alreadyFriends}
+                            </div>
+                          )}
+                        </div>
+
+                        <div>
+                          {this.state.clickedRequest && (
+                            <div className="alert alert-success" role="alert">
+                              Friend Request Sent
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -147,9 +197,7 @@ class ProfileHeader extends Component {
                       </p>
                     </div>
                     <div className="pb-5">
-                      <h5 className="text-center">
-                        {firstName} has {profile.friends.length} friends
-                      </h5>
+                      <FriendsListProfile profile={profile} />
                     </div>
                   </div>
                 </div>
@@ -167,12 +215,14 @@ class ProfileHeader extends Component {
         </div>
       );
     }
-    console.log('this profile is', profile.friends.length);
     return <div>{profileContent}</div>;
   }
 }
 
+const mapStateToProps = state => ({
+  errors: state.errors,
+});
 export default connect(
-  null,
+  mapStateToProps,
   { addFriendRequest }
 )(ProfileHeader);

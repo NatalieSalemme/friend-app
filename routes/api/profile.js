@@ -18,7 +18,7 @@ const User = require('../../models/User');
 //access Public
 router.get('/all', (req, res) => {
   const errors = {};
-  Profile.find()
+  Profile.find({})
     .populate('user', ['name', 'avatar'])
     .then(profiles => {
       if (!profiles) {
@@ -398,6 +398,13 @@ router.post(
   (req, res) => {
     Profile.findOne({ handle: req.params.handle })
       .then(profile => {
+        // res.json(req.user.id, profile.user);
+
+        if (profile.user == req.user.id) {
+          return res.status(400).json({
+            cannotBeFriendsWithYourself: 'You cannot be friends with yourself',
+          });
+        }
         if (
           profile.friends.filter(
             friend => friend.user.toString() === req.user.id
@@ -407,6 +414,7 @@ router.post(
             alreadyFriends: 'You are already friends with this user',
           });
         }
+
         if (
           profile.friendrequests.filter(
             friend => friend.user.toString() === req.user.id
@@ -467,7 +475,7 @@ router.delete(
   }
 );
 
-//@route POST api/profile/friendrequests/to/me/:requestId
+//@route POST api/profile/friendrequests/to/me/:requestId/:futureFriendId
 //@desc  Accept a friend request
 //access Private
 
@@ -494,7 +502,7 @@ router.post(
 );
 
 //@route POST api/profile/friendrequests/accept/:futureFriendId
-//@desc  Accept a friend request
+//@desc  After a friend request is accepted, it adds current users name to future friends profile's friends list
 //access Private
 
 router.post(

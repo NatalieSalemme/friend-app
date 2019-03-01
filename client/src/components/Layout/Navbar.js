@@ -28,11 +28,13 @@ class Navbar extends Component {
     const { profile, loading } = this.props.profile;
 
     let content;
+    let friendRequestsLength;
     if (profile === null || loading) {
       content = null;
     } else {
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
+        friendRequestsLength = profile.friendrequests.length;
         content = (
           <div>
             <Link className="mr-4 text-white" to="/edit-profile">
@@ -115,6 +117,19 @@ class Navbar extends Component {
             >
               {' '}
               <i className="fas fa-user-plus" />
+              {friendRequestsLength > 0 && (
+                <button
+                  type="button"
+                  className="btn btn-success ml-1"
+                  data-container="body"
+                  data-toggle="popover"
+                  data-placement="right"
+                  data-content="Number of Friend Requests."
+                  // style={{ width: '80%', height: '80%' }}
+                >
+                  {friendRequestsLength && friendRequestsLength}
+                </button>
+              )}
             </Link>
           </div>
 
