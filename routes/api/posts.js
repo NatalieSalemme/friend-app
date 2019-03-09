@@ -3,19 +3,45 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Post = require('../../models/Post');
+const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 //Validation
 const validatePostInput = require('../../validation/post');
 
 //@route GET api/post
 //@desc  Get posts
-//access Public
-router.get('/', (req, res) => {
-  Post.find()
-    .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
-});
+//access Private
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    let emptyArr = [];
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Post.find().then(post => {
+        let friendIds = [];
+        profile.friends.map(friend => {
+          friendIds.push(JSON.stringify(friend.user));
+        });
+        friendIds.push(req.user.id);
+
+        let postList = [];
+        post.forEach(p => {
+          let user = JSON.stringify(p.user);
+
+          if (friendIds.includes(user)) {
+            postList.push(p);
+          }
+        });
+        res.json(postList);
+      });
+    });
+
+    // Post.find()
+    //   .sort({ date: -1 })
+    //   .then(posts => res.json(posts))
+    //   .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+  }
+);
 
 //@route GET api/post/:id
 //@desc  Get posts by id
