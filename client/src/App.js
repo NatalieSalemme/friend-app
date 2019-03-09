@@ -24,9 +24,9 @@ import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 
 import Profiles from './components/profiles/Profiles';
-import Profile from './components/profile/Profile';
-import IdProfile from './components/profile/IdProfile';
-import AllFriends from './components/profile/AllFriends';
+import Profile from './components/Profile/Profile';
+import IdProfile from './components/Profile/IdProfile';
+import AllFriends from './components/Profile/AllFriends';
 
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';

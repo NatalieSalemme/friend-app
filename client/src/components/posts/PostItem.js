@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
@@ -33,6 +34,8 @@ class PostItem extends Component {
   };
   render() {
     const { post, auth, showActions } = this.props;
+    let postDate = post.date.toString();
+    console.log(typeof postDate);
     // console.log(this.props.profile);
     return (
       <div className="card card-body mb-3 col-md-8 mx-auto">
@@ -47,11 +50,28 @@ class PostItem extends Component {
                 alt=""
               />
             </Link>
+
             <br />
             <p className="text-center">{post.name}</p>
           </div>
           <div className="col-md-10">
-            <p>{post.text}</p>
+            <div className="row d-flex justify-content-end">
+              <p className="pr-3 mt-2 font-weight-bold">
+                {' '}
+                {moment(postDate).format('MM/DD/YYYY LT')}
+              </p>
+              {post.user === auth.user.id ? (
+                <button
+                  onClick={() => this.onDeleteClick(post._id)}
+                  type="button"
+                  className="btn btn-danger mx-2"
+                >
+                  <i className="fas fa-times" />
+                </button>
+              ) : null}
+            </div>
+            <p className="mr-3">{post.text}</p>
+
             {showActions ? (
               <span>
                 <div className="row">
@@ -86,15 +106,17 @@ class PostItem extends Component {
                   >
                     Comments
                   </Link>
-                  {post.user === auth.user.id ? (
-                    <button
-                      onClick={() => this.onDeleteClick(post._id)}
-                      type="button"
-                      className="btn btn-danger ml-2"
-                    >
-                      <i className="fas fa-times" />
-                    </button>
-                  ) : null}
+                  {/* <div className="col-md-1">
+                    {post.user === auth.user.id ? (
+                      <button
+                        onClick={() => this.onDeleteClick(post._id)}
+                        type="button"
+                        className="btn btn-danger ml-2"
+                      >
+                        <i className="fas fa-times" />
+                      </button>
+                    ) : null}
+                  </div> */}
                 </div>
               </span>
             ) : null}
