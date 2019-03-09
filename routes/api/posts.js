@@ -16,31 +16,30 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     let emptyArr = [];
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.find().then(post => {
-        let friendIds = [];
-        profile.friends.map(friend => {
-          friendIds.push(JSON.stringify(friend.user));
-        });
-        friendIds.unshift(JSON.stringify(req.user.id));
-        let myId = JSON.stringify(req.user.id);
-        console.log(friendIds);
-        let postList = [];
-        post.forEach(p => {
-          let user = JSON.stringify(p.user);
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        Post.find()
+          .sort({ date: -1 })
+          .then(post => {
+            let friendIds = [];
+            profile.friends.map(friend => {
+              friendIds.push(JSON.stringify(friend.user));
+            });
+            friendIds.unshift(JSON.stringify(req.user.id));
+            let myId = JSON.stringify(req.user.id);
+            console.log(friendIds);
+            let postList = [];
+            post.forEach(p => {
+              let user = JSON.stringify(p.user);
 
-          if (friendIds.includes(user) || p.user === myId) {
-            postList.push(p);
-          }
-        });
-        res.json(postList);
-      });
-    });
-
-    // Post.find()
-    //   .sort({ date: -1 })
-    //   .then(posts => res.json(posts))
-    //   .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
+              if (friendIds.includes(user) || p.user === myId) {
+                postList.push(p);
+              }
+            });
+            res.json(postList);
+          });
+      })
+      .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
   }
 );
 
