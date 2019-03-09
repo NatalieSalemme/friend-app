@@ -550,6 +550,11 @@ router.get('/filter/:name', (req, res) => {
           emptyProfs.push(profile);
         }
       });
+      if (emptyProfs.length === 0) {
+        res
+          .status(404)
+          .json({ noprofilesfound: 'There were no profiles found' });
+      }
       res.send(emptyProfs);
     });
   });
