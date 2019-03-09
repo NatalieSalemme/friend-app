@@ -527,4 +527,32 @@ router.post(
   }
 );
 
+//@route GET api/profile/filter/:name
+//@desc  After a friend request is accepted, it adds current users name to future friends profile's friends list
+//access Public
+router.get('/filter/:name', (req, res) => {
+  User.find().then(users => {
+    let userIds = [];
+    users.forEach(user => {
+      if (
+        (user.name,
+        user.name.toLowerCase().includes(req.params.name.toLowerCase()))
+      ) {
+        userIds.push(user._id.toString());
+      }
+    });
+    console.log(userIds);
+    Profile.find().then(profiles => {
+      let emptyProfs = [];
+      profiles.forEach(profile => {
+        let stringifiedId = profile.user.toString();
+        if (userIds.includes(stringifiedId)) {
+          emptyProfs.push(profile);
+        }
+      });
+      res.send(emptyProfs);
+    });
+  });
+});
+
 module.exports = router;
