@@ -22,13 +22,14 @@ router.get(
         profile.friends.map(friend => {
           friendIds.push(JSON.stringify(friend.user));
         });
-        friendIds.push(req.user.id);
-
+        friendIds.unshift(JSON.stringify(req.user.id));
+        let myId = JSON.stringify(req.user.id);
+        console.log(friendIds);
         let postList = [];
         post.forEach(p => {
           let user = JSON.stringify(p.user);
 
-          if (friendIds.includes(user)) {
+          if (friendIds.includes(user) || p.user === myId) {
             postList.push(p);
           }
         });
