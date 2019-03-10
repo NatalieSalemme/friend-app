@@ -323,6 +323,10 @@ export const friendAddsCurrentUser = futureFriend => dispatch => {
       })
     );
 };
+//show filtered profiles from query parameters in url
+export const showFilteredProfiles = name => dispatch => {
+  axios.get(`api/profile/filter/caleb`).then(res => console.log(res.data));
+};
 //clear errors
 export const clearErrors = () => {
   return {

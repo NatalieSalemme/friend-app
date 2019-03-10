@@ -70,7 +70,7 @@ class PostItem extends Component {
                 </button>
               ) : null}
             </div>
-            <p className="mr-3">{post.text}</p>
+            <p className="mr-3 pb-4">{post.text}</p>
 
             {showActions ? (
               <span>

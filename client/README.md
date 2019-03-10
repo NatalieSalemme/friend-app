@@ -10,3 +10,4 @@ Things to do:
 
 -Put timestamp on comments
 -Add registration validation on check terms and conditions
+-Fix filter function, as of right now, it's on a <Link> tag, which takes it to the filterProfile component with query parameters, but when it is pushed multiple times, url is concatenated with /profile/filter/:name each time
