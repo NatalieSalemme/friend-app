@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { showFilteredProfiles } from '../../actions/profileActions';
+import FilteredProfilesList from './FilteredProfilesList';
 
 class FilterProfile extends Component {
   componentDidMount() {
     let name = this.props.match.params.name;
-    this.props.showFilteredProfiles();
-    console.log('$$$$name', name);
+    this.props.showFilteredProfiles(name);
   }
   render() {
     const { match } = this.props;
@@ -15,6 +15,7 @@ class FilterProfile extends Component {
         <h1 className="text-center mt-5">
           Showing search results for {match.params.name}
         </h1>
+        <FilteredProfilesList />
       </div>
     );
   }
