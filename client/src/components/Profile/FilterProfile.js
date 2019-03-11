@@ -11,10 +11,16 @@ class FilterProfile extends Component {
   render() {
     const { match } = this.props;
     const { profiles } = this.props.profile;
-    console.log('&&&&&&&&&', profiles);
     return (
-      <div>
-        <h1 className="text-center mt-5">
+      <div
+        style={{
+          backgroundColor: '#E9EBEE',
+
+          padding: '4em 0 8em 0',
+          marginBottom: '-3em',
+        }}
+      >
+        <h1 className="text-center mt-3 mb-5">
           Showing search results for {match.params.name}
         </h1>
         <FilteredProfilesList profiles={profiles} />

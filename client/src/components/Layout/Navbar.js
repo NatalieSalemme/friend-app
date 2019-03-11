@@ -34,14 +34,18 @@ class Navbar extends Component {
       name: e.target.value,
     });
   }
-  // onSubmit = e => {
-  //   this.props.history.push('/profile/filter/:name');
-  // };
+  // onSubmit(e) {
+  //   e.preventDefault();
+  //   this.context.history.push(
+  //     '/thetest'
+  //     // `/profile/filter/${this.state.name}`
+  //   );
+  // }
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-
+    console.log(this);
     let content;
     let friendRequestsLength;
     if (profile === null || loading) {
@@ -113,14 +117,13 @@ class Navbar extends Component {
           <form className="form-inline mr-5 my-lg-0">
             <input
               className="form-control mr-sm-2"
-              name="friendSearch"
               type="search"
               placeholder="Search"
               aria-label="Search"
               value={this.state.name}
               onChange={e => this.handleChange(e)}
             />{' '}
-            <Link to={`profile/filter/${this.state.name}`}>
+            <Link to={`/profile/filter/${this.state.name}`}>
               <button
                 className="btn btn-outline-dark my-2 my-sm-0 text-white"
                 // onClick={this.onSubmit}

@@ -7,7 +7,7 @@ class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
     let profileContent;
-    console.log('profile***', profile.user);
+    let name = profile.name.split(' ').map(s => <h5>{s}</h5>);
     if (profile === null) {
       profileContent = <Spinner />;
     } else {
@@ -21,19 +21,24 @@ class ProfileItem extends Component {
             />
           </Link>
 
-          <div className="card-body">
+          <div className="card-body" style={{ minHeight: '7.5em' }}>
             {' '}
             <h5 className="card-title list-group-item text-center">
-              {profile.name && profile.name}
+              {name && name}
             </h5>
           </div>
 
           <ul className="list-group list-group-flush  ">
-            <li className="card-text list-group-item ">
+            <li
+              className="card-text list-group-item d-flex align-items-center"
+              style={{ minHeight: '5em' }}
+            >
               Status: "{profile.status}"
             </li>
-            <li className="list-group-item">
-              {profile.location ? profile.location : `It's a mystery`}
+            <li className="list-group-item d-flex align-items-center">
+              {profile.location
+                ? `Location: ${profile.location}`
+                : `Location: It's a mystery`}
             </li>
           </ul>
         </div>
@@ -42,7 +47,10 @@ class ProfileItem extends Component {
     return (
       <div
         className="card mx-2 my-3 mx-auto"
-        style={{ minWidth: '15em', maxWidth: '15em' }}
+        style={{
+          minWidth: '15em',
+          maxWidth: '15em',
+        }}
       >
         {profileContent}
       </div>
