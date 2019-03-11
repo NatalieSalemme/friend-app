@@ -10,12 +10,14 @@ class FilterProfile extends Component {
   }
   render() {
     const { match } = this.props;
+    const { profiles } = this.props.profile;
+    console.log('&&&&&&&&&', profiles);
     return (
       <div>
         <h1 className="text-center mt-5">
           Showing search results for {match.params.name}
         </h1>
-        <FilteredProfilesList />
+        <FilteredProfilesList profiles={profiles} />
       </div>
     );
   }

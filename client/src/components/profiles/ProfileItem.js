@@ -24,7 +24,7 @@ class ProfileItem extends Component {
           <div className="card-body">
             {' '}
             <h5 className="card-title list-group-item text-center">
-              {profile.user && profile.user.name}
+              {profile.name && profile.name}
             </h5>
           </div>
 
