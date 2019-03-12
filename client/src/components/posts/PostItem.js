@@ -35,8 +35,6 @@ class PostItem extends Component {
   render() {
     const { post, auth, showActions } = this.props;
     let postDate = post.date.toString();
-    console.log(typeof postDate);
-    // console.log(this.props.profile);
     return (
       <div className="card card-body mb-3 col-md-8 mx-auto">
         <div className="row">

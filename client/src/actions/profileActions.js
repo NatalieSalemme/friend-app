@@ -134,7 +134,7 @@ export const deleteEducation = id => dispatch => {
 export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get('/api/profile/all')
+    .get('/api/profile/browse')
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -326,6 +326,7 @@ export const friendAddsCurrentUser = futureFriend => dispatch => {
 };
 //show filtered profiles from query parameters in url
 export const showFilteredProfiles = name => dispatch => {
+  console.log('filtering by ' + name);
   axios
     .get(`/api/profile/filter/${name}`)
     .then(res =>

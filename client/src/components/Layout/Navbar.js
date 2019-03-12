@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
+import { history } from '../common/BrowserRouter';
 
 import {
-  // getCurrentProfile,
   getProfileById,
-  getProfiles,
   clearCurrentProfile,
   showFilteredProfiles,
 } from '../../actions/profileActions';
@@ -17,8 +16,6 @@ class Navbar extends Component {
     name: '',
   };
   componentDidMount() {
-    // this.props.getCurrentProfile();
-    // this.props.getProfiles();
     this.props.getProfileById(this.props.auth.user.id);
     this.setState({
       name: '',
@@ -36,11 +33,9 @@ class Navbar extends Component {
     });
   }
 
-  // onSubmit(e) {
-  //   // e.preventDefault();
-  //   this.props.showFilteredProfiles(this.state.name);
-  // }
-
+  changeProfiles = () => {
+    this.props.showFilteredProfiles(this.state.name);
+  };
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
@@ -125,7 +120,7 @@ class Navbar extends Component {
             <Link to={`/profile/filter/${this.state.name}`}>
               <button
                 className="btn btn-outline-dark my-2 my-sm-0 text-white"
-                // onClick={this.onSubmit}
+                onClick={this.changeProfiles}
                 type="submit"
                 style={{ backgroundColor: '#1f0891' }}
               >

@@ -13,10 +13,10 @@ const Profile = require('../../models/Profile');
 //Load user profile
 const User = require('../../models/User');
 
-//@route GET api/profile/all
-//@desc  Get all profiles
+//@route GET api/profile/browse
+//@desc  Get profiles that do not include current user or current users friends
 //access Public
-router.get('/all', (req, res) => {
+router.get('/browse', (req, res) => {
   const errors = {};
   Profile.find({})
     .populate('user', ['name', 'avatar'])
