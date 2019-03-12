@@ -16,7 +16,7 @@ class FriendRequestItem extends Component {
   };
   render() {
     const { request } = this.props;
-    const { user } = this.props.auth;
+    // const { user } = this.props.auth;
     return (
       <div className="card card-body mb-3 col-md-4 mx-auto">
         <div className="container">

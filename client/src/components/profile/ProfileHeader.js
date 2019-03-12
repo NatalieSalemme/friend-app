@@ -24,7 +24,7 @@ class ProfileHeader extends Component {
 
   render() {
     const { profile } = this.props;
-    console.log(this.props.errors);
+    // console.log(this.props.errors);
     let profileContent;
     if (!profile) {
       profileContent = <Spinner />;

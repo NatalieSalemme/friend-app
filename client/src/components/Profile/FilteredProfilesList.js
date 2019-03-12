@@ -5,10 +5,10 @@ import ProfileItem from '../profiles/ProfileItem';
 class FilteredProfilesList extends Component {
   render() {
     const { profiles, loading } = this.props;
-    console.log('*****profiles', profiles.length);
+    // console.log('*****profiles', profiles.length);
 
     let mappedResults;
-    if (!profiles && loading == true) {
+    if (!profiles && loading === true) {
       return <Spinner />;
     } else if (profiles.length === 0) {
       return <h4 className="text-center">No profiles found</h4>;

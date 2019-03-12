@@ -14,7 +14,7 @@ class FriendsListProfile extends Component {
         <FriendItemIcon key={i} friend={friend} />
       ));
     }
-    console.log('friendsListProfile&&&&', profile);
+    // console.log('friendsListProfile&&&&', profile);
     return (
       <div>
         <h5 className="text-center">

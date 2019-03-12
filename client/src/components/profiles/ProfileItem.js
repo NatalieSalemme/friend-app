@@ -7,7 +7,7 @@ class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
     let profileContent;
-    let name = profile.name.split(' ').map(s => s);
+    // let name = profile.name.split(' ').map(s => s);
     if (profile === null) {
       profileContent = <Spinner />;
     } else {

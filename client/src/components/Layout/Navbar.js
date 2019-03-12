@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
-import { history } from '../common/BrowserRouter';
 
 import {
   getProfileById,
