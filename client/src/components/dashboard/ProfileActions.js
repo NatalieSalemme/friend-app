@@ -12,7 +12,7 @@ const ProfileActions = () => {
         <i className="fas fa-user-edit text-info mr-1 list-group-item" />
         Edit Account
       </Link>
-      <Link to="/edit-photo" className="btn btn-light text-left">
+      <Link to="/users/me/avatar" className="btn btn-light text-left">
         <i className="fas fa-camera text-info mr-1 list-group-item" />
         Edit Photo
       </Link>
