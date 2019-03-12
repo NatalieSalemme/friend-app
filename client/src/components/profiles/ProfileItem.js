@@ -7,7 +7,7 @@ class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
     let profileContent;
-    let name = profile.name.split(' ').map(s => <h5>{s}</h5>);
+    let name = profile.name.split(' ').map(s => s);
     if (profile === null) {
       profileContent = <Spinner />;
     } else {
@@ -24,7 +24,7 @@ class ProfileItem extends Component {
           <div className="card-body" style={{ minHeight: '7.5em' }}>
             {' '}
             <h5 className="card-title list-group-item text-center">
-              {name && name}
+              {profile.name && profile.name}
             </h5>
           </div>
 

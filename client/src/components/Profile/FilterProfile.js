@@ -8,9 +8,14 @@ class FilterProfile extends Component {
     let name = this.props.match.params.name;
     this.props.showFilteredProfiles(name);
   }
+  // shouldComponentUpdate(nextProps) {
+  //   return nextProps.match.params.name == this.props.match.params.name;
+  // }
   render() {
+    console.log('match', this.props.match.params.name);
     const { match } = this.props;
     const { profiles } = this.props.profile;
+
     return (
       <div
         style={{

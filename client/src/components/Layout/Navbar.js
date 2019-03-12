@@ -9,6 +9,7 @@ import {
   getProfileById,
   getProfiles,
   clearCurrentProfile,
+  showFilteredProfiles,
 } from '../../actions/profileActions';
 
 class Navbar extends Component {
@@ -34,18 +35,16 @@ class Navbar extends Component {
       name: e.target.value,
     });
   }
+
   // onSubmit(e) {
-  //   e.preventDefault();
-  //   this.context.history.push(
-  //     '/thetest'
-  //     // `/profile/filter/${this.state.name}`
-  //   );
+  //   // e.preventDefault();
+  //   this.props.showFilteredProfiles(this.state.name);
   // }
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-    console.log(this);
+    // console.log(this);
     let content;
     let friendRequestsLength;
     if (profile === null || loading) {
@@ -257,5 +256,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile, getProfileById }
+  { logoutUser, clearCurrentProfile, getProfileById, showFilteredProfiles }
 )(Navbar);
