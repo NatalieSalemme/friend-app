@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 const _ = require('lodash');
-
+const multer = require('multer');
+const sharp = require('sharp');
 //Load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
@@ -37,7 +38,7 @@ router.post('/register', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        avatar: req.body.avatar,
+        avatar: '../images/smiley.png',
       });
       //salt the password
       const saltRounds = 10;
@@ -163,4 +164,59 @@ router.post(
   }
 );
 
+const upload = multer({
+  limits: {
+    fileSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error('Please upload an image'));
+    }
+    cb(undefined, true);
+  },
+});
+
+//@route POST api/users/me/avatar
+//@desc  Update users avatar
+//access Private
+router.post(
+  '/me/avatar',
+  passport.authenticate('jwt', { session: false }),
+  upload.single('avatar'),
+  async (req, res) => {
+    const buffer = await sharp(req.file.buffer)
+      .resize({ width: 250, height: 250 })
+      .png()
+      .toBuffer();
+    req.user.avatar = buffer;
+    await req.user.save();
+    res.send();
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
+
+router.delete(
+  '/me/avatar',
+  passport.authenticate('jwt', { session: false }),
+  async (req, res) => {
+    req.user.avatar = undefined;
+    await req.user.save();
+    res.send();
+  }
+);
+
+router.get('/:id/avatar', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user || !user.avatar) {
+      throw new Error();
+    }
+    res.set('Content-Type', 'image/png');
+    res.send(user.avatar);
+  } catch (e) {
+    res.status(404).send();
+  }
+});
 module.exports = router;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
+import moment from 'moment';
+
 import {
   deleteProfileComment,
   addProfileCommentLike,
@@ -35,24 +37,45 @@ class ProfileCommentItem extends Component {
   render() {
     const { comment, showActions, auth, profile } = this.props;
 
+    let commentDate = comment.date.toString();
+    console.log(commentDate);
     return (
-      <div className="card card-body my-3 col-md-12 mx-auto">
+      <div className="card card-body mb-3 col-md-12 mx-auto my-2">
         <div className="row">
-          <div className="col-md-3">
-            <Link to={`/profile/user/${comment.user}`}>
+          <div className="col-md-2">
+            <Link to={`profile/user/${comment.user}`}>
               <img
-                className="rounded-circle d-none d-md-block mx-auto"
-                src={require('../images/rose.jpg')}
+                onClick={id => this.onPhotoClick(comment.user)}
+                className="rounded-circle d-none d-md-block"
+                src={`http://localhost:3000/api/users/${comment.user}/avatar`}
+                alt="avatar"
                 style={{ width: '75px', height: '75px' }}
-                alt=""
               />
             </Link>
+
             <br />
             <p className="text-center">{comment.name}</p>
           </div>
+          <div className="col-md-10">
+            <div className="row d-flex justify-content-end">
+              <p className="pr-3 mt-2 font-weight-bold">
+                {' '}
+                {moment(commentDate).format('MM/DD/YYYY LT')}
+              </p>
+              {comment.user === auth.user.id ? (
+                <button
+                  onClick={() =>
+                    this.onDeleteClick(profile.profile.handle, comment._id)
+                  }
+                  type="button"
+                  className="btn btn-danger mx-2"
+                >
+                  <i className="fas fa-times" />
+                </button>
+              ) : null}
+            </div>
+            <p className="mr-3 pb-4">{comment.text}</p>
 
-          <div className="col-md-8">
-            <p className="mb-5 mr-5">{comment.text}</p>
             {showActions ? (
               <span>
                 <div className="row">
@@ -80,19 +103,6 @@ class ProfileCommentItem extends Component {
                   </button>
                 </div>
               </span>
-            ) : null}
-          </div>
-          <div className="col-md-1 pr-4">
-            {comment.user === auth.user.id ? (
-              <button
-                onClick={() =>
-                  this.onDeleteClick(profile.profile.handle, comment._id)
-                }
-                type="button"
-                className="btn btn-danger"
-              >
-                <i className="fas fa-times" />
-              </button>
             ) : null}
           </div>
         </div>

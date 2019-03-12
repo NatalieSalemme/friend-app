@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/authActions';
-import { history } from '../common/BrowserRouter';
 
 import {
   getProfileById,
@@ -40,6 +39,10 @@ class Navbar extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
     // console.log(this);
+    let userId;
+    if (user) {
+      userId = user.id;
+    }
     let content;
     let friendRequestsLength;
     if (profile === null || loading) {
@@ -58,9 +61,15 @@ class Navbar extends Component {
               <img
                 className="rounded-circle mr-4"
                 style={{ width: '35px', height: '35px' }}
-                src={require('../images/rose.jpg')}
+                src={`http://localhost:3000/api/users/${userId}/avatar`}
                 alt="avatar"
               />
+              {/* <img
+                className="rounded-circle mr-4"
+                style={{ width: '35px', height: '35px' }}
+                src={require('../images/rose.jpg')}
+                alt="avatar"
+              /> */}
             </Link>
           </div>
         );

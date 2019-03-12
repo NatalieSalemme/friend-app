@@ -109,6 +109,29 @@ export const updateUser = userData => dispatch => {
     );
 };
 
+export const uploadPhoto = formData => dispatch => {
+  console.log('from action creator', formData);
+  axios
+    .post('/api/users/me/avatar', formData)
+    // .then(res => console.log(res.data));
+    .then(res =>
+      dispatch({
+        type: UPDATE_USER,
+        payload: res.data,
+      })
+    );
+  // .then(res =>
+  //   dispatch({
+  //     type: CLEAR_ERRORS,
+  //   })
+  // )
+  // .catch(err =>
+  //   dispatch({
+  //     type: GET_ERRORS,
+  //     payload: err.response.data,
+  //   })
+  // );
+};
 //clear errors
 export const clearErrors = () => {
   return {

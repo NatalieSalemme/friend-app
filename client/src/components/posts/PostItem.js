@@ -40,12 +40,18 @@ class PostItem extends Component {
         <div className="row">
           <div className="col-md-2">
             <Link to={`profile/user/${post.user}`}>
-              <img
+              {/* <img
                 onClick={id => this.onPhotoClick(post.user)}
                 className="rounded-circle d-none d-md-block"
                 src={require('../images/rose.jpg')}
                 style={{ width: '75px', height: '75px' }}
                 alt=""
+              /> */}
+              <img
+                className="rounded-circle d-non d-md-block"
+                src={`http://localhost:3000/api/users/${post.user}/avatar`}
+                alt="avatar"
+                style={{ width: '75px', height: '75px' }}
               />
             </Link>
 

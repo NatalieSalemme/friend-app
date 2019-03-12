@@ -11,6 +11,14 @@ const photo = require('./routes/api/photo');
 
 const app = express();
 
+const multer = require('multer');
+const upload = multer({
+  dest: 'images',
+});
+app.post('/upload', upload.single('upload'), (req, res) => {
+  res.send(res);
+});
+
 //Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,7 +30,11 @@ const db = require('./config/keys').mongoURI;
 mongoose
   .connect(
     db,
-    { useNewUrlParser: true }
+    {
+      useNewUrlParser: true,
+      // useCreateIndex: true,
+      // useFindAndModify: false
+    }
   )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));

@@ -16,7 +16,7 @@ import {
 export const getProfileByHandle = handle => dispatch => {
   dispatch(setProfileLoading());
   dispatch(clearErrors());
-  console.log('getting profile by handle');
+  // console.log('getting profile by handle');
   axios
     .get(`/api/profile/handle/${handle}`)
     .then(res =>
@@ -37,7 +37,7 @@ export const getProfileByHandle = handle => dispatch => {
 export const getProfileById = id => dispatch => {
   dispatch(setProfileLoading());
   dispatch(clearErrors());
-  console.log('getting profile by id');
+  // console.log('getting profile by id');
   axios
     .get(`/api/profile/user/${id}`)
     .then(res =>
@@ -94,7 +94,7 @@ export const addEducation = (eduData, history) => dispatch => {
 
 // Delete Experience
 export const deleteExperience = id => dispatch => {
-  console.log('deleting experience');
+  // console.log('deleting experience');
   axios
     .delete(`/api/profile/experience/${id}`)
     .then(res =>
@@ -113,7 +113,7 @@ export const deleteExperience = id => dispatch => {
 
 // Delete Education
 export const deleteEducation = id => dispatch => {
-  console.log('deleting education');
+  // console.log('deleting education');
   axios
     .delete(`/api/profile/education/${id}`)
     .then(res =>
@@ -172,7 +172,7 @@ export const deleteAccount = () => dispatch => {
 // Get current profile
 export const getCurrentProfile = () => dispatch => {
   // dispatch(setProfileLoading());
-  console.log('getting current profile');
+  // console.log('getting current profile');
   axios
     .get('/api/profile')
     .then(res =>
@@ -326,7 +326,7 @@ export const friendAddsCurrentUser = futureFriend => dispatch => {
 };
 //show filtered profiles from query parameters in url
 export const showFilteredProfiles = name => dispatch => {
-  console.log('filtering by ' + name);
+  // console.log('filtering by ' + name);
   axios
     .get(`/api/profile/filter/${name}`)
     .then(res =>
@@ -342,6 +342,7 @@ export const showFilteredProfiles = name => dispatch => {
       })
     );
 };
+
 //clear errors
 export const clearErrors = () => {
   return {
