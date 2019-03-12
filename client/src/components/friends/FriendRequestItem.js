@@ -24,10 +24,16 @@ class FriendRequestItem extends Component {
             <br />
             <div>
               <Link to={`/profile/user/${request.user}`}>
-                <img
+                {/* <img
                   style={{ width: '130px', height: '130px' }}
                   src={require('../images/rose.jpg')}
                   alt="avatar"
+                /> */}
+                <img
+                  className="rounded-circle d-none d-md-block"
+                  src={`http://localhost:3000/api/users/${request.user}/avatar`}
+                  alt="avatar"
+                  style={{ width: '130px', height: '130px' }}
                 />
 
                 <h6 className="text-center mt-2 text-body">

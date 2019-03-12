@@ -10,11 +10,17 @@ class AllFriendsItem extends Component {
         <div className="col-md-3 mx-auto pb-5">
           <div className="card" style={{ width: '220px' }}>
             <Link to={`/profile/user/${friend.user ? friend.user : ''}`}>
-              <img
+              {/* <img
                 className=" img-thumbnail card-img-top"
                 src={require('../images/rose.jpg')}
                 alt="Avatar"
                 style={{ width: '220px', height: '190px' }}
+              /> */}
+              <img
+                className=" img-thumbnail card-img-top"
+                src={`http://localhost:3000/api/users/${friend.user}/avatar`}
+                alt="avatar"
+                style={{ width: '220px', height: '220px' }}
               />
             </Link>
             <div className="card-body">

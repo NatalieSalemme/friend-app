@@ -39,6 +39,10 @@ class Navbar extends Component {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
     // console.log(this);
+    let userId;
+    if (user) {
+      userId = user.id;
+    }
     let content;
     let friendRequestsLength;
     if (profile === null || loading) {
@@ -57,7 +61,8 @@ class Navbar extends Component {
               <img
                 className="rounded-circle mr-4"
                 style={{ width: '35px', height: '35px' }}
-                src="http://localhost:3000/api/users/5c838667f2046c0772aeada8/avatar"
+                src={`http://localhost:3000/api/users/${userId}/avatar`}
+                alt="avatar"
               />
               {/* <img
                 className="rounded-circle mr-4"

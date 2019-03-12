@@ -45,11 +45,17 @@ class CommentItem extends Component {
         content = (
           <div>
             <Link to={`/profile/${profile.handle}`}>
-              <img
+              {/* <img
                 className=" mr-4"
                 style={{ width: '70px', height: '70px' }}
                 src={require('../images/rose.jpg')}
                 alt="avatar"
+              /> */}
+              <img
+                className=" mr-4"
+                src={`http://localhost:3000/api/users/${comment.user}/avatar`}
+                alt="avatar"
+                style={{ width: '70px', height: '70px' }}
               />
             </Link>
           </div>

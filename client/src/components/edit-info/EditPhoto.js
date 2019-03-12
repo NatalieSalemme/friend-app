@@ -11,6 +11,12 @@ class EditPhoto extends Component {
     console.log('submitted');
   };
   render() {
+    const { profile } = this.props.profile;
+
+    let userId;
+    if (profile) {
+      userId = profile.user._id;
+    }
     return (
       <div>
         <h1 className="text-center my-5">Edit Profile Photo</h1>
@@ -36,7 +42,7 @@ class EditPhoto extends Component {
           <div className="row">
             <img
               className="mx-auto my-2"
-              src="http://localhost:3000/api/users/5c838667f2046c0772aeada8/avatar"
+              src={`http://localhost:3000/api/users/${userId}/avatar`}
               alt="avatar"
             />
           </div>
@@ -45,8 +51,10 @@ class EditPhoto extends Component {
     );
   }
 }
-
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
 export default connect(
-  null,
+  mapStateToProps,
   { uploadPhoto }
 )(EditPhoto);

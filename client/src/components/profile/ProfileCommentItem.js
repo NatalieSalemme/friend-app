@@ -47,9 +47,9 @@ class ProfileCommentItem extends Component {
               <img
                 onClick={id => this.onPhotoClick(comment.user)}
                 className="rounded-circle d-none d-md-block"
-                src={require('../images/rose.jpg')}
+                src={`http://localhost:3000/api/users/${comment.user}/avatar`}
+                alt="avatar"
                 style={{ width: '75px', height: '75px' }}
-                alt=""
               />
             </Link>
 

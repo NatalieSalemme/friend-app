@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        avatar: req.body.avatar,
+        avatar: '../images/smiley.png',
       });
       //salt the password
       const saltRounds = 10;
