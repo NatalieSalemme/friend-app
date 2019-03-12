@@ -13,16 +13,15 @@ secretOrKey: 'yoursecretkeyhere',
 
 Friend search
 
--List of friends
--Users
--Activities-can mark if interested
--Profile -upload image here
--Blog
--Messaging
--File upload
--Able to join groups of people with similar interests
--Friend requests
--Show list of friends on profile
--Show list of comments on profile
--Able to have a chatbox between people
--Able to filter through friends who have similar interests
+An expansion on Brad Traversy's course found at https://www.udemy.com/mern-stack-front-to-back/learn/v4/overview
+
+New Features I added to course:
+-User can send, receive, and accept friend requests
+-Customized profile with friends, hobbies, and bucket lists displayed
+-User can to go to a different page to see all the friend's a user has
+-User can post comments on a profile
+-Filtered feed that only includes the current users and the current users time, this is filtered by time, which is displayed through MomentJS
+-User can update their account information(name, email, password)
+-If a user has friend requests, the amount is showed in a box on the navigation bar
+-User can use the footer to navigate to various pages on the site
+-User is able to use the search bar to find all profiles that match their query

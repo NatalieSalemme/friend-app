@@ -4,17 +4,39 @@ import { showFilteredProfiles } from '../../actions/profileActions';
 import FilteredProfilesList from './FilteredProfilesList';
 
 class FilterProfile extends Component {
+  state = {
+    errors: {},
+  };
   componentDidMount() {
     let name = this.props.match.params.name;
     this.props.showFilteredProfiles(name);
   }
-  // shouldComponentUpdate(nextProps) {
-  //   return nextProps.match.params.name == this.props.match.params.name;
+  //
+  // componentDidUpdate(prevProps) {
+  //   let name = this.props.match.params.name;
+  //   if (prevProps.match.params != name) {
+  //     // this.props.showFilteredProfiles(name);
+  //   }
   // }
+
   render() {
-    console.log('match', this.props.match.params.name);
     const { match } = this.props;
-    const { profiles } = this.props.profile;
+    const { profiles, loading } = this.props.profile;
+    console.log(typeof profiles);
+
+    let content;
+
+    if (!profiles) {
+      console.log('empty');
+      content = <h4 className="text-center">No profiles found</h4>;
+    } else {
+      console.log('has something');
+      content = (
+        <div>
+          <FilteredProfilesList profiles={profiles} />
+        </div>
+      );
+    }
 
     return (
       <div
@@ -28,13 +50,14 @@ class FilterProfile extends Component {
         <h1 className="text-center mt-3 mb-5">
           Showing search results for {match.params.name}
         </h1>
-        <FilteredProfilesList profiles={profiles} />
+        {content}
       </div>
     );
   }
 }
 const mapStateToProps = state => ({
   profile: state.profile,
+  errors: state.errors,
 });
 
 export default connect(

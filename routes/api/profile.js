@@ -13,10 +13,10 @@ const Profile = require('../../models/Profile');
 //Load user profile
 const User = require('../../models/User');
 
-//@route GET api/profile/all
-//@desc  Get all profiles
+//@route GET api/profile/browse
+//@desc  Get profiles that do not include current user or current users friends
 //access Public
-router.get('/all', (req, res) => {
+router.get('/browse', (req, res) => {
   const errors = {};
   Profile.find({})
     .populate('user', ['name', 'avatar'])
@@ -542,7 +542,7 @@ router.get('/filter/:name', (req, res) => {
         userIds.push(user._id.toString());
       }
     });
-    console.log(userIds);
+    // console.log(userIds);
     Profile.find().then(profiles => {
       let emptyProfs = [];
       profiles.forEach(profile => {
@@ -551,12 +551,14 @@ router.get('/filter/:name', (req, res) => {
           emptyProfs.push(profile);
         }
       });
-      if (emptyProfs.length === 0) {
+
+      if (emptyProfs.length == 0) {
         res
           .status(404)
           .json({ noprofilesfound: 'There were no profiles found' });
+      } else {
+        res.send(emptyProfs);
       }
-      res.send(emptyProfs);
     });
   });
 });
