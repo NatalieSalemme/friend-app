@@ -11,25 +11,27 @@ class Education extends Component {
 
   render() {
     const education = this.props.education.map(edu => (
-      <tr key={edu._id}>
-        <td>{edu.school}</td>
-        <td>{edu.major}</td>
-        <td>{edu.year}</td>
+      <tbody>
+        <tr key={edu._id}>
+          <td>{edu.school}</td>
+          <td>{edu.major}</td>
+          <td>{edu.year}</td>
 
-        <td className="ml-5">
-          <button
-            onClick={() => this.onDeleteClick(edu._id)}
-            className="btn btn-danger ml-5"
-            style={{ marginRight: '-3em' }}
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
+          <td className="ml-5">
+            <button
+              onClick={() => this.onDeleteClick(edu._id)}
+              className="btn btn-danger ml-5"
+              style={{ marginRight: '-3em' }}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
     ));
     const educationInfo =
       education.length === 0 ? (
-        <p className="text-muted">None</p>
+        <div className="text-muted">None</div>
       ) : (
         <thead>
           <tr>

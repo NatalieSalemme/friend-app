@@ -4,6 +4,7 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_FRIEND_REQUESTS,
+  SHOW_FILTERED_PROFILES,
 } from '../actions/types';
 
 const initialState = {
@@ -42,7 +43,11 @@ export default function(state = initialState, action) {
         ...state,
         profile: action.payload,
       };
-
+    case SHOW_FILTERED_PROFILES:
+      return {
+        ...state,
+        profiles: action.payload,
+      };
     default:
       return state;
   }

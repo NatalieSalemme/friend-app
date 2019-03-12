@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class FriendItemIcon extends Component {
   render() {
     const { friend } = this.props;
-    // console.log('frienditemicon***', friend);
+    console.log('frienditemicon***', friend.name);
     let content;
 
     if (!friend) {

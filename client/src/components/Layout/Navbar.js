@@ -9,13 +9,20 @@ import {
   getProfileById,
   getProfiles,
   clearCurrentProfile,
+  showFilteredProfiles,
 } from '../../actions/profileActions';
 
 class Navbar extends Component {
+  state = {
+    name: '',
+  };
   componentDidMount() {
     // this.props.getCurrentProfile();
     // this.props.getProfiles();
     this.props.getProfileById(this.props.auth.user.id);
+    this.setState({
+      name: '',
+    });
   }
   onLogoutClick = e => {
     e.preventDefault();
@@ -23,10 +30,21 @@ class Navbar extends Component {
     this.props.clearCurrentProfile();
     this.props.logoutUser();
   };
+  handleChange(e) {
+    this.setState({
+      name: e.target.value,
+    });
+  }
+
+  // onSubmit(e) {
+  //   // e.preventDefault();
+  //   this.props.showFilteredProfiles(this.state.name);
+  // }
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-
+    // console.log(this);
     let content;
     let friendRequestsLength;
     if (profile === null || loading) {
@@ -94,20 +112,26 @@ class Navbar extends Component {
               </Link>
             </li>
           </ul>
+
           <form className="form-inline mr-5 my-lg-0">
             <input
               className="form-control mr-sm-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-dark my-2 my-sm-0 text-white"
-              type="submit"
-              style={{ backgroundColor: '#1f0891' }}
-            >
-              Search
-            </button>
+              value={this.state.name}
+              onChange={e => this.handleChange(e)}
+            />{' '}
+            <Link to={`/profile/filter/${this.state.name}`}>
+              <button
+                className="btn btn-outline-dark my-2 my-sm-0 text-white"
+                // onClick={this.onSubmit}
+                type="submit"
+                style={{ backgroundColor: '#1f0891' }}
+              >
+                Search
+              </button>
+            </Link>
           </form>
 
           <div className="nav-item active ">
@@ -232,5 +256,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser, clearCurrentProfile, getProfileById }
+  { logoutUser, clearCurrentProfile, getProfileById, showFilteredProfiles }
 )(Navbar);

@@ -27,6 +27,7 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/Profile/Profile';
 import IdProfile from './components/Profile/IdProfile';
 import AllFriends from './components/Profile/AllFriends';
+import FilterProfile from './components/Profile/FilterProfile';
 
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
@@ -73,6 +74,11 @@ class App extends Component {
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:handle" component={Profile} />
               <Route exact path="/profile/user/:id" component={IdProfile} />
+              <Route
+                exact
+                path="/profile/filter/:name"
+                component={FilterProfile}
+              />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>

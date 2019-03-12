@@ -25,7 +25,7 @@ class Experience extends Component {
     ));
     const experienceInfo =
       experience.length === 0 ? (
-        <p className="text-muted">None</p>
+        <div className="text-muted">None</div>
       ) : (
         <thead>
           <tr>

@@ -9,6 +9,7 @@ import {
   CLEAR_ERRORS,
   SET_CURRENT_USER,
   GET_FRIEND_REQUESTS,
+  SHOW_FILTERED_PROFILES,
 } from './types';
 
 // Get profile by handle
@@ -316,6 +317,23 @@ export const friendAddsCurrentUser = futureFriend => dispatch => {
   axios
     .post(`/api/profile/friendrequests/accept/${futureFriend}`)
     .then(res => dispatch(getCurrentProfile()))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+//show filtered profiles from query parameters in url
+export const showFilteredProfiles = name => dispatch => {
+  axios
+    .get(`/api/profile/filter/${name}`)
+    .then(res =>
+      dispatch({
+        type: SHOW_FILTERED_PROFILES,
+        payload: res.data,
+      })
+    )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
