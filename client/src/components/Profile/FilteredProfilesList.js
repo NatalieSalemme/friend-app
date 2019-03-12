@@ -4,12 +4,14 @@ import ProfileItem from '../profiles/ProfileItem';
 
 class FilteredProfilesList extends Component {
   render() {
-    const { profiles } = this.props;
-    console.log(profiles);
+    const { profiles, loading } = this.props;
+    console.log('*****profiles', profiles.length);
 
     let mappedResults;
-    if (!profiles) {
+    if (!profiles && loading == true) {
       return <Spinner />;
+    } else if (profiles.length === 0) {
+      return <h4 className="text-center">No profiles found</h4>;
     } else {
       mappedResults = profiles.map((profile, i) => (
         <ProfileItem key={i} profile={profile} />

@@ -542,7 +542,7 @@ router.get('/filter/:name', (req, res) => {
         userIds.push(user._id.toString());
       }
     });
-    console.log(userIds);
+    // console.log(userIds);
     Profile.find().then(profiles => {
       let emptyProfs = [];
       profiles.forEach(profile => {
@@ -551,12 +551,14 @@ router.get('/filter/:name', (req, res) => {
           emptyProfs.push(profile);
         }
       });
-      if (emptyProfs.length === 0) {
+
+      if (emptyProfs.length == 0) {
         res
           .status(404)
           .json({ noprofilesfound: 'There were no profiles found' });
+      } else {
+        res.send(emptyProfs);
       }
-      res.send(emptyProfs);
     });
   });
 });

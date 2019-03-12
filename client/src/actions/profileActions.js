@@ -337,8 +337,8 @@ export const showFilteredProfiles = name => dispatch => {
     )
     .catch(err =>
       dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data,
+        type: SHOW_FILTERED_PROFILES,
+        payload: [],
       })
     );
 };

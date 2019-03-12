@@ -16,19 +16,21 @@ class FilterProfile extends Component {
   //   let name = this.props.match.params.name;
   //   if (prevProps.match.params != name) {
   //     // this.props.showFilteredProfiles(name);
-  //
-  //
   //   }
   // }
 
   render() {
     const { match } = this.props;
-    const { profiles } = this.props.profile;
+    const { profiles, loading } = this.props.profile;
+    console.log(typeof profiles);
+
     let content;
 
     if (!profiles) {
-      content = <h3>No profiles found</h3>;
+      console.log('empty');
+      content = <h4 className="text-center">No profiles found</h4>;
     } else {
+      console.log('has something');
       content = (
         <div>
           <FilteredProfilesList profiles={profiles} />
