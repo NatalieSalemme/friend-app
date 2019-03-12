@@ -6,6 +6,7 @@ import Spinner from '../common/Spinner';
 class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
+    console.log(profile);
     let profileContent;
     // let name = profile.name.split(' ').map(s => s);
     if (profile === null) {
@@ -16,8 +17,8 @@ class ProfileItem extends Component {
           <Link to={`/profile/${profile.handle}`} className="btn text-white">
             <img
               className="card-img-top img-thumbnail"
-              src={require('../images/rose.jpg')}
-              alt="Avatar"
+              src={`http://localhost:3000/api/users/${profile.user._id}/avatar`}
+              alt="avatar"
             />
           </Link>
 

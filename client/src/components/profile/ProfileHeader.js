@@ -39,9 +39,16 @@ class ProfileHeader extends Component {
               <div className="row">
                 <div className="col-4 col-md-3">
                   {profile.user && (
+                    // <img
+                    //   className="img-thumbnail"
+                    //   src={require('../images/rose.jpg')}
+                    //   alt="avatar"
+                    // />
                     <img
                       className="img-thumbnail"
-                      src={require('../images/rose.jpg')}
+                      src={`http://localhost:3000/api/users/${
+                        profile.user._id
+                      }/avatar`}
                       alt="avatar"
                     />
                   )}

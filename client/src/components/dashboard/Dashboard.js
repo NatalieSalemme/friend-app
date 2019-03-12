@@ -54,7 +54,6 @@ class Dashboard extends Component {
               >
                 Delete My Account
               </button>
-              <img src="http://localhost:3000/api/users/5c838667f2046c0772aeada8/avatar" />
             </div>
           </div>
         );

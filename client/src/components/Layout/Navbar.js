@@ -57,9 +57,14 @@ class Navbar extends Component {
               <img
                 className="rounded-circle mr-4"
                 style={{ width: '35px', height: '35px' }}
+                src="http://localhost:3000/api/users/5c838667f2046c0772aeada8/avatar"
+              />
+              {/* <img
+                className="rounded-circle mr-4"
+                style={{ width: '35px', height: '35px' }}
                 src={require('../images/rose.jpg')}
                 alt="avatar"
-              />
+              /> */}
             </Link>
           </div>
         );
