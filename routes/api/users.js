@@ -78,30 +78,33 @@ router.post('/login', (req, res) => {
       return res.status(404).json(errors);
     }
     //Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        //User matched
-        //Create JWT payload
-        const payload = { id: user.id, name: user.name };
-        //Sign token
-        //(payload, secret, expiration, callback)
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 9000 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: 'Bearer ' + token,
-            });
-          }
-        );
-      } else {
-        errors.password = 'Password incorrect';
-        //message to be sent on the client
-        return res.status(400).json(errors);
-      }
-    });
+    bcrypt
+      .compare(password, user.password)
+      .then(isMatch => {
+        if (isMatch) {
+          //User matched
+          //Create JWT payload
+          const payload = { id: user.id, name: user.name };
+          //Sign token
+          //(payload, secret, expiration, callback)
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 9000 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: 'Bearer ' + token,
+              });
+            }
+          );
+        } else {
+          errors.password = 'Password incorrect';
+          //message to be sent on the client
+          return res.status(400).json(errors);
+        }
+      })
+      .catch(err => res.json({ loginError: 'Unable to login' }));
   });
 });
 
@@ -226,30 +229,17 @@ router.delete(
   }
 );
 
-// router.get('/:id/avatar', async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id);
-//     if (!user || !user.avatar) {
-//       throw new Error();
-//     }
-//     res.set('Content-Type', 'image/png');
-//     res.send(user.avatar);
-//   } catch (e) {
-//     res.status(404).send();
-//   }
-// });
-
-router.get('/:id/avatar', (req, res) => {
-  User.findById(req.params.id)
-    .then(user => {
-      if (!user || !user.avatar) {
-        return res.status(404).send();
-      } else {
-        res.set('Content-Type', 'image/png');
-        res.send(user.avatar);
-      }
-    })
-    .catch(err => res.status(404).json(err));
+router.get('/:id/avatar', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user || !user.avatar) {
+      throw new Error();
+    }
+    res.set('Content-Type', 'image/png');
+    res.send(user.avatar);
+  } catch (e) {
+    res.status(404).send();
+  }
 });
 
 module.exports = router;

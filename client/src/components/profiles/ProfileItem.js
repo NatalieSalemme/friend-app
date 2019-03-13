@@ -20,7 +20,8 @@ class ProfileItem extends Component {
       } else {
         avatar = require('../images/anonymous.jpg');
       }
-      let profName = profile.name
+
+      let profName = profile.user.name
         .split(' ')
         .map((s, i) => <h5 key={i}>{s}</h5>);
       profileContent = (

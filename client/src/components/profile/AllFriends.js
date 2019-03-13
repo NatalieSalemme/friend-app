@@ -44,13 +44,8 @@ class AllFriends extends Component {
               Displaying {name ? name : 'User'} {friendCount} Friends
             </h1>
           </div>
-          <div className="row ">
-            <div
-              className="card-deck mx-auto d-flex justify-content-around"
-              style={{ border: '2px dotted blue' }}
-            >
-              {mapped}
-            </div>
+          <div className="row">
+            <div className="card-deck mx-auto">{mapped}</div>
           </div>
         </div>
       </div>
