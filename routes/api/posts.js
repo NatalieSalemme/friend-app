@@ -179,13 +179,19 @@ router.post(
       //if any errors, send 400 with errors object
       return res.status(400).json(errors);
     }
-
+    // Profile.findOne({ user: req.user.id }).then(profile => res.json(profile));
     Post.findById(req.params.id)
       .then(post => {
+        let hasAvatar;
+        if (req.user.avatar) {
+          hasAvatar = true;
+        } else {
+          hasAvatar = false;
+        }
         const newComment = {
           text: req.body.text,
           name: req.body.name,
-          avatar: req.body.avatar,
+          avatar: hasAvatar,
           user: req.user.id,
         };
         post.comments.unshift(newComment);
