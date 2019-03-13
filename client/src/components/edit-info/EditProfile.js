@@ -36,8 +36,8 @@ class EditProfile extends Component {
       const profile = nextProps.profile.profile;
 
       //Bring array back to CSV
-      const hobbiesCSV = profile.hobbies.join(',');
-      const bucketlistCSV = profile.bucketlist.join(',');
+      const hobbiesCSV = profile.hobbies.join(', ');
+      const bucketlistCSV = profile.bucketlist.join(', ');
       //If profile field doesn't exist, make empty string
       profile.handle = !isEmpty(profile.handle) ? profile.handle : '';
       profile.website = !isEmpty(profile.website) ? profile.website : '';
@@ -178,40 +178,43 @@ class EditProfile extends Component {
                 />
 
                 <div>
-                  <InputGroup
+                  <TextFieldGroup
                     placeholder="Twitter Profile URL"
                     name="twitter"
-                    icon="fab fa-twitter"
                     value={this.state.twitter}
                     onChange={this.onChange}
                     error={errors.twitter}
+                    info="www.twitter.com/[USERNAME]"
                   />
 
-                  <InputGroup
+                  <TextFieldGroup
                     placeholder="Facebook Page URL"
                     name="facebook"
                     icon="fab fa-facebook"
                     value={this.state.facebook}
                     onChange={this.onChange}
                     error={errors.facebook}
+                    info="www.facebook.com/[USERNAME]"
                   />
 
-                  <InputGroup
+                  <TextFieldGroup
                     placeholder="Linkedin Profile URL"
                     name="linkedin"
                     icon="fab fa-linkedin"
                     value={this.state.linkedin}
                     onChange={this.onChange}
                     error={errors.linkedin}
+                    info="www.linkedin.com/in/[USERNAME]"
                   />
 
-                  <InputGroup
+                  <TextFieldGroup
                     placeholder="Instagram Page URL"
                     name="instagram"
                     icon="fab fa-instagram"
                     value={this.state.instagram}
                     onChange={this.onChange}
                     error={errors.instagram}
+                    info="www.instagram.com/[USERNAME]"
                   />
                 </div>
                 <input
@@ -231,6 +234,7 @@ class EditProfile extends Component {
 
 EditProfile.propTypes = {
   profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
 };
