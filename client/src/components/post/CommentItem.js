@@ -36,6 +36,8 @@ class CommentItem extends Component {
     const { profile, loading } = this.props.profile;
     // console.log('commentItem', comment._id);
     let content;
+    console.log('profile comment ****', profile);
+    console.log('comment ***', comment);
     if (profile === null || loading) {
       // content = <Spinner />;
       content = null;

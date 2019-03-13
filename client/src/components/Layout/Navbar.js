@@ -38,7 +38,6 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-    // console.log(this);
     let userId;
     if (user) {
       userId = user.id;
@@ -50,10 +49,10 @@ class Navbar extends Component {
     } else {
       // Check if logged in user has profile data
       let avatar;
-      if (user.avatar === undefined) {
-        avatar = require('../images/anonymous.jpg');
-      } else {
+      if (profile.hasOwnAvatar) {
         avatar = `http://localhost:3000/api/users/${userId}/avatar`;
+      } else {
+        avatar = require('../images/anonymous.jpg');
       }
 
       if (Object.keys(profile).length > 0) {

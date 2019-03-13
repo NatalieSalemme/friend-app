@@ -36,11 +36,14 @@ class PostItem extends Component {
     const { post, auth, showActions } = this.props;
     let postDate = post.date.toString();
     let avatar;
-    if (post.user.avatar === undefined) {
-      avatar = require('../images/anonymous.jpg');
-    } else {
-      avatar = `http://localhost:3000/api/users/${post.user}/avatar`;
+    if (this.props.profile.profile) {
+      if (this.props.profile.profile.hasOwnAvatar) {
+        avatar = `http://localhost:3000/api/users/${post.user}/avatar`;
+      } else {
+        avatar = require('../images/anonymous.jpg');
+      }
     }
+
     return (
       <div className="card card-body mb-3 col-md-8 mx-auto">
         <div className="row">
