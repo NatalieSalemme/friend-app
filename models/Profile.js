@@ -37,6 +37,10 @@ const ProfileSchema = new Schema({
   bio: {
     type: String,
   },
+  hasOwnAvatar: {
+    type: Boolean,
+    default: false,
+  },
   friends: [
     {
       user: {

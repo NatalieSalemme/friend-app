@@ -10,6 +10,7 @@ import {
   SET_CURRENT_USER,
   GET_FRIEND_REQUESTS,
   SHOW_FILTERED_PROFILES,
+  UPDATE_USER,
 } from './types';
 
 // Get profile by handle
@@ -343,6 +344,14 @@ export const showFilteredProfiles = name => dispatch => {
     );
 };
 
+export const updateAvatarStatus = () => dispatch => {
+  axios.post('/api/profile/updateAvatarStatus').then(res =>
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    })
+  );
+};
 //clear errors
 export const clearErrors = () => {
   return {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { uploadPhoto } from '../../actions/authActions';
+import { updateAvatarStatus } from '../../actions/profileActions';
 
 class EditPhoto extends Component {
   onSubmit = e => {
@@ -8,7 +9,7 @@ class EditPhoto extends Component {
     const bodyFormData = new FormData();
     bodyFormData.append('avatar', e.target.avatar.files[0]);
     this.props.uploadPhoto(bodyFormData);
-    console.log('submitted');
+    this.props.updateAvatarStatus();
   };
   render() {
     const { profile } = this.props.profile;
@@ -69,5 +70,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { uploadPhoto }
+  { uploadPhoto, updateAvatarStatus }
 )(EditPhoto);
