@@ -31,7 +31,13 @@ class EditPhoto extends Component {
     // let avvie = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
 
     return (
-      <div>
+      <div
+      // style={{
+      //   backgroundColor: '#E9EBEE',
+      //   padding: '3em 0',
+      //   marginBottom: '-4em',
+      // }}
+      >
         <h1 className="text-center my-5">Edit Profile Photo</h1>
 
         <form onSubmit={this.onSubmit} encType="multipart/form-data">

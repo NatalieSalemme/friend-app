@@ -70,12 +70,6 @@ class Navbar extends Component {
                 src={avatar}
                 alt="avatar"
               />
-              {/* <img
-                className="rounded-circle mr-4"
-                style={{ width: '35px', height: '35px' }}
-                src={require('../images/rose.jpg')}
-                alt="avatar"
-              /> */}
             </Link>
           </div>
         );
@@ -167,12 +161,12 @@ class Navbar extends Component {
             </Link>
           </div>
 
-          <div className="nav-item active ">
+          {/* <div className="nav-item active ">
             <Link to="/messages/all" className="nav-link text-white">
               {' '}
               <i className="far fa-envelope" />
             </Link>
-          </div>
+          </div> */}
           <div className="nav-item">
             {content}
             {/* <Link to={`/profile`}>

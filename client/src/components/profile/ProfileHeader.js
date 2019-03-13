@@ -91,14 +91,14 @@ class ProfileHeader extends Component {
                     </p>
                     <div className="container">
                       <div className="row justify-content-md-center">
-                        <Link to={`/messages/to/${profile.user._id}`}>
+                        {/* <Link to={`/messages/to/${profile.user._id}`}>
                           <div className="col-md-auto">
                             <i
                               className="far fa-envelope fa-2x"
                               style={{ color: 'red' }}
                             />
                           </div>
-                        </Link>
+                        </Link> */}
 
                         <div className="col-md-auto">
                           <i
