@@ -6,7 +6,6 @@ import Spinner from '../common/Spinner';
 class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
-    console.log(profile);
     let profileContent;
     // let name = profile.name.split(' ').map(s => s);
     if (profile === null) {
@@ -18,6 +17,9 @@ class ProfileItem extends Component {
       } else {
         avatar = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
       }
+      let profName = profile.name
+        .split(' ')
+        .map((s, i) => <h5 key={i}>{s}</h5>);
       profileContent = (
         <div>
           <Link to={`/profile/${profile.handle}`} className="btn text-white">
@@ -30,9 +32,9 @@ class ProfileItem extends Component {
 
           <div className="card-body" style={{ minHeight: '7.5em' }}>
             {' '}
-            <h5 className="card-title list-group-item text-center">
-              {profile.name && profile.name}
-            </h5>
+            <div className="card-title list-group-item text-center">
+              {profile.name && profName}
+            </div>
           </div>
 
           <ul className="list-group list-group-flush  ">

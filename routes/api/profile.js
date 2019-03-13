@@ -297,7 +297,7 @@ router.post(
         const newComment = new Post({
           text: req.body.text,
           name: req.user.name,
-          avatar: req.body.avatar,
+          avatar: req.user.avatar,
           user: req.user.id,
         });
         profile.comments.unshift(newComment);

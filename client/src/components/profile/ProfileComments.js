@@ -40,7 +40,6 @@ class ProfileComments extends Component {
   };
 
   render() {
-    console.log('profile component rerendered');
     const { errors } = this.state;
     const { profile } = this.props.profile;
 

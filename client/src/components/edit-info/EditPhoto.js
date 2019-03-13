@@ -13,10 +13,22 @@ class EditPhoto extends Component {
   render() {
     const { profile } = this.props.profile;
 
-    let userId;
+    let avatar;
     if (profile) {
-      userId = profile.user._id;
+      if (!profile.user.avatar) {
+        avatar = require('../images/anonymous.jpg');
+      } else {
+        avatar = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
+      }
     }
+    // let avatar;
+    // if (profile.user.avatar === undefined) {
+    //   avatar = require('../images/anonymous.jpg');
+    // } else {
+    //   avatar = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
+    // }
+    // let avvie = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
+
     return (
       <div>
         <h1 className="text-center my-5">Edit Profile Photo</h1>
@@ -42,8 +54,9 @@ class EditPhoto extends Component {
           <div className="row">
             <img
               className="mx-auto my-2"
-              src={`http://localhost:3000/api/users/${userId}/avatar`}
+              src={avatar}
               alt="avatar"
+              style={{ width: '250px', height: '250px' }}
             />
           </div>
         </div>

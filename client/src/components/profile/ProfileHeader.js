@@ -31,7 +31,6 @@ class ProfileHeader extends Component {
       profileContent = <Spinner />;
     } else {
       let avatar;
-      console.log('profile is ****', profile);
       if (profile.user.avatar === undefined) {
         avatar = require('../images/anonymous.jpg');
       } else {

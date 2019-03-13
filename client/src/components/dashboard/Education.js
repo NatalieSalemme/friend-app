@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { deleteEducation } from '../../actions/profileActions';
 
@@ -31,7 +30,11 @@ class Education extends Component {
     ));
     const educationInfo =
       education.length === 0 ? (
-        <div className="text-muted">None</div>
+        <tbody className="text-muted">
+          <tr>
+            <td>None</td>
+          </tr>
+        </tbody>
       ) : (
         <thead>
           <tr>
@@ -52,11 +55,6 @@ class Education extends Component {
     );
   }
 }
-
-Education.propTypes = {
-  deleteEducation: PropTypes.func.isRequired,
-};
-
 export default connect(
   null,
   { deleteEducation }

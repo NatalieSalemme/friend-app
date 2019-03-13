@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-
 import { deleteExperience } from '../../actions/profileActions';
 
 class Experience extends Component {
@@ -25,7 +23,11 @@ class Experience extends Component {
     ));
     const experienceInfo =
       experience.length === 0 ? (
-        <div className="text-muted">None</div>
+        <tbody className="text-muted">
+          <tr>
+            <td>None</td>
+          </tr>
+        </tbody>
       ) : (
         <thead>
           <tr>
@@ -45,9 +47,6 @@ class Experience extends Component {
   }
 }
 
-Experience.propTypes = {
-  deleteExperience: PropTypes.func.isRequired,
-};
 export default connect(
   null,
   { deleteExperience }
