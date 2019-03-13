@@ -20,10 +20,8 @@ class ProfileItem extends Component {
       } else {
         avatar = require('../images/anonymous.jpg');
       }
-
-      let profName = profile.user.name
-        .split(' ')
-        .map((s, i) => <h5 key={i}>{s}</h5>);
+      let trueName = profile.user.name ? profile.user.name : profile.name;
+      let profName = trueName.split(' ').map((s, i) => <h5 key={i}>{s}</h5>);
       profileContent = (
         <div>
           <Link to={`/profile/${profile.handle}`} className="btn text-white">

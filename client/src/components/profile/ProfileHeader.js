@@ -15,18 +15,31 @@ class ProfileHeader extends Component {
   };
   onFriendRequestClick(handle) {
     this.props.addFriendRequest(handle);
-    if (Object.keys(this.props.errors) === 0) {
-      this.setState({
-        clickedRequest: true,
-      });
-    }
+    this.setState({
+      clickedRequest: true,
+    });
+    // if (Object.keys(this.props.errors) === 0) {
+    //   this.setState({
+    //     clickedRequest: true,
+    //   });
+    // }
   }
 
   render() {
     const { profile } = this.props;
     // console.log(this.props.errors);
+    console.log(this.state.clickedRequest);
+    console.log(this.props.errors);
 
     let profileContent;
+    let displaySuccess = false;
+    console.log('displaySuccess ***', displaySuccess);
+    if (
+      this.state.clickedRequest &&
+      Object.keys(this.props.errors).length === 0
+    ) {
+      displaySuccess = true;
+    }
     if (!profile) {
       profileContent = <Spinner />;
     } else {
@@ -96,6 +109,13 @@ class ProfileHeader extends Component {
                             style={{ color: 'green', cursor: 'pointer' }}
                           />
                         </div>
+                        <div>
+                          {displaySuccess && (
+                            <div className="alert alert-success" role="alert">
+                              Friend Request Sent
+                            </div>
+                          )}
+                        </div>
 
                         <div>
                           {this.props.errors.cannotBeFriendsWithYourself && (
@@ -129,13 +149,13 @@ class ProfileHeader extends Component {
                           )}
                         </div>
 
-                        <div>
+                        {/* <div>
                           {this.state.clickedRequest && (
                             <div className="alert alert-success" role="alert">
                               Friend Request Sent
                             </div>
                           )}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <div className="mt-3 pb-2">
