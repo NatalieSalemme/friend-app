@@ -12,12 +12,18 @@ class ProfileItem extends Component {
     if (profile === null) {
       profileContent = <Spinner />;
     } else {
+      let avatar;
+      if (profile.user.avatar === undefined) {
+        avatar = require('../images/anonymous.jpg');
+      } else {
+        avatar = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
+      }
       profileContent = (
         <div>
           <Link to={`/profile/${profile.handle}`} className="btn text-white">
             <img
               className="card-img-top img-thumbnail"
-              src={`http://localhost:3000/api/users/${profile.user._id}/avatar`}
+              src={avatar}
               alt="avatar"
             />
           </Link>

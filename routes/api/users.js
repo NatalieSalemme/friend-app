@@ -38,10 +38,10 @@ router.post('/register', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        avatar: '../images/smiley.png',
+        avatar: req.body.avatar,
       });
       //salt the password
-      const saltRounds = 10;
+      const saltRounds = 8;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
@@ -196,6 +196,25 @@ router.post(
     res.status(400).send({ error: error.message });
   }
 );
+
+// router.post(
+//   '/default/avatar',
+//   passport.authenticate('jwt', { session: false }),
+//   upload.single('avatar'),
+//   async (req, res) => {
+//     let image = fs.readFile('./');
+//     const buffer = await sharp(req.file.buffer)
+//       .resize({ width: 250, height: 250 })
+//       .png()
+//       .toBuffer();
+//     req.user.avatar = buffer;
+//     await req.user.save();
+//     res.send();
+//   },
+//   (error, req, res, next) => {
+//     res.status(400).send({ error: error.message });
+//   }
+// );
 
 router.delete(
   '/me/avatar',

@@ -49,6 +49,13 @@ class Navbar extends Component {
       content = null;
     } else {
       // Check if logged in user has profile data
+      let avatar;
+      if (user.avatar === undefined) {
+        avatar = require('../images/anonymous.jpg');
+      } else {
+        avatar = `http://localhost:3000/api/users/${userId}/avatar`;
+      }
+
       if (Object.keys(profile).length > 0) {
         friendRequestsLength = profile.friendrequests.length;
         content = (
@@ -61,7 +68,7 @@ class Navbar extends Component {
               <img
                 className="rounded-circle mr-4"
                 style={{ width: '35px', height: '35px' }}
-                src={`http://localhost:3000/api/users/${userId}/avatar`}
+                src={avatar}
                 alt="avatar"
               />
               {/* <img

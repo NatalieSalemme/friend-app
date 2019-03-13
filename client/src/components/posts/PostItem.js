@@ -35,6 +35,12 @@ class PostItem extends Component {
   render() {
     const { post, auth, showActions } = this.props;
     let postDate = post.date.toString();
+    let avatar;
+    if (post.user.avatar === undefined) {
+      avatar = require('../images/anonymous.jpg');
+    } else {
+      avatar = `http://localhost:3000/api/users/${post.user}/avatar`;
+    }
     return (
       <div className="card card-body mb-3 col-md-8 mx-auto">
         <div className="row">
@@ -49,7 +55,7 @@ class PostItem extends Component {
               /> */}
               <img
                 className="rounded-circle d-non d-md-block"
-                src={`http://localhost:3000/api/users/${post.user}/avatar`}
+                src={avatar}
                 alt="avatar"
                 style={{ width: '75px', height: '75px' }}
               />

@@ -25,10 +25,18 @@ class ProfileHeader extends Component {
   render() {
     const { profile } = this.props;
     // console.log(this.props.errors);
+
     let profileContent;
     if (!profile) {
       profileContent = <Spinner />;
     } else {
+      let avatar;
+      console.log('profile is ****', profile);
+      if (profile.user.avatar === undefined) {
+        avatar = require('../images/anonymous.jpg');
+      } else {
+        avatar = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
+      }
       profileContent = (
         <div className="row">
           <div className="col-md-12">
@@ -44,13 +52,7 @@ class ProfileHeader extends Component {
                     //   src={require('../images/rose.jpg')}
                     //   alt="avatar"
                     // />
-                    <img
-                      className="img-thumbnail"
-                      src={`http://localhost:3000/api/users/${
-                        profile.user._id
-                      }/avatar`}
-                      alt="avatar"
-                    />
+                    <img className="img-thumbnail" src={avatar} alt="avatar" />
                   )}
 
                   <div className="bg-white">

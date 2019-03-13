@@ -40,6 +40,12 @@ class CommentItem extends Component {
       // content = <Spinner />;
       content = null;
     } else {
+      let avatar;
+      if (comment.user.avatar === undefined) {
+        avatar = require('../images/anonymous.jpg');
+      } else {
+        avatar = `http://localhost:3000/api/users/${comment.user}/avatar`;
+      }
       // Check if logged in user has profile data
       if (Object.keys(profile).length > 0) {
         content = (
@@ -53,7 +59,7 @@ class CommentItem extends Component {
               /> */}
               <img
                 className=" mr-4"
-                src={`http://localhost:3000/api/users/${comment.user}/avatar`}
+                src={avatar}
                 alt="avatar"
                 style={{ width: '70px', height: '70px' }}
               />
