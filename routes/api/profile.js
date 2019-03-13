@@ -19,7 +19,7 @@ const User = require('../../models/User');
 router.get('/browse', (req, res) => {
   const errors = {};
   Profile.find({})
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['name'])
     .then(profiles => {
       if (!profiles) {
         errors.noprofile = 'There are no profiles';
@@ -29,6 +29,34 @@ router.get('/browse', (req, res) => {
     })
     .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
 });
+
+// router.get('/browse', async (req, res) => {
+//   const errors = {};
+//   try {
+//     const profiles = await Profile.find({}).populate('user', [
+//       'name',
+//       'avatar',
+//     ]);
+//     if (!profiles) {
+//       errors.noprofile = 'There are no profiles';
+//       return res.status(404).json();
+//     }
+//     res.json(profiles);
+//   } catch (e) {
+//     res.status(404).json({ profile: 'There are no profiles' });
+//   }
+// });
+
+// Profile.find({})
+//   .populate('user', ['name', 'avatar'])
+// .then(profiles => {
+// if (!profiles) {
+//   errors.noprofile = 'There are no profiles';
+//   return res.status(404).json();
+// }
+// res.json(profiles);
+// })
+// .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
 
 //@route GET api/profile/handle/:handle
 //@desc  Get profile by handle

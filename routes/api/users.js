@@ -226,16 +226,30 @@ router.delete(
   }
 );
 
-router.get('/:id/avatar', async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    if (!user || !user.avatar) {
-      throw new Error();
-    }
-    res.set('Content-Type', 'image/png');
-    res.send(user.avatar);
-  } catch (e) {
-    res.status(404).send();
-  }
+// router.get('/:id/avatar', async (req, res) => {
+//   try {
+//     const user = await User.findById(req.params.id);
+//     if (!user || !user.avatar) {
+//       throw new Error();
+//     }
+//     res.set('Content-Type', 'image/png');
+//     res.send(user.avatar);
+//   } catch (e) {
+//     res.status(404).send();
+//   }
+// });
+
+router.get('/:id/avatar', (req, res) => {
+  User.findById(req.params.id)
+    .then(user => {
+      if (!user || !user.avatar) {
+        return res.status(404).send();
+      } else {
+        res.set('Content-Type', 'image/png');
+        res.send(user.avatar);
+      }
+    })
+    .catch(err => res.status(404).json(err));
 });
+
 module.exports = router;
