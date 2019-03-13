@@ -6,18 +6,19 @@ import Spinner from '../common/Spinner';
 class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
-    console.log(this.props);
+    console.log(profile);
     let profileContent;
     // let name = profile.name.split(' ').map(s => s);
     if (profile === null) {
       profileContent = <Spinner />;
     } else {
-      console.log('http://localhost:3000/api/users/${userId}/avatar');
       let avatar;
-      if (profile.user.avatar === undefined) {
-        avatar = require('../images/anonymous.jpg');
+      if (profile.hasOwnAvatar) {
+        avatar = `http://localhost:3000/api/users/${
+          profile.user._id ? profile.user._id : profile.user
+        }/avatar`;
       } else {
-        avatar = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
+        avatar = require('../images/anonymous.jpg');
       }
       let profName = profile.name
         .split(' ')

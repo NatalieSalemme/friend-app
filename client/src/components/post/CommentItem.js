@@ -38,12 +38,16 @@ class CommentItem extends Component {
     let showActions = true;
     let content;
     let avatar;
+    let shouldShowDelete;
+
     let commentDate = comment.date.toString();
     console.log('comment ***', comment);
+
     if (profile === null || loading) {
       // content = <Spinner />;
       content = null;
     } else {
+      console.log('****profile', profile);
       if (comment.avatar) {
         avatar = `http://localhost:3000/api/users/${comment.user}/avatar`;
       } else {
