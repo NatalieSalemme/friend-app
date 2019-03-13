@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   deleteComment,
   addCommentLike,
-  // removeLike,
+  removeCommentLike,
 } from '../../actions/postActions';
 
 class CommentItem extends Component {
@@ -16,8 +15,8 @@ class CommentItem extends Component {
     this.props.addCommentLike(this.props.postId, commentId);
   };
 
-  onUnlikeClick = id => {
-    this.props.removeLike(id);
+  onUnlikeClick = commentId => {
+    this.props.removeCommentLike(this.props.postId, commentId);
   };
 
   onDeleteClick = (postId, commentId) => {
@@ -202,13 +201,6 @@ class CommentItem extends Component {
 //   }
 // }
 
-CommentItem.propTypes = {
-  deleteComment: PropTypes.func.isRequired,
-  comment: PropTypes.object.isRequired,
-  postId: PropTypes.string.isRequired,
-  auth: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
@@ -216,5 +208,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteComment, addCommentLike }
+  { deleteComment, addCommentLike, removeCommentLike }
 )(CommentItem);

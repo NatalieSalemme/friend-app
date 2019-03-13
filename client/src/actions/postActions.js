@@ -148,6 +148,20 @@ export const addCommentLike = (postId, commentId) => dispatch => {
     );
 };
 
+//Remove Comment Like
+
+export const removeCommentLike = (postId, commentId) => dispatch => {
+  axios
+    .post(`/api/posts/unlike/${postId}/${commentId}`)
+    .then(res => dispatch(getPost(postId)))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
 //Remove Like
 export const removeLike = id => dispatch => {
   axios
