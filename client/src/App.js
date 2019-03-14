@@ -17,7 +17,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/create-profile/CreateProfile';
-import EditProfile from './components/edit-profile/EditProfile';
+import EditProfile from './components/edit-info/EditProfile';
 import EditAccount from './components/edit-info/EditAccount';
 import EditPhoto from './components/edit-info/EditPhoto';
 import AddExperience from './components/add-credentials/AddExperience';

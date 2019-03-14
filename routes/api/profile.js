@@ -19,7 +19,7 @@ const User = require('../../models/User');
 router.get('/browse', (req, res) => {
   const errors = {};
   Profile.find({})
-    .populate('user', ['name', 'avatar'])
+    .populate('user', ['name'])
     .then(profiles => {
       if (!profiles) {
         errors.noprofile = 'There are no profiles';
@@ -29,6 +29,34 @@ router.get('/browse', (req, res) => {
     })
     .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
 });
+
+// router.get('/browse', async (req, res) => {
+//   const errors = {};
+//   try {
+//     const profiles = await Profile.find({}).populate('user', [
+//       'name',
+//       'avatar',
+//     ]);
+//     if (!profiles) {
+//       errors.noprofile = 'There are no profiles';
+//       return res.status(404).json();
+//     }
+//     res.json(profiles);
+//   } catch (e) {
+//     res.status(404).json({ profile: 'There are no profiles' });
+//   }
+// });
+
+// Profile.find({})
+//   .populate('user', ['name', 'avatar'])
+// .then(profiles => {
+// if (!profiles) {
+//   errors.noprofile = 'There are no profiles';
+//   return res.status(404).json();
+// }
+// res.json(profiles);
+// })
+// .catch(err => res.status(404).json({ profile: 'There are no profiles' }));
 
 //@route GET api/profile/handle/:handle
 //@desc  Get profile by handle
@@ -79,59 +107,67 @@ router.post(
     if (!isValid) {
       //Return any errors with 400 status
       return res.status(400).json(errors);
-    }
-    //Get user fields
-    const userFields = {};
-    userFields.user = req.user.id;
-    if (req.body.handle) userFields.handle = req.body.handle;
-    //Get fields
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    profileFields.name = req.user.name;
-    if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.website) profileFields.website = req.body.website;
-    if (req.body.location) profileFields.location = req.body.location;
-    if (req.body.status) profileFields.status = req.body.status;
-    if (req.body.hobbies) profileFields.hobbies = req.body.hobbies;
-    if (req.body.bio) profileFields.bio = req.body.bio;
+    } else {
+      //Get user fields
+      const userFields = {};
+      userFields.user = req.user.id;
+      if (req.body.handle) userFields.handle = req.body.handle;
+      //Get fields
+      const profileFields = {};
+      profileFields.user = req.user.id;
+      profileFields.name = req.user.name;
+      if (req.body.handle) profileFields.handle = req.body.handle;
+      if (req.body.website) profileFields.website = req.body.website;
+      if (req.body.location) profileFields.location = req.body.location;
+      if (req.body.status) profileFields.status = req.body.status;
+      if (req.body.hobbies) profileFields.hobbies = req.body.hobbies;
+      if (req.body.bio) profileFields.bio = req.body.bio;
 
-    //CSV to split into array
-    if (typeof req.body.hobbies !== 'undefined') {
-      profileFields.hobbies = req.body.hobbies.split(', ');
-    }
-    if (typeof req.body.bucketlist !== 'undefined') {
-      profileFields.bucketlist = req.body.bucketlist.split(', ');
-    }
-
-    //Social
-    profileFields.social = {};
-    if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-    if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-    if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-    if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
-
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      if (profile) {
-        //Update
-
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        ).then(profile => res.json(profile));
-      } else {
-        //Check if handle exists
-        Profile.findOne({ handle: profileFields.handle }).then(profile => {
-          if (profile) {
-            errors.handle = 'That handle already exists';
-            res.status(400).json(errors);
-          }
-
-          //Save profile
-          new Profile(profileFields).save().then(profile => res.json(profile));
-        });
+      //CSV to split into array
+      if (typeof req.body.hobbies !== 'undefined') {
+        profileFields.hobbies = req.body.hobbies.split(', ');
       }
-    });
+      if (typeof req.body.bucketlist !== 'undefined') {
+        profileFields.bucketlist = req.body.bucketlist.split(', ');
+      }
+
+      //Social
+      profileFields.social = {};
+      if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
+      if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
+      if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
+      if (req.body.instagram)
+        profileFields.social.instagram = req.body.instagram;
+
+      Profile.findOne({ user: req.user.id })
+        .then(profile => {
+          if (profile) {
+            //Update
+
+            Profile.findOneAndUpdate(
+              { user: req.user.id },
+              { $set: profileFields },
+              { new: true }
+            ).then(profile => res.json(profile));
+          } else {
+            //Check if handle exists
+            Profile.findOne({ handle: profileFields.handle }).then(profile => {
+              if (profile) {
+                errors.handle = 'That handle already exists';
+                res.status(400).json(errors);
+              }
+
+              //Save profile
+              new Profile(profileFields)
+                .save()
+                .then(profile => res.json(profile));
+            });
+          }
+        })
+        .catch(err =>
+          res.status(404).json({ updateError: 'Unable to update profile' })
+        );
+    }
   }
 );
 
@@ -297,7 +333,7 @@ router.post(
         const newComment = new Post({
           text: req.body.text,
           name: req.user.name,
-          avatar: req.body.avatar,
+          avatar: req.user.avatar,
           user: req.user.id,
         });
         profile.comments.unshift(newComment);
@@ -563,4 +599,17 @@ router.get('/filter/:name', (req, res) => {
   });
 });
 
+//@route POST api/profile/updateAvatarStatus
+//@desc  Update avatar status in Profile model setting it to true
+//access Private
+router.post(
+  '/updateAvatarStatus',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      profile.hasOwnAvatar = true;
+      profile.save().then(profile => res.json(profile));
+    });
+  }
+);
 module.exports = router;

@@ -15,23 +15,35 @@ class ProfileHeader extends Component {
   };
   onFriendRequestClick(handle) {
     this.props.addFriendRequest(handle);
-    if (Object.keys(this.props.errors) === 0) {
-      this.setState({
-        clickedRequest: true,
-      });
-    }
+    this.setState({
+      clickedRequest: true,
+    });
+    // if (Object.keys(this.props.errors) === 0) {
+    //   this.setState({
+    //     clickedRequest: true,
+    //   });
+    // }
   }
 
   render() {
     const { profile } = this.props;
     // console.log(this.props.errors);
+    console.log(this.state.clickedRequest);
+    console.log(this.props.errors);
 
     let profileContent;
+    let displaySuccess = false;
+    console.log('displaySuccess ***', displaySuccess);
+    if (
+      this.state.clickedRequest &&
+      Object.keys(this.props.errors).length === 0
+    ) {
+      displaySuccess = true;
+    }
     if (!profile) {
       profileContent = <Spinner />;
     } else {
       let avatar;
-      console.log('profile is ****', profile);
       if (profile.user.avatar === undefined) {
         avatar = require('../images/anonymous.jpg');
       } else {
@@ -56,7 +68,7 @@ class ProfileHeader extends Component {
                   )}
 
                   <div className="bg-white">
-                    <h1 className="display-6 text-center">
+                    <h1 className="display-6 text-center p-1">
                       {profile.user && profile.user.name}
                     </h1>
 
@@ -71,7 +83,7 @@ class ProfileHeader extends Component {
                         )}
                       </div>
                     </div>
-                    <p className="lead text-center">
+                    <p className="lead text-center p-1">
                       Current Status: {profile.status}{' '}
                       {isEmpty(profile.company) ? null : (
                         <span>at {profile.company}</span>
@@ -79,14 +91,14 @@ class ProfileHeader extends Component {
                     </p>
                     <div className="container">
                       <div className="row justify-content-md-center">
-                        <Link to={`/messages/to/${profile.user._id}`}>
+                        {/* <Link to={`/messages/to/${profile.user._id}`}>
                           <div className="col-md-auto">
                             <i
                               className="far fa-envelope fa-2x"
                               style={{ color: 'red' }}
                             />
                           </div>
-                        </Link>
+                        </Link> */}
 
                         <div className="col-md-auto">
                           <i
@@ -96,6 +108,13 @@ class ProfileHeader extends Component {
                             className="fas fa-plus fa-2x"
                             style={{ color: 'green', cursor: 'pointer' }}
                           />
+                        </div>
+                        <div>
+                          {displaySuccess && (
+                            <div className="alert alert-success" role="alert">
+                              Friend Request Sent
+                            </div>
+                          )}
                         </div>
 
                         <div>
@@ -130,13 +149,13 @@ class ProfileHeader extends Component {
                           )}
                         </div>
 
-                        <div>
+                        {/* <div>
                           {this.state.clickedRequest && (
                             <div className="alert alert-success" role="alert">
                               Friend Request Sent
                             </div>
                           )}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <div className="mt-3 pb-2">

@@ -42,9 +42,12 @@ class CommentForm extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="post-form mb-3">
+      <div className="post-form mb-3 col-md-10 mx-auto">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">
+          <div
+            className="card-header text-white "
+            style={{ backgroundColor: '#1f0891' }}
+          >
             Make a comment...
           </div>
           <div className="card-body">
@@ -59,7 +62,11 @@ class CommentForm extends Component {
                   error={errors.text}
                 />
               </div>
-              <button type="submit" className="btn btn-dark">
+              <button
+                type="submit"
+                className="btn text-white"
+                style={{ backgroundColor: '#1f0891' }}
+              >
                 Submit
               </button>
             </form>

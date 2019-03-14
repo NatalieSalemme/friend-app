@@ -31,11 +31,22 @@ class Post extends Component {
     }
 
     return (
-      <div className="post">
+      <div
+        className="post"
+        style={{
+          backgroundColor: '#E9EBEE',
+          padding: ' 3em 0 5em 0',
+          margin: '0 0 -4em 0',
+        }}
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Link to="/feed" className="btn btn-light mb-3">
+              <Link
+                to="/feed"
+                className="btn text-white mb-3"
+                style={{ backgroundColor: '#1f0891' }}
+              >
                 Back To Feed
               </Link>
               {postContent}

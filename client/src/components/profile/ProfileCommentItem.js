@@ -38,7 +38,16 @@ class ProfileCommentItem extends Component {
     const { comment, showActions, auth, profile } = this.props;
 
     let commentDate = comment.date.toString();
-    console.log(commentDate);
+    console.log(comment);
+    let avvie;
+    if (profile) {
+      if (!comment.avatar) {
+        avvie = require('../images/anonymous.jpg');
+      } else {
+        avvie = `http://localhost:3000/api/users/${comment.user}/avatar`;
+      }
+    }
+
     return (
       <div className="card card-body mb-3 col-md-12 mx-auto my-2">
         <div className="row">
@@ -47,7 +56,7 @@ class ProfileCommentItem extends Component {
               <img
                 onClick={id => this.onPhotoClick(comment.user)}
                 className="rounded-circle d-none d-md-block"
-                src={`http://localhost:3000/api/users/${comment.user}/avatar`}
+                src={avvie}
                 alt="avatar"
                 style={{ width: '75px', height: '75px' }}
               />

@@ -179,13 +179,19 @@ router.post(
       //if any errors, send 400 with errors object
       return res.status(400).json(errors);
     }
-
+    // Profile.findOne({ user: req.user.id }).then(profile => res.json(profile));
     Post.findById(req.params.id)
       .then(post => {
+        let hasAvatar;
+        if (req.user.avatar) {
+          hasAvatar = true;
+        } else {
+          hasAvatar = false;
+        }
         const newComment = {
           text: req.body.text,
           name: req.body.name,
-          avatar: req.body.avatar,
+          avatar: hasAvatar,
           user: req.user.id,
         };
         post.comments.unshift(newComment);
@@ -249,4 +255,51 @@ router.post(
   }
 );
 
+//@route POST api/posts/unlike/:postId/:commentId
+//@desc  Unike comment on post
+//access Private
+
+router.post(
+  '/unlike/:postId/:commentId',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Post.findById(req.params.postId)
+        .then(post => {
+          let index = post.comments.findIndex(
+            x => x.id === req.params.commentId
+          );
+
+          if (
+            post.comments[index].likes.filter(
+              like => like.user.toString() === req.user.id
+            ).length === 0
+          ) {
+            return res
+              .status(400)
+              .json({ notliked: 'You have not yet liked this post' });
+          }
+
+          //Get remove index
+          const removeIndex = post.comments[index].likes
+            .map(item => item.user.toString())
+            .indexOf(req.user.id);
+          //Splice out of array
+          post.comments[index].likes.splice(removeIndex, 1);
+
+          post.save().then(post => res.json(post));
+        })
+        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+    });
+    // Profile.findOne({ user: req.user.id }).then(profile => {
+    //   Post.findOne({ _id: req.params.postId }).then(post => {
+    //     let index = post.comments.findIndex(x => x.id === req.params.commentId);
+    //
+    //     post.comments[index].likes.unshift({ user: req.user.id });
+    //
+    //     post.save().then(post => res.json(post));
+    //   });
+    // });
+  }
+);
 module.exports = router;

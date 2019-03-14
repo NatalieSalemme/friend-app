@@ -13,11 +13,15 @@ class ProfileItem extends Component {
       profileContent = <Spinner />;
     } else {
       let avatar;
-      if (profile.user.avatar === undefined) {
-        avatar = require('../images/anonymous.jpg');
+      if (profile.hasOwnAvatar) {
+        avatar = `http://localhost:3000/api/users/${
+          profile.user._id ? profile.user._id : profile.user
+        }/avatar`;
       } else {
-        avatar = `http://localhost:3000/api/users/${profile.user._id}/avatar`;
+        avatar = require('../images/anonymous.jpg');
       }
+      let trueName = profile.user.name ? profile.user.name : profile.name;
+      let profName = trueName.split(' ').map((s, i) => <h5 key={i}>{s}</h5>);
       profileContent = (
         <div>
           <Link to={`/profile/${profile.handle}`} className="btn text-white">
@@ -30,9 +34,9 @@ class ProfileItem extends Component {
 
           <div className="card-body" style={{ minHeight: '7.5em' }}>
             {' '}
-            <h5 className="card-title list-group-item text-center">
-              {profile.name && profile.name}
-            </h5>
+            <div className="card-title list-group-item text-center">
+              {profile.name && profName}
+            </div>
           </div>
 
           <ul className="list-group list-group-flush  ">

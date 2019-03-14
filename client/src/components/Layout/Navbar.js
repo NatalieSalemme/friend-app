@@ -38,7 +38,6 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-    // console.log(this);
     let userId;
     if (user) {
       userId = user.id;
@@ -50,10 +49,10 @@ class Navbar extends Component {
     } else {
       // Check if logged in user has profile data
       let avatar;
-      if (user.avatar === undefined) {
-        avatar = require('../images/anonymous.jpg');
-      } else {
+      if (profile.hasOwnAvatar) {
         avatar = `http://localhost:3000/api/users/${userId}/avatar`;
+      } else {
+        avatar = require('../images/anonymous.jpg');
       }
 
       if (Object.keys(profile).length > 0) {
@@ -71,12 +70,6 @@ class Navbar extends Component {
                 src={avatar}
                 alt="avatar"
               />
-              {/* <img
-                className="rounded-circle mr-4"
-                style={{ width: '35px', height: '35px' }}
-                src={require('../images/rose.jpg')}
-                alt="avatar"
-              /> */}
             </Link>
           </div>
         );
@@ -168,42 +161,13 @@ class Navbar extends Component {
             </Link>
           </div>
 
-          <div className="nav-item active ">
+          {/* <div className="nav-item active ">
             <Link to="/messages/all" className="nav-link text-white">
               {' '}
               <i className="far fa-envelope" />
             </Link>
-          </div>
-          <div className="nav-item">
-            {content}
-            {/* <Link to={`/profile`}>
-              <img
-                className="rounded-circle mr-3"
-                style={{ width: '35px', height: '35px' }}
-                src={require('../images/rose.jpg')}
-                alt="avatar"
-              />
-            </Link> */}
-
-            {/* {user.avatar ===
-              '//www.gravatar.com/avatar/0e393a1a33ad90f4c3d52f6884ccb7ea?s=200&r=pg&d=mm' ||
-            user.avatar === user.name ? (
-              <img
-                className="rounded-circle mr-3"
-                style={{ width: '35px', height: '35px' }}
-                src={require('../images/rose.jpg')}
-                alt="avatar"
-              />
-            ) : (
-              <img
-                className="rounded-circle"
-                src={user.avatar}
-                alt={user.name}
-                style={{ width: '25px', marginRight: '5px' }}
-                title="You must have a Gravatar connected to your email to display an image"
-              />
-            )} */}
-          </div>
+          </div> */}
+          <div className="nav-item">{content}</div>
           <div
             className="nav-item active text-white mr-5 logout-btn"
             onClick={this.onLogoutClick}

@@ -38,8 +38,8 @@ class AllFriends extends Component {
           width: '100%',
         }}
       >
-        <div className="container">
-          <div className="col-md-12">
+        <div className="container col-md-12">
+          <div>
             <h1 className="text-center py-5">
               Displaying {name ? name : 'User'} {friendCount} Friends
             </h1>

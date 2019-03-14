@@ -29,7 +29,6 @@ class Dashboard extends Component {
     } else {
       // Check if logged in user has profile data
       let firstName = user.name.split(' ')[0];
-      console.log(firstName);
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>

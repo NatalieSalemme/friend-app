@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { showFilteredProfiles } from '../../actions/profileActions';
+import Spinner from '../common/Spinner';
 import FilteredProfilesList from './FilteredProfilesList';
 
 class FilterProfile extends Component {
@@ -14,12 +15,14 @@ class FilterProfile extends Component {
 
   render() {
     const { match } = this.props;
-    const { profiles } = this.props.profile;
+    const { profiles, profile, loading } = this.props.profile;
     // console.log(typeof profiles);
 
     let content;
 
-    if (!profiles) {
+    if (loading) {
+      content = <Spinner />;
+    } else if (!profiles) {
       // console.log('empty');
       content = <h4 className="text-center">No profiles found</h4>;
     } else {

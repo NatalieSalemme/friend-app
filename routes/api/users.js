@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        avatar: req.body.avatar,
+        // avatar: null,
       });
       //salt the password
       const saltRounds = 8;
@@ -78,30 +78,33 @@ router.post('/login', (req, res) => {
       return res.status(404).json(errors);
     }
     //Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        //User matched
-        //Create JWT payload
-        const payload = { id: user.id, name: user.name, avatar: user.avatar };
-        //Sign token
-        //(payload, secret, expiration, callback)
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 9000 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: 'Bearer ' + token,
-            });
-          }
-        );
-      } else {
-        errors.password = 'Password incorrect';
-        //message to be sent on the client
-        return res.status(400).json(errors);
-      }
-    });
+    bcrypt
+      .compare(password, user.password)
+      .then(isMatch => {
+        if (isMatch) {
+          //User matched
+          //Create JWT payload
+          const payload = { id: user.id, name: user.name };
+          //Sign token
+          //(payload, secret, expiration, callback)
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 9000 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: 'Bearer ' + token,
+              });
+            }
+          );
+        } else {
+          errors.password = 'Password incorrect';
+          //message to be sent on the client
+          return res.status(400).json(errors);
+        }
+      })
+      .catch(err => res.json({ loginError: 'Unable to login' }));
   });
 });
 
@@ -238,4 +241,5 @@ router.get('/:id/avatar', async (req, res) => {
     res.status(404).send();
   }
 });
+
 module.exports = router;

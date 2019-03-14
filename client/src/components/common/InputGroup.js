@@ -2,8 +2,16 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-const InputGroup = props => {
-  const { name, placeholder, value, error, type, onChange } = props;
+const InputGroup = ({
+  name,
+  placeholder,
+  value,
+  error,
+  type,
+  onChange,
+  info,
+}) => {
+  // const { name, placeholder, value, error, type, onChange, info } = props;
   return (
     <div className="input-group mb-3">
       <input
@@ -15,7 +23,9 @@ const InputGroup = props => {
         value={value}
         onChange={onChange}
         type={type}
+        info={info}
       />
+      {info && <small className="form-text text-muted">{info}</small>}
       {error && <div className="invalid-feedback">{error}</div>}
     </div>
   );

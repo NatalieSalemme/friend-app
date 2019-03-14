@@ -111,6 +111,7 @@ export const updateUser = userData => dispatch => {
 
 export const uploadPhoto = formData => dispatch => {
   console.log('from action creator', formData);
+
   axios
     .post('/api/users/me/avatar', formData)
     // .then(res => console.log(res.data));
@@ -120,6 +121,7 @@ export const uploadPhoto = formData => dispatch => {
         payload: res.data,
       })
     );
+
   // .then(res =>
   //   dispatch({
   //     type: CLEAR_ERRORS,
@@ -132,6 +134,7 @@ export const uploadPhoto = formData => dispatch => {
   //   })
   // );
 };
+
 //clear errors
 export const clearErrors = () => {
   return {

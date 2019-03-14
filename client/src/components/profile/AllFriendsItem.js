@@ -7,7 +7,7 @@ class AllFriendsItem extends Component {
     let content;
     if (friend) {
       content = (
-        <div className="col-md-3 mx-auto pb-5">
+        <div className="col-md-3 pb-5">
           <div className="card" style={{ width: '220px' }}>
             <Link to={`/profile/user/${friend.user ? friend.user : ''}`}>
               {/* <img
