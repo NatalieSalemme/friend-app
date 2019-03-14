@@ -167,36 +167,7 @@ class Navbar extends Component {
               <i className="far fa-envelope" />
             </Link>
           </div> */}
-          <div className="nav-item">
-            {content}
-            {/* <Link to={`/profile`}>
-              <img
-                className="rounded-circle mr-3"
-                style={{ width: '35px', height: '35px' }}
-                src={require('../images/rose.jpg')}
-                alt="avatar"
-              />
-            </Link> */}
-
-            {/* {user.avatar ===
-              '//www.gravatar.com/avatar/0e393a1a33ad90f4c3d52f6884ccb7ea?s=200&r=pg&d=mm' ||
-            user.avatar === user.name ? (
-              <img
-                className="rounded-circle mr-3"
-                style={{ width: '35px', height: '35px' }}
-                src={require('../images/rose.jpg')}
-                alt="avatar"
-              />
-            ) : (
-              <img
-                className="rounded-circle"
-                src={user.avatar}
-                alt={user.name}
-                style={{ width: '25px', marginRight: '5px' }}
-                title="You must have a Gravatar connected to your email to display an image"
-              />
-            )} */}
-          </div>
+          <div className="nav-item">{content}</div>
           <div
             className="nav-item active text-white mr-5 logout-btn"
             onClick={this.onLogoutClick}

@@ -36,8 +36,8 @@ class EditProfile extends Component {
       const profile = nextProps.profile.profile;
 
       //Bring array back to CSV
-      const hobbiesCSV = profile.hobbies.join(', ');
-      const bucketlistCSV = profile.bucketlist.join(', ');
+      const hobbiesCSV = profile.hobbies && profile.hobbies.join(', ');
+      const bucketlistCSV = profile.bucketlist && profile.bucketlist.join(', ');
       //If profile field doesn't exist, make empty string
       profile.handle = !isEmpty(profile.handle) ? profile.handle : '';
       profile.website = !isEmpty(profile.website) ? profile.website : '';
@@ -156,7 +156,7 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   error={errors.hobbies}
                   info="Please use comma separated values (eg.
-                      hiking, bowling, sewing"
+                      hiking, bowling, sewing)"
                 />
                 <TextFieldGroup
                   placeholder="* Bucket List"
@@ -165,7 +165,7 @@ class EditProfile extends Component {
                   onChange={this.onChange}
                   error={errors.bucketlist}
                   info="Please use comma separated values (eg.
-                      skydiving, going to paris, beat a world record"
+                      skydiving, going to paris, beat a world record)"
                 />
 
                 <TextAreaFieldGroup
@@ -184,7 +184,7 @@ class EditProfile extends Component {
                     value={this.state.twitter}
                     onChange={this.onChange}
                     error={errors.twitter}
-                    info="www.twitter.com/[USERNAME]"
+                    info="www.twitter.com/[username]"
                   />
 
                   <TextFieldGroup
@@ -194,7 +194,7 @@ class EditProfile extends Component {
                     value={this.state.facebook}
                     onChange={this.onChange}
                     error={errors.facebook}
-                    info="www.facebook.com/[USERNAME]"
+                    info="www.facebook.com/[username]"
                   />
 
                   <TextFieldGroup
@@ -204,7 +204,7 @@ class EditProfile extends Component {
                     value={this.state.linkedin}
                     onChange={this.onChange}
                     error={errors.linkedin}
-                    info="www.linkedin.com/in/[USERNAME]"
+                    info="www.linkedin.com/in/[username]"
                   />
 
                   <TextFieldGroup
@@ -214,7 +214,7 @@ class EditProfile extends Component {
                     value={this.state.instagram}
                     onChange={this.onChange}
                     error={errors.instagram}
-                    info="www.instagram.com/[USERNAME]"
+                    info="www.instagram.com/[username]"
                   />
                 </div>
                 <input

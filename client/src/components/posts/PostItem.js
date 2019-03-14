@@ -65,7 +65,9 @@ class PostItem extends Component {
             </Link>
 
             <br />
-            <p className="text-center">{post.name}</p>
+            <p className="text-center" style={{ marginLeft: '-.5em' }}>
+              {post.name}
+            </p>
           </div>
           <div className="col-md-10">
             <div className="row d-flex justify-content-end">

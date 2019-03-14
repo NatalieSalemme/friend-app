@@ -68,7 +68,7 @@ class ProfileHeader extends Component {
                   )}
 
                   <div className="bg-white">
-                    <h1 className="display-6 text-center">
+                    <h1 className="display-6 text-center p-1">
                       {profile.user && profile.user.name}
                     </h1>
 
@@ -83,7 +83,7 @@ class ProfileHeader extends Component {
                         )}
                       </div>
                     </div>
-                    <p className="lead text-center">
+                    <p className="lead text-center p-1">
                       Current Status: {profile.status}{' '}
                       {isEmpty(profile.company) ? null : (
                         <span>at {profile.company}</span>
