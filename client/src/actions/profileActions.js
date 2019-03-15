@@ -10,7 +10,6 @@ import {
   SET_CURRENT_USER,
   GET_FRIEND_REQUESTS,
   SHOW_FILTERED_PROFILES,
-  UPDATE_USER,
 } from './types';
 
 // Get profile by handle

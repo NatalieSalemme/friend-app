@@ -33,10 +33,10 @@ class CommentItem extends Component {
   };
 
   render() {
-    const { comment, postId, auth } = this.props;
+    const { comment, auth } = this.props;
     const { profile, loading } = this.props.profile;
     let showActions = true;
-    let content;
+    let content = null;
     let avatar;
     let shouldShowDelete;
 

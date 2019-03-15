@@ -15,7 +15,7 @@ class FilterProfile extends Component {
 
   render() {
     const { match } = this.props;
-    const { profiles, profile, loading } = this.props.profile;
+    const { profiles, loading } = this.props.profile;
     // console.log(typeof profiles);
 
     let content;
