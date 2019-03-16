@@ -12,10 +12,12 @@ class FriendItemIcon extends Component {
     } else {
       let friendUser = friend.user;
       content = (
-        <div className="ml-2">
-          <Link to={`/profile/user/${friendUser}`} className="text-secondary">
-            {friend.name}
-          </Link>
+        <div className="ml-2 text-secondary">
+          {/* <Link to={`/profile/user/${friendUser}`} className="text-secondary"> */}
+          {/* <p className="text-secondary"> */}
+          {friend.name}
+          {/* </Link> */}
+          {/* </p> */}
         </div>
       );
     }

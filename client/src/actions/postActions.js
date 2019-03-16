@@ -50,6 +50,7 @@ export const addComment = (postId, commentData) => dispatch => {
 
 //Delete Comment
 export const deleteComment = (postId, commentId) => dispatch => {
+  console.log('deleting Comment');
   axios
     .delete(`/api/posts/comment/${postId}/${commentId}`)
     .then(res =>

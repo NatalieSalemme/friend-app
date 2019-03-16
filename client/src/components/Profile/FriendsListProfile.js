@@ -22,10 +22,12 @@ class FriendsListProfile extends Component {
         </h5>
         <ul>{mappedFriends}</ul>
         <Link to={`/profile/user/friends/${profile.user._id}`}>
-          <h3 className="text-center" style={{ color: '#1f0891' }}>
-            {' '}
-            See all Friends
-          </h3>
+          <p>
+            <h3 className="text-center" style={{ color: '#1f0891' }}>
+              {' '}
+              See all Friends
+            </h3>
+          </p>
         </Link>
       </div>
     );

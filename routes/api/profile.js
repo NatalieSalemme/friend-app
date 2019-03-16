@@ -324,7 +324,10 @@ router.post(
     Profile.findOne({ handle: req.params.handle })
       .then(profile => {
         const { errors, isValid } = validatePostInput(req.body);
-
+        let hasAvatar = false;
+        if (req.user.avatar) {
+          hasAvatar = true;
+        }
         //check validation
         if (!isValid) {
           //if any errors, send 400 with errors object
@@ -333,7 +336,7 @@ router.post(
         const newComment = new Post({
           text: req.body.text,
           name: req.user.name,
-          avatar: req.user.avatar,
+          avatar: hasAvatar,
           user: req.user.id,
         });
         profile.comments.unshift(newComment);

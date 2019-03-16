@@ -19,8 +19,8 @@ class CommentItem extends Component {
     this.props.removeCommentLike(this.props.postId, commentId);
   };
 
-  onDeleteClick = (postId, commentId) => {
-    this.props.deleteComment(postId, commentId);
+  onDeleteClick = commentId => {
+    this.props.deleteComment(this.props.postId, commentId);
   };
 
   findUserLike = likes => {
@@ -47,7 +47,7 @@ class CommentItem extends Component {
       // content = <Spinner />;
       content = null;
     } else {
-      console.log('****profile', profile);
+      // console.log('****profile', profile);
       if (comment.avatar) {
         avatar = `http://localhost:3000/api/users/${comment.user}/avatar`;
       } else {
