@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import Landing from '../layout/Landing';
+import Landing from '../Layout/Landing';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
-
-
 
 class Register extends Component {
   state = {
@@ -19,23 +17,23 @@ class Register extends Component {
   };
 
   componentDidMount() {
-    if(this.props.auth.isAuthenticated) {
+    if (this.props.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
     }
   }
   componentWillReceiveProps(nextProps) {
-    if(nextProps.errors) {
+    if (nextProps.errors) {
       this.setState({
-        errors: nextProps.errors
-      })
+        errors: nextProps.errors,
+      });
     }
   }
 
   onChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
   onSubmit = e => {
     e.preventDefault();
@@ -43,11 +41,10 @@ class Register extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
-    }
+      password2: this.state.password2,
+    };
     this.props.registerUser(newUser, this.props.history);
-
-  }
+  };
   render() {
     const { errors } = this.state;
     return (
@@ -59,54 +56,69 @@ class Register extends Component {
               <input
                 type="text"
                 className={classnames('form-control', {
-                  'is-invalid': errors.name
+                  'is-invalid': errors.name,
                 })}
                 name="name"
                 placeholder="Name"
                 value={this.state.name}
                 onChange={this.onChange}
               />
-              {errors.name && (<div className="invalid-feedback text-left font-weight-bold">{errors.name}</div>)}
+              {errors.name && (
+                <div className="invalid-feedback text-left font-weight-bold">
+                  {errors.name}
+                </div>
+              )}
             </div>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="email"
                 className={classnames('form-control', {
-                  'is-invalid': errors.email
+                  'is-invalid': errors.email,
                 })}
                 name="email"
                 placeholder="Enter email"
                 value={this.state.email}
-                  onChange={this.onChange}
+                onChange={this.onChange}
               />
-                {errors.email && (<div className="invalid-feedback text-left font-weight-bold">{errors.email}</div>)}
+              {errors.email && (
+                <div className="invalid-feedback text-left font-weight-bold">
+                  {errors.email}
+                </div>
+              )}
             </div>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="password"
                 className={classnames('form-control', {
-                  'is-invalid': errors.password
+                  'is-invalid': errors.password,
                 })}
                 name="password"
                 placeholder="Password"
                 value={this.state.password}
-                  onChange={this.onChange}
+                onChange={this.onChange}
               />
-                {errors.password && (<div className="invalid-feedback text-left font-weight-bold">{errors.password}</div>)}
+              {errors.password && (
+                <div className="invalid-feedback text-left font-weight-bold">
+                  {errors.password}
+                </div>
+              )}
             </div>
             <div className="form-group col-md-6 mx-auto">
               <input
                 type="password"
                 className={classnames('form-control', {
-                  'is-invalid': errors.password2
+                  'is-invalid': errors.password2,
                 })}
-
                 name="password2"
                 placeholder="Confirm password"
                 value={this.state.password2}
-                  onChange={this.onChange}
+                onChange={this.onChange}
               />
-                {errors.password2 && (<div className="invalid-feedback text-left font-weight-bold">{errors.password2}</div>)}
+              {errors.password2 && (
+                <div className="invalid-feedback text-left font-weight-bold">
+                  {errors.password2}
+                </div>
+              )}
             </div>
 
             <div className="form-check">
@@ -142,11 +154,14 @@ class Register extends Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
-}
+  errors: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));
